@@ -1,5 +1,5 @@
-/*INSERT INTO DIENTES.PAISES paises (paises.ID_PAIS, paises.SIGLAS, paises.NOMBRE) VALUES
-(Dientes.Paises_SQ.NEXTVAL , 'AF','Afghanistan');*/
+INSERT INTO DIENTES.PAISES paises (paises.ID_PAIS, paises.SIGLAS, paises.NOMBRE) VALUES
+(Dientes.Paises_SQ.NEXTVAL , 'AF','Afghanistan');
 
 INSERT INTO DIENTES.PAISES paises (paises.ID_PAIS, paises.SIGLAS, paises.NOMBRE) VALUES
 (Dientes.Paises_SQ.NEXTVAL, 'AL', 'Albania');
