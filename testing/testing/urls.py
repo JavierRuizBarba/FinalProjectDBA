@@ -16,8 +16,8 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from django.conf.urls import include, url
-from registro import views
-from testing.views import login_redirect
+#from registro import views
+from testing import views
 from django.contrib.auth.views import login, logout
 from django.shortcuts import redirect
 
@@ -25,6 +25,8 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^register', include('registro.urls')),
     url(r'^login', login,{'template_name':'registro/login.html'}),
-    url(r'^$', login_redirect),
-    url(r'^logout/', logout, {'template_name': 'registro/logout.html'})
+    url(r'^$', views.login_redirect),
+    url(r'^logout/', logout, {'template_name': 'registro/logout.html'}),
+    url(r'^update_user_info', views.update_user_info),
+    url(r'^search_ajax/?$', views.search_ajax)
 ]

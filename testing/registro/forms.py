@@ -11,7 +11,9 @@ class UserRegistration(UserCreationForm):
             'username',
             'first_name',
             'last_name',
-            'email'
+            'email',
+            'password1',
+            'password2',
         }
 
     def save(self, commit=True):

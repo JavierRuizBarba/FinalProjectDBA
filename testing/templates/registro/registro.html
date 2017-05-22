@@ -1,19 +1,17 @@
-{% load bootstrap3 %}
+{% extends 'baseoff.html' %}
 
-{# Load CSS and JavaScript #}
-{% bootstrap_css %}
-{% bootstrap_javascript %}
+{% block head %}
+    <title>Registro</title>
+{% endblock %}
 
-{# Display django.contrib.messages as Bootstrap alerts #}
-{% bootstrap_messages %}
-
-{# Display a form #}
+{% block body %}
+    <h1>Formato de Registro</h1>
+    <h2>Favor de llenar toda la información solicitada</h2>
+    <br>
 <form method="post" class="form">
   {% csrf_token %}
-  {% bootstrap_form form %}
-  {% buttons %}
-    <button type="submit" class="btn btn-primary">
-      {% bootstrap_icon "star" %} Submit
-    </button>
-  {% endbuttons %}
+  {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Submit</button>
+    <a href='login' class="btn btn-danger">Cancelar</a>
 </form>
+{% endblock %}

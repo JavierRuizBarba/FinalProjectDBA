@@ -21,6 +21,12 @@ def home(request):
         return redirect('%s?next=%s' % (settings.LOGIN_URL, request.path))
     else:
         user = request.user.username
+        group = request.user.groups.all()
+        grupo = str(group[0])
+        if grupo == "Doctores":
+            basehtml = 'base.html'
+        else:
+            basehtml = 'basepaciente.html'
         cursor = connection.cursor()
         rawCursor = cursor.connection.cursor()
         cursor.callproc('dientes.get_user', [user, rawCursor])
@@ -30,4 +36,4 @@ def home(request):
             name = item[1]
             lastname = item[2]
 
-    return render(request, 'registro/Home.html', {'username':username, 'nombre':name, 'apellido':lastname})
+    return render(request, 'registro/Home.html', {'username':username, 'nombre':name, 'apellido':lastname, 'grupo':grupo, 'basehtml':basehtml})
