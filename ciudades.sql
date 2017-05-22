@@ -1,6 +1,7 @@
+/* Formatted on 5/20/2017 9:32:06 PM (QP5 v5.300) */
 /*ALTER TABLE dientes.ciudades
     DROP COLUMN SIGLAS;*/
-    
+
 INSERT
   INTO DIENTES.CIUDADES ciudades (ciudades.ID_CIUDAD,
                                   ciudades.NOMBRE,
@@ -4841,7 +4842,7 @@ INSERT
   INTO DIENTES.CIUDADES ciudades (ciudades.ID_CIUDAD,
                                   ciudades.NOMBRE,
                                   ciudades.ID_ESTADO)
-VALUES (dientes.ciudades_sq.NEXTVAL, 'Temascalcingo', 2441-2426);
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Temascalcingo', 2441 - 2426);
 
 INSERT
   INTO DIENTES.CIUDADES ciudades (ciudades.ID_CIUDAD,
@@ -11997,3 +11998,1737 @@ INSERT
                                   ciudades.NOMBRE,
                                   ciudades.ID_ESTADO)
 VALUES (dientes.ciudades_sq.NEXTVAL, 'Cerritos', 24);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Birmingham', 33);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Montgomery', 33);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Mobile', 33);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Huntsville', 33);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Anchorage', 34);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Phoenix', 35);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Tucson', 35);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Mesa', 35);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Chandler', 35);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Glendale', 35);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Scottsdale', 35);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Gilbert', 35);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Tempe', 35);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Peoria', 35);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Surprise', 35);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Little Rock', 36);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Los Angeles', 37);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'San Diego', 37);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'San Jose', 37);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'San Francisco', 37);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Fresno', 37);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Sacramento', 37);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Long Beach', 37);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Oakland', 37);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Bakersfield', 37);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Anaheim', 37);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Santa Ana', 37);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Riverside', 37);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Stockton', 37);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Chula Vista', 37);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Irvine', 37);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Fremont', 37);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'San Bernardino', 37);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Modesto', 37);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Fontana', 37);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Oxnard', 37);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Moreno Valley', 37);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Huntington Beach', 37);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Glendale', 37);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Santa Clarita', 37);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Garden Grove', 37);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Oceanside', 37);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Rancho Cucamonga', 37);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Santa Rosa', 37);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Ontario', 37);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Lancaster', 37);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Elk Grove', 37);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Corona', 37);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Palmdale', 37);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Salinas', 37);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Pomona', 37);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Hayward', 37);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Escondido', 37);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Torrance', 37);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Sunnyvale', 37);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Orange', 37);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Fullerton', 37);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Pasadena', 37);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Thousand Oaks', 37);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Visalia', 37);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Simi Valley', 37);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Concord', 37);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Roseville', 37);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Victorville', 37);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Santa Clara', 37);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Vallejo', 37);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Berkeley', 37);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'El Monte', 37);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Downey', 37);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Costa Mesa', 37);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Inglewood', 37);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Carlsbad', 37);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'San Buenaventura (Ventura)', 37);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Fairfield', 37);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'West Covina', 37);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Murrieta', 37);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Richmond', 37);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Norwalk', 37);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Antioch', 37);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Temecula', 37);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Burbank', 37);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Daly City', 37);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Rialto', 37);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Santa Maria', 37);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'El Cajon', 37);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Denver', 38);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Colorado Springs', 38);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Aurora', 38);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Fort Collins', 38);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Lakewood', 38);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Thornton', 38);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Arvada', 38);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Westminster', 38);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Pueblo', 38);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Centennial', 38);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Boulder', 38);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Bridgeport', 39);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'New Haven', 39);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Stamford', 39);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Hartford', 39);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Waterbury', 39);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Washington', 41);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Jacksonville', 42);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Miami', 42);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Tampa', 42);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Orlando', 42);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'St. Petersburg', 42);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Hialeah', 42);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Tallahassee', 42);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Fort Lauderdale', 42);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Port St. Lucie', 42);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Cape Coral', 42);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Pembroke Pines', 42);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Hollywood', 42);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Miramar', 42);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Gainesville', 42);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Coral Springs', 42);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Miami Gardens', 42);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Clearwater', 42);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Palm Bay', 42);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Pompano Beach', 42);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'West Palm Beach', 42);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Atlanta', 43);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Columbus', 43);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Augusta', 43);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Savannah', 43);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Athens', 43);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Honolulu', 45);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Boise', 46);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Chicago', 47);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Aurora', 47);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Rockford', 47);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Joliet', 47);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Naperville', 47);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Springfield', 47);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Peoria', 47);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Elgin', 47);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Indianapolis', 48);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Fort Wayne', 48);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Evansville', 48);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'South Bend', 48);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Des Moines', 49);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Cedar Rapids', 49);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Davenport', 49);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Wichita', 50);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Overland Park', 50);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Kansas City', 50);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Olathe', 50);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Topeka', 50);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Louisville', 51);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Lexington', 51);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'New Orleans', 52);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Baton Rouge', 52);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Shreveport', 52);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Lafayette', 52);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Baltimore', 54);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Boston', 55);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Worcester', 55);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Springfield', 55);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Lowell', 55);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Cambridge', 55);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Detroit', 56);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Grand Rapids', 56);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Warren', 56);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Sterling Heights', 56);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Ann Arbor', 56);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Lansing', 56);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Flint', 56);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Minneapolis', 57);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Saint Paul', 57);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Rochester', 57);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Jackson', 58);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Kansas City', 59);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'St. Louis', 59);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Springfield', 59);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Independence', 59);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Columbia', 59);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Billings', 60);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Omaha', 61);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Lincoln', 61);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Las Vegas', 62);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Henderson', 62);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Reno', 62);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'North Las Vegas', 62);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Manchester', 63);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Newark', 64);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Jersey City', 64);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Paterson', 64);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Elizabeth', 64);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Albuquerque', 65);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Las Cruces', 65);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'New York', 66);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Buffalo', 66);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Rochester', 66);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Yonkers', 66);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Syracuse', 66);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Charlotte', 67);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Raleigh', 67);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Greensboro', 67);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Durham', 67);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Winston-Salem', 67);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Fayetteville', 67);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Cary', 67);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Wilmington', 67);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'High Point', 67);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Fargo', 68);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Columbus', 69);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Cleveland', 69);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Cincinnati', 69);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Toledo', 69);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Akron', 69);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Dayton', 69);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Oklahoma City', 70);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Tulsa', 70);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Norman', 70);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Broken Arrow', 70);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Portland', 71);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Eugene', 71);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Salem', 71);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Gresham', 71);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Philadelphia', 72);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Pittsburgh', 72);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Allentown', 72);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Erie', 72);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Providence', 73);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Columbia', 74);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Charleston', 74);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'North Charleston', 74);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Sioux Falls', 75);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Memphis', 76);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Nashville', 76);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Knoxville', 76);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Chattanooga', 76);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Clarksville', 76);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Murfreesboro', 76);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Houston', 77);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'San Antonio', 77);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Dallas', 77);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Austin', 77);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Fort Worth', 77);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'El Paso', 77);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Arlington', 77);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Corpus Christi', 77);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Plano', 77);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Laredo', 77);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Lubbock', 77);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Garland', 77);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Irving', 77);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Amarillo', 77);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Grand Prairie', 77);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Brownsville', 77);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Pasadena', 77);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'McKinney', 77);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Mesquite', 77);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'McAllen', 77);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Killeen', 77);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Frisco', 77);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Waco', 77);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Carrollton', 77);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Denton', 77);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Midland', 77);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Abilene', 77);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Beaumont', 77);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Round Rock', 77);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Odessa', 77);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Wichita Falls', 77);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Richardson', 77);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Salt Lake City', 78);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'West Valley City', 78);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Provo', 78);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'West Jordan', 78);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Virginia Beach', 80);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Norfolk', 80);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Chesapeake', 80);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Richmond', 80);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Newport News', 80);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Alexandria', 80);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Hampton', 80);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Seattle', 81);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Spokane', 81);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Tacoma', 81);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Vancouver', 81);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Bellevue', 81);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Kent', 81);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Everett', 81);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Milwaukee', 83);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Madison', 83);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Green Bay', 83);
+
+INSERT
+  INTO Dientes.Ciudades ciudades (ciudades.id_Ciudad,
+                                  ciudades.nombre,
+                                  ciudades.id_estado)
+VALUES (dientes.ciudades_sq.NEXTVAL, 'Kenosha', 83);
