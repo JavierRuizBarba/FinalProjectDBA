@@ -55,7 +55,8 @@ AS
                          FECHA_HORA_V    IN DIENTES.CITA.FECHA_HORA%TYPE,
                          DETALLE_V       IN DIENTES.CITA.DETALLE%TYPE,
                          ASISTIO_V       IN DIENTES.CITA.ASISTIO%TYPE,
-                         ACTIVO_V        IN DIENTES.CITA.ACTIVO%TYPE)
+                         ACTIVO_V        IN DIENTES.CITA.ACTIVO%TYPE,
+                         ACEPTADA_V      IN DIENTES.CITA.ACEPTADA%TYPE)
     AS
     BEGIN
         UPDATE DIENTES.CITA
@@ -64,7 +65,8 @@ AS
                FECHA_HORA = FECHA_HORA_V,
                DETALLE = DETALLE_V,
                ASISTIO = ASISTIO_V,
-               ACTIVO = ACTIVO_V
+               ACTIVO = ACTIVO_V,
+               ACEPTADA = ACEPTADA_V
          WHERE ID_CITA = ID_CITA_V;
     END EDIT_CITA;
 
