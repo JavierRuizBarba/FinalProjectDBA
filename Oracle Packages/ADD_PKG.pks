@@ -20,7 +20,8 @@ AS
                         ID_DENTISTA_V   IN     DIENTES.CITA.ID_DENTISTA%TYPE,
                         FECHA_HORA_V    IN     DIENTES.CITA.FECHA_HORA%TYPE,
                         DETALLE_V       IN     DIENTES.CITA.DETALLE%TYPE,
-                        ASISTIO_V       IN     DIENTES.CITA.ASISTIO%TYPE);
+                        ASISTIO_V       IN     DIENTES.CITA.ASISTIO%TYPE,
+                        ACEPTADA_V      IN     DIENTES.CITA.ACEPTADA%TYPE);
 
     PROCEDURE ADD_DETALLE_CITA (
         OUT_DETALLE_CITA              OUT NUMBER,
