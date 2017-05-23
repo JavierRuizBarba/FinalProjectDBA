@@ -28,5 +28,7 @@ urlpatterns = [
     url(r'^$', views.login_redirect),
     url(r'^logout/', logout, {'template_name': 'registro/logout.html'}),
     url(r'^update_user_info', views.update_user_info),
-    url(r'^search_ajax/?$', views.search_ajax)
+    url(r'^search_ajax/?$', views.search_ajax),
+    url(r'^grupos', views.grupos_usuarios),
+    url(r'^nueva_cita', views.new_app),
 ]

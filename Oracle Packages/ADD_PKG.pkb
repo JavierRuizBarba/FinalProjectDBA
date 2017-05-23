@@ -59,13 +59,16 @@ AS
     PROCEDURE ADD_CITA (OUT_CITA           OUT NUMBER,
                         ID_PACIENTE_V   IN     DIENTES.CITA.ID_PACIENTE%TYPE,
                         ID_DENTISTA_V   IN     DIENTES.CITA.ID_DENTISTA%TYPE,
-                        FECHA_HORA_V    IN     DIENTES.CITA.FECHA_HORA%TYPE,
+                        FECHA_HORA_V    IN     varchar2,
                         DETALLE_V       IN     DIENTES.CITA.DETALLE%TYPE,
                         ASISTIO_V       IN     DIENTES.CITA.ASISTIO%TYPE,
                         ACEPTADA_V      IN     DIENTES.CITA.ACEPTADA%TYPE)
-    AS
+    IS
+        FECHA Date;
     BEGIN
         OUT_CITA := DIENTES.CITA_SQ.NEXTVAL;
+        
+        FECHA := to_date(FECHA_HORA_V, 'MM/DD/YYYY HH:MI AM');
 
         INSERT INTO DIENTES.CITA (ID_CITA,
                                   ID_PACIENTE,
@@ -77,7 +80,7 @@ AS
              VALUES (OUT_CITA,
                      ID_PACIENTE_V,
                      ID_DENTISTA_V,
-                     FECHA_HORA_V,
+                     FECHA,
                      DETALLE_V,
                      ASISTIO_V,
                      ACEPTADA_V);

@@ -22,7 +22,11 @@ def home(request):
     else:
         user = request.user.username
         group = request.user.groups.all()
-        grupo = str(group[0])
+        print(group)
+        if not group:
+            grupo = ""
+        else:
+            grupo = str(group[0])
         if grupo == "Doctores":
             basehtml = 'base.html'
         else:
