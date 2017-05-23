@@ -1,7 +1,7 @@
 from django.shortcuts import redirect, render
 import cx_Oracle
 from django.db import connection
-from testing.forms import update_address, user_groups, nueva_cita_doc#, nueva_cita_paciente
+from testing.forms import update_address, user_groups, nueva_cita_doc, nueva_cita_paciente
 from testing import settings
 from django.http import HttpResponse
 import json
@@ -54,11 +54,11 @@ def new_app(request):
                 form = nueva_cita_doc(request.POST)
             else:
                 form = nueva_cita_doc()
-        #elif grupo == "Administrador":
-         #   if request.method == "POST":
-          #      form = nueva_cita_admin(request.POST)
-           # else:
-            #    form = nueva_cita_admin()
+        elif grupo == "Paciente":
+            if request.method == "POST":
+                form = nueva_cita_paciente(request.POST)
+            else:
+                form = nueva_cita_paciente()
         #else:
          #   if request.method == "POST":
           #      form = nueva_cita_paciente(request.POST)
