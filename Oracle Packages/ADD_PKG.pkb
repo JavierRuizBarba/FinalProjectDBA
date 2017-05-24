@@ -156,6 +156,7 @@ AS
     END ADD_ESPECIALIDAD_DENTISTA;
 
     PROCEDURE ADD_HORARIO (OUT_HORARIO      OUT NUMBER,
+                            USUARIO_ID IN NUMBER,
                            LUNES_V       IN     VARCHAR2,
                            MARTES_V      IN     VARCHAR2,
                            MIERCOLES_V   IN     VARCHAR2,
@@ -183,6 +184,7 @@ AS
                      VIERNES_V,
                      SABADO_V,
                      DOMINGO_V);
+         UPDATE DIENTES.USUARIOS USUARIO SET USUARIO.HORARIO = OUT_HORARIO WHERE USUARIO.ID_USUARIO = USUARIO_ID;
     END ADD_HORARIO;
 
     PROCEDURE ADD_MATERIAL (OUT_MATERIAL OUT INTEGER, NOMBRE_V IN VARCHAR2)

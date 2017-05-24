@@ -48,6 +48,7 @@ AS
         ID_DENTISTA_V       IN DIENTES.ESPECIALIDAD_DENTISTA.ID_DENTISTA%TYPE);
 
     PROCEDURE ADD_HORARIO (OUT_HORARIO      OUT NUMBER,
+                           USUARIO_ID IN NUMBER,
                            LUNES_V       IN     VARCHAR2,
                            MARTES_V      IN     VARCHAR2,
                            MIERCOLES_V   IN     VARCHAR2,
