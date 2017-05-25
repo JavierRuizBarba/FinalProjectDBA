@@ -1,6 +1,9 @@
 /* Formatted on 5/25/2017 12:22:17 AM (QP5 v5.300) */
 CREATE OR REPLACE PACKAGE DIENTES.ADD_PKG
 AS
+    
+    FUNCTION GET_DAY_EN(DIA VARCHAR2) RETURN VARCHAR2;
+    
     PROCEDURE ADD_ALERGIA (OUT_ALERGIA OUT NUMBER, ALERGIA IN VARCHAR2);
 
     PROCEDURE ADD_ABONO (OUT_ABONO                 OUT NUMBER,
@@ -92,10 +95,10 @@ AS
         OUT_TRATAMIENTOPACIENTE      OUT INTEGER,
         ID_TRATAMIENTO_V          IN     INTEGER,
         ID_PACIENTE_V             IN     INTEGER,
-        COSTO_V                   IN     LONG,
-        CITAS_NUMERO_V            IN     INTEGER,
+        ID_DENTISTA_V             IN     INTEGER,
         CITAS_TOTAL_V             IN     INTEGER,
-        ABONOS_TOTALES_V          IN     INTEGER);
+        DIA                       IN     VARCHAR2,
+        HORA                      IN     VARCHAR2);
 
     PROCEDURE ADD_USER_INFO (USUARIOID   IN NUMBER,
                              NOMBRE      IN VARCHAR2,
