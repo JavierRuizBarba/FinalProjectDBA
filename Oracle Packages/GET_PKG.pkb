@@ -97,8 +97,29 @@ AS
             SELECT * FROM DIENTES.HORARIOS HORA WHERE HORA.ID_HORARIO = HORARIO_ID;
     END GET_HORARIO_DIA;
     
+    Procedure GET_ADDRESS_ID(USUARIO IN NUMBER, ADDRESS_ID OUT sys_refcursor)
+    AS
+    BEGIN
+    open address_id for
+        Select secondusers.ID_DIRECCION from dientes.usuarios secondusers where secondusers.ID_USUARIO = USUARIO;
+    END GET_ADDRESS_ID;
+    
+    PROCEDURE GET_USER_GROUP(USUARIO IN NUMBER, GRUPOCUR OUT SYS_REFCURSOR)
+    AS
+    BEGIN
+        OPEN GRUPOCUR FOR
+            SELECT GRUPOUSUARIO.ID FROM DIENTES.AUTH_USER_GROUPS GRUPOUSUARIO WHERE GRUPOUSUARIO.USER_ID = USUARIO;
+    END GET_USER_GROUP;
 END GET_PKG;
 /
+variable rc refcursor;
+exec dientes.get_pkg.get_USER_GROUP(8, :rc);
+print rc;
+
+
+
+
+
 
 
 

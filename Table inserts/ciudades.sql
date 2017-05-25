@@ -13732,3 +13732,5 @@ INSERT
                                   ciudades.nombre,
                                   ciudades.id_estado)
 VALUES (dientes.ciudades_sq.NEXTVAL, 'Kenosha', 83);
+
+Insert Into DIENTES.CIUDADES city (city.ID_CIUDAD, city.ID_ESTADO, city.NOMBRE) values (dientes.ciudades_sq.nextval, 9, 'Distrito Federal');

@@ -1,3 +1,4 @@
+/* Formatted on 5/25/2017 12:22:24 AM (QP5 v5.300) */
 CREATE OR REPLACE PACKAGE BODY DIENTES.ADD_PKG
 AS
     PROCEDURE ADD_ALERGIA (OUT_ALERGIA OUT NUMBER, ALERGIA VARCHAR2)
@@ -59,16 +60,16 @@ AS
     PROCEDURE ADD_CITA (OUT_CITA           OUT NUMBER,
                         ID_PACIENTE_V   IN     DIENTES.CITA.ID_PACIENTE%TYPE,
                         ID_DENTISTA_V   IN     DIENTES.CITA.ID_DENTISTA%TYPE,
-                        FECHA_HORA_V    IN     varchar2,
+                        FECHA_HORA_V    IN     VARCHAR2,
                         DETALLE_V       IN     DIENTES.CITA.DETALLE%TYPE,
                         ASISTIO_V       IN     DIENTES.CITA.ASISTIO%TYPE,
                         ACEPTADA_V      IN     DIENTES.CITA.ACEPTADA%TYPE)
     IS
-        FECHA Date;
+        FECHA   DATE;
     BEGIN
         OUT_CITA := DIENTES.CITA_SQ.NEXTVAL;
-        
-        FECHA := to_date(FECHA_HORA_V, 'MM/DD/YYYY HH:MI AM');
+
+        FECHA := TO_DATE (FECHA_HORA_V, 'MM/DD/YYYY HH:MI AM');
 
         INSERT INTO DIENTES.CITA (ID_CITA,
                                   ID_PACIENTE,
@@ -156,7 +157,7 @@ AS
     END ADD_ESPECIALIDAD_DENTISTA;
 
     PROCEDURE ADD_HORARIO (OUT_HORARIO      OUT NUMBER,
-                            USUARIO_ID IN NUMBER,
+                           USUARIO_ID    IN     NUMBER,
                            LUNES_V       IN     VARCHAR2,
                            MARTES_V      IN     VARCHAR2,
                            MIERCOLES_V   IN     VARCHAR2,
@@ -184,7 +185,10 @@ AS
                      VIERNES_V,
                      SABADO_V,
                      DOMINGO_V);
-         UPDATE DIENTES.USUARIOS USUARIO SET USUARIO.HORARIO = OUT_HORARIO WHERE USUARIO.ID_USUARIO = USUARIO_ID;
+
+        UPDATE DIENTES.USUARIOS USUARIO
+           SET USUARIO.HORARIO = OUT_HORARIO
+         WHERE USUARIO.ID_USUARIO = USUARIO_ID;
     END ADD_HORARIO;
 
     PROCEDURE ADD_MATERIAL (OUT_MATERIAL OUT INTEGER, NOMBRE_V IN VARCHAR2)
@@ -239,60 +243,115 @@ AS
                      ID_TIPOPAGOS_V,
                      ID_CAMBIO_V);
     END ADD_PAGOS;
-    
-    PROCEDURE ADD_TIPO_PAGO(OUT_TIPOPAGOS OUT INTEGER, NOMBRE_V IN VARCHAR2)
+
+    PROCEDURE ADD_TIPO_PAGO (OUT_TIPOPAGOS OUT INTEGER, NOMBRE_V IN VARCHAR2)
     AS
     BEGIN
-    OUT_TIPOPAGOS := DIENTES.TIPOPAGOS_SQ.NEXTVAL;
-    INSERT INTO DIENTES.TIPO_PAGOS (
-   ID_TIPOPAGOS, NOMBRE) 
-VALUES ( OUT_TIPOPAGOS,NOMBRE_V);
+        OUT_TIPOPAGOS := DIENTES.TIPOPAGOS_SQ.NEXTVAL;
+
+        INSERT INTO DIENTES.TIPO_PAGOS (ID_TIPOPAGOS, NOMBRE)
+             VALUES (OUT_TIPOPAGOS, NOMBRE_V);
     END ADD_TIPO_PAGO;
-    
-    PROCEDURE ADD_TIPO_SANGRE(OUT_TIPOSANGRE OUT INTEGER, NOMBRE_V IN VARCHAR2)
+
+    PROCEDURE ADD_TIPO_SANGRE (OUT_TIPOSANGRE      OUT INTEGER,
+                               NOMBRE_V         IN     VARCHAR2)
     AS
     BEGIN
-    OUT_TIPOSANGRE := DIENTES.TIPO_SANGRE_SQ.NEXTVAL;
-    INSERT INTO DIENTES.TIPO_SANGRE (
-   ID_TIPO_SANGRE, NOMBRE) 
-VALUES ( OUT_TIPOSANGRE,NOMBRE_V);
+        OUT_TIPOSANGRE := DIENTES.TIPO_SANGRE_SQ.NEXTVAL;
+
+        INSERT INTO DIENTES.TIPO_SANGRE (ID_TIPO_SANGRE, NOMBRE)
+             VALUES (OUT_TIPOSANGRE, NOMBRE_V);
     END ADD_TIPO_SANGRE;
-    
-    PROCEDURE ADD_TRATAMIENTO (OUT_TRATAMIENTO OUT INTEGER, NOMBRE_V IN VARCHAR2, COSTO_V IN LONG, ID_ESPECIALIDAD_V IN INTEGER)
+
+    PROCEDURE ADD_TRATAMIENTO (OUT_TRATAMIENTO        OUT INTEGER,
+                               NOMBRE_V            IN     VARCHAR2,
+                               COSTO_V             IN     LONG,
+                               ID_ESPECIALIDAD_V   IN     INTEGER)
     AS
-    BEGIN 
-    OUT_TRATAMIENTO := DIENTES.TRATAMIENTO_SQ.NEXTVAL;
-    INSERT INTO DIENTES.TRATAMIENTO (
-   ID_TRATAMIENTO, NOMBRE, COSTO, 
-   ID_ESPECIALIDAD) 
-VALUES (OUT_TRATAMIENTO, NOMBRE_V, COSTO_V, ID_ESPECIALIDAD_V);
+    BEGIN
+        OUT_TRATAMIENTO := DIENTES.TRATAMIENTO_SQ.NEXTVAL;
+
+        INSERT INTO DIENTES.TRATAMIENTO (ID_TRATAMIENTO,
+                                         NOMBRE,
+                                         COSTO,
+                                         ID_ESPECIALIDAD)
+             VALUES (OUT_TRATAMIENTO,
+                     NOMBRE_V,
+                     COSTO_V,
+                     ID_ESPECIALIDAD_V);
     END ADD_TRATAMIENTO;
-    
-    PROCEDURE ADD_TRATAMIENTO_MATERIAL(ID_TRATAMIENTO_V IN INTEGER, ID_MATERIAL_V IN INTEGER)
+
+    PROCEDURE ADD_TRATAMIENTO_MATERIAL (ID_TRATAMIENTO_V   IN INTEGER,
+                                        ID_MATERIAL_V      IN INTEGER)
     AS
     BEGIN
-    INSERT INTO DIENTES.TRATAMIENTO_MATERIAL (
-   ID_TRATAMIENTO, ID_MATERIAL) 
-VALUES (ID_TRATAMIENTO_V, ID_MATERIAL_V);
+        INSERT
+          INTO DIENTES.TRATAMIENTO_MATERIAL (ID_TRATAMIENTO, ID_MATERIAL)
+        VALUES (ID_TRATAMIENTO_V, ID_MATERIAL_V);
     END ADD_TRATAMIENTO_MATERIAL;
-    
-    /* Formatted on 5/21/2017 9:17:47 PM (QP5 v5.300) */
-PROCEDURE ADD_TRATAMIENTO_PACIENTE (OUT_TRATAMIENTOPACIENTE      OUT INTEGER,
-                                    ID_TRATAMIENTO_V          IN     INTEGER,
-                                    ID_PACIENTE_V             IN     INTEGER,
-                                    COSTO_V                   IN     LONG,
-                                    CITAS_NUMERO_V            IN     INTEGER,
-                                    CITAS_TOTAL_V             IN     INTEGER,
-                                    ABONOS_TOTALES_V          IN     INTEGER)
+
+
+    PROCEDURE ADD_TRATAMIENTO_PACIENTE (
+        OUT_TRATAMIENTOPACIENTE      OUT INTEGER,
+        ID_TRATAMIENTO_V          IN     INTEGER,
+        ID_PACIENTE_V             IN     INTEGER,
+        COSTO_V                   IN     LONG,
+        CITAS_NUMERO_V            IN     INTEGER,
+        CITAS_TOTAL_V             IN     INTEGER,
+        ABONOS_TOTALES_V          IN     INTEGER)
     AS
     BEGIN
-    INSERT INTO DIENTES.TRATAMIENTO_PACIENTE (
-   ID_TRATAMIENTOPACIENTE, ID_TRATAMIENTO, ID_PACIENTE, 
-   COSTO, CITAS_NUMERO, CITAS_TOTAL, 
-   ABONOS_TOTALES) 
-VALUES ( OUT_TRATAMIENTOPACIENTE, ID_TRATAMIENTO_V, ID_PACIENTE_V, 
-   COSTO_V, CITAS_NUMERO_V, CITAS_TOTAL_V, 
-   ABONOS_TOTALES_V);
+        INSERT INTO DIENTES.TRATAMIENTO_PACIENTE (ID_TRATAMIENTOPACIENTE,
+                                                  ID_TRATAMIENTO,
+                                                  ID_PACIENTE,
+                                                  COSTO,
+                                                  CITAS_NUMERO,
+                                                  CITAS_TOTAL,
+                                                  ABONOS_TOTALES)
+             VALUES (OUT_TRATAMIENTOPACIENTE,
+                     ID_TRATAMIENTO_V,
+                     ID_PACIENTE_V,
+                     COSTO_V,
+                     CITAS_NUMERO_V,
+                     CITAS_TOTAL_V,
+                     ABONOS_TOTALES_V);
     END ADD_TRATAMIENTO_PACIENTE;
+
+    PROCEDURE ADD_USER_INFO (USUARIOID   IN NUMBER,
+                             NOMBRE      IN VARCHAR2,
+                             APELLIDO    IN VARCHAR2,
+                             CORREO      IN VARCHAR2,
+                             CIUDADID    IN NUMBER,
+                             STREET      IN VARCHAR2,
+                             EXTERIOR    IN NUMBER,
+                             GENERO      IN VARCHAR2,
+                             CELL        IN NUMBER,
+                             BLOOD       IN VARCHAR2)
+    IS
+        ADDRESSID   NUMBER;
+    BEGIN
+        UPDATE DIENTES.AUTH_USER USUARIOPRIMARIO
+           SET USUARIOPRIMARIO.FIRST_NAME = NOMBRE,
+               USUARIOPRIMARIO.LAST_NAME = APELLIDO,
+               USUARIOPRIMARIO.EMAIL = CORREO
+         WHERE USUARIOPRIMARIO.ID = USUARIOID;
+
+        ADD_DIRECCION (ADDRESSID,
+                       CIUDADID,
+                       STREET,
+                       EXTERIOR,
+                       '');
+
+        INSERT INTO DIENTES.USUARIOS SECUNDARIO (SECUNDARIO.ID_USUARIO,
+                                                 SECUNDARIO.SEXO,
+                                                 SECUNDARIO.CELULAR,
+                                                 SECUNDARIO.TIPO_SANGRE,
+                                                 SECUNDARIO.ID_DIRECCION)
+             VALUES (USUARIOID,
+                     GENERO,
+                     CELL,
+                     BLOOD,
+                     ADDRESSID);
+    END ADD_USER_INFO;
 END ADD_PKG;
 /
