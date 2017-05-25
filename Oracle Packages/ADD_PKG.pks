@@ -1,3 +1,4 @@
+/* Formatted on 5/25/2017 12:22:17 AM (QP5 v5.300) */
 CREATE OR REPLACE PACKAGE DIENTES.ADD_PKG
 AS
     PROCEDURE ADD_ALERGIA (OUT_ALERGIA OUT NUMBER, ALERGIA IN VARCHAR2);
@@ -18,7 +19,7 @@ AS
     PROCEDURE ADD_CITA (OUT_CITA           OUT NUMBER,
                         ID_PACIENTE_V   IN     DIENTES.CITA.ID_PACIENTE%TYPE,
                         ID_DENTISTA_V   IN     DIENTES.CITA.ID_DENTISTA%TYPE,
-                        FECHA_HORA_V    IN     varchar2,
+                        FECHA_HORA_V    IN     VARCHAR2,
                         DETALLE_V       IN     DIENTES.CITA.DETALLE%TYPE,
                         ASISTIO_V       IN     DIENTES.CITA.ASISTIO%TYPE,
                         ACEPTADA_V      IN     DIENTES.CITA.ACEPTADA%TYPE);
@@ -48,7 +49,7 @@ AS
         ID_DENTISTA_V       IN DIENTES.ESPECIALIDAD_DENTISTA.ID_DENTISTA%TYPE);
 
     PROCEDURE ADD_HORARIO (OUT_HORARIO      OUT NUMBER,
-                           USUARIO_ID IN NUMBER,
+                           USUARIO_ID    IN     NUMBER,
                            LUNES_V       IN     VARCHAR2,
                            MARTES_V      IN     VARCHAR2,
                            MIERCOLES_V   IN     VARCHAR2,
@@ -95,5 +96,16 @@ AS
         CITAS_NUMERO_V            IN     INTEGER,
         CITAS_TOTAL_V             IN     INTEGER,
         ABONOS_TOTALES_V          IN     INTEGER);
+
+    PROCEDURE ADD_USER_INFO (USUARIOID   IN NUMBER,
+                             NOMBRE      IN VARCHAR2,
+                             APELLIDO    IN VARCHAR2,
+                             CORREO      IN VARCHAR2,
+                             CIUDADID    IN NUMBER,
+                             STREET      IN VARCHAR2,
+                             EXTERIOR    IN NUMBER,
+                             GENERO      IN VARCHAR2,
+                             CELL        IN NUMBER,
+                             BLOOD       IN VARCHAR2);
 END ADD_PKG;
 /

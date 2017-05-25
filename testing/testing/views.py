@@ -66,6 +66,8 @@ def new_app(request):
             #    form = nueva_cita_paciente()
         return render(request, 'nueva_cita.html', {'form':form, 'basehtml':basehtml, 'usuario':usuario, 'grupo':grupo})
 
+
+
 @csrf_exempt
 def search_ajax(request):
     if request.POST.get('tag') == 'getstate':

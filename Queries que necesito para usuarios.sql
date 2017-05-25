@@ -36,9 +36,9 @@ begin
     open informacion for
         select mainusuario.FIRST_NAME, mainusuario.LAST_NAME, mainusuario.EMAIL, direccion.CALLE, direccion.NUMERO, direccion.ID_CIUDAD, ciudad.ID_ESTADO,
         estados.ID_PAIS, secondusuario.CELULAR, secondusuario.SEXO, secondusuario.TIPO_SANGRE
-        from dientes.auth_user mainusuario inner join DIENTES.USUARIOS secondusuario on mainusuario.ID=secondusuario.ID_USUARIO 
-        inner join DIENTES.DIRECCIONES direccion on secondusuario.ID_DIRECCION = direccion.ID_DIRECCION inner join DIENTES.CIUDADES ciudad
-        on direccion.ID_CIUDAD = ciudad.ID_CIUDAD inner join DIENTES.ESTADO estados on ciudad.ID_ESTADO = estados.ID_ESTADO
+        from dientes.auth_user mainusuario full outer join DIENTES.USUARIOS secondusuario on mainusuario.ID=secondusuario.ID_USUARIO 
+        full outer join DIENTES.DIRECCIONES direccion on secondusuario.ID_DIRECCION = direccion.ID_DIRECCION full outer join DIENTES.CIUDADES ciudad
+        on direccion.ID_CIUDAD = ciudad.ID_CIUDAD full outer join DIENTES.ESTADO estados on ciudad.ID_ESTADO = estados.ID_ESTADO
         where mainusuario.ID = usuario;
 end;
         
