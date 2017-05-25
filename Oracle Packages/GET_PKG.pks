@@ -10,5 +10,13 @@ Procedure GET_HORARIO_DOC(DOCTOR IN NUMBER, HORAS OUT SYS_REFCURSOR);
 PROCEDURE GET_HORARIO_DIA(DOCTOR IN NUMBER, DIA IN VARCHAR2, HORADIA OUT sys_refcursor);
 Procedure GET_ADDRESS_ID(USUARIO IN NUMBER, ADDRESS_ID OUT SYS_REFCURSOR);
 PROCEDURE GET_USER_GROUP(USUARIO IN NUMBER, GRUPOCUR OUT SYS_REFCURSOR);
+PROCEDURE GET_PACIENTES_DOCTOR(DOCTOR IN NUMBER, PACIENTES OUT SYS_REFCURSOR);
+PROCEDURE GET_COUNTRY(PAIS OUT SYS_REFCURSOR);
+PROCEDURE GET_ESTADOS(pais in integer, estados out sys_refcursor);
+PROCEDURE GET_CIUDADES(states in integer, ciudad out sys_refcursor);
+procedure get_blood(blood out sys_refcursor);
+procedure get_user_info(usuario in integer, informacion out sys_refcursor);
+procedure get_usernames (usernames out sys_refcursor);
+procedure get_groups (gruposdjango out sys_refcursor);
 END GET_PKG;
 /
