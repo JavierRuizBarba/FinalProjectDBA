@@ -1,4 +1,4 @@
-/* Formatted on 5/25/2017 11:23:47 AM (QP5 v5.300) */
+/* Formatted on 5/25/2017 7:41:44 PM (QP5 v5.300) */
 CREATE OR REPLACE PACKAGE BODY DIENTES.GET_PKG
 AS
     PROCEDURE GET_PACIENTE_CITA (PACIENTE OUT SYS_REFCURSOR)
@@ -145,76 +145,147 @@ AS
     AS
     BEGIN
         OPEN pacientes FOR
-            SELECT Distinct AUTH.FIRST_NAME, AUTH.LAST_NAME
+            SELECT DISTINCT AUTH.FIRST_NAME, AUTH.LAST_NAME
               FROM DIENTES.CITA  CITAS
                    INNER JOIN DIENTES.AUTH_USER AUTH
                        ON CITAS.ID_PACIENTE = AUTH.ID
              WHERE CITAS.ID_DENTISTA = DOCTOR;
     END GET_PACIENTES_DOCTOR;
-PROCEDURE GET_COUNTRY(PAIS OUT SYS_REFCURSOR)
-as
-begin
-    open pais for
-        Select paises.id_pais, paises.nombre from DIENTES.PAISES paises order by paises.id_pais asc;
-end GET_COUNTRY;
-PROCEDURE GET_ESTADOS(pais in integer, estados out sys_refcursor)
-as
-begin
-    open estados for
-        Select estados.id_estado, estados.NOMBRE from DIENTES.ESTADO estados where estados.ID_PAIS = pais order by estados.NOMBRE asc;
-end GET_ESTADOS;
-PROCEDURE GET_CIUDADES(states in integer, ciudad out sys_refcursor)
-as
-begin
-    open ciudad for
-        Select city.ID_CIUDAD, city.NOMBRE from DIENTES.CIUDADES city where city.ID_ESTADO = states order by city.nombre asc;
-end GET_CIUDADES;
 
-procedure get_blood(blood out sys_refcursor)
-as
-begin
+    PROCEDURE GET_COUNTRY (PAIS OUT SYS_REFCURSOR)
+    AS
+    BEGIN
+        OPEN pais FOR
+              SELECT paises.id_pais, paises.nombre
+                FROM DIENTES.PAISES paises
+            ORDER BY paises.id_pais ASC;
+    END GET_COUNTRY;
 
-    open blood for
-        select bloodtype.ID_TIPO_SANGRE, bloodtype.NOMBRE from DIENTES.TIPO_SANGRE bloodtype;
-end;
-procedure get_user_info(usuario in integer, informacion out sys_refcursor)
-as
-begin
-    open informacion for
-        select mainusuario.FIRST_NAME, mainusuario.LAST_NAME, mainusuario.EMAIL, direccion.CALLE, direccion.NUMERO, direccion.ID_CIUDAD, ciudad.ID_ESTADO,
-        estados.ID_PAIS, secondusuario.CELULAR, secondusuario.SEXO, secondusuario.TIPO_SANGRE
-        from dientes.auth_user mainusuario full outer join DIENTES.USUARIOS secondusuario on mainusuario.ID=secondusuario.ID_USUARIO 
-        full outer join DIENTES.DIRECCIONES direccion on secondusuario.ID_DIRECCION = direccion.ID_DIRECCION full outer join DIENTES.CIUDADES ciudad
-        on direccion.ID_CIUDAD = ciudad.ID_CIUDAD full outer join DIENTES.ESTADO estados on ciudad.ID_ESTADO = estados.ID_ESTADO
-        where mainusuario.ID = usuario;
-end get_user_info;
-procedure get_usernames (usernames out sys_refcursor)
-as
-begin
-    open usernames for
-        select djangousers.ID, djangousers.USERNAME from DIENTES.AUTH_USER djangousers;
-end get_usernames;
+    PROCEDURE GET_ESTADOS (pais IN INTEGER, estados OUT SYS_REFCURSOR)
+    AS
+    BEGIN
+        OPEN estados FOR
+              SELECT estados.id_estado, estados.NOMBRE
+                FROM DIENTES.ESTADO estados
+               WHERE estados.ID_PAIS = pais
+            ORDER BY estados.NOMBRE ASC;
+    END GET_ESTADOS;
 
-procedure get_groups (gruposdjango out sys_refcursor)
-as
-begin
-    open gruposdjango for
-        select grupitos.ID, grupitos.NAME from DIENTES.AUTH_GROUP grupitos;
-end get_groups;
+    PROCEDURE GET_CIUDADES (states IN INTEGER, ciudad OUT SYS_REFCURSOR)
+    AS
+    BEGIN
+        OPEN ciudad FOR
+              SELECT city.ID_CIUDAD, city.NOMBRE
+                FROM DIENTES.CIUDADES city
+               WHERE city.ID_ESTADO = states
+            ORDER BY city.nombre ASC;
+    END GET_CIUDADES;
 
-procedure get_users (usernames out sys_refcursor)
-as
-begin
-    open usernames for
-        select djangousers.ID, djangousers.USERNAME from DIENTES.AUTH_USER djangousers;
-end;
+    PROCEDURE get_blood (blood OUT SYS_REFCURSOR)
+    AS
+    BEGIN
+        OPEN blood FOR
+            SELECT bloodtype.ID_TIPO_SANGRE, bloodtype.NOMBRE
+              FROM DIENTES.TIPO_SANGRE bloodtype;
+    END;
 
-PROCEDURE GET_USER(USUARIOID IN NUMBER, USERNAMES OUT SYS_REFCURSOR)
-AS
-BEGIN
-    OPEN USERNAMES FOR
-        SELECT TABLAUSER.USERNAME, TABLAUSER.FIRST_NAME, TABLAUSER.LAST_NAME FROM DIENTES.AUTH_USER TABLAUSER WHERE TABLAUSER.ID=USUARIOID; 
-END GET_USER;
+    PROCEDURE get_user_info (usuario       IN     INTEGER,
+                             informacion      OUT SYS_REFCURSOR)
+    AS
+    BEGIN
+        OPEN informacion FOR
+            SELECT mainusuario.FIRST_NAME,
+                   mainusuario.LAST_NAME,
+                   mainusuario.EMAIL,
+                   direccion.CALLE,
+                   direccion.NUMERO,
+                   direccion.ID_CIUDAD,
+                   ciudad.ID_ESTADO,
+                   estados.ID_PAIS,
+                   secondusuario.CELULAR,
+                   secondusuario.SEXO,
+                   secondusuario.TIPO_SANGRE
+              FROM dientes.auth_user  mainusuario
+                   FULL OUTER JOIN DIENTES.USUARIOS secondusuario
+                       ON mainusuario.ID = secondusuario.ID_USUARIO
+                   FULL OUTER JOIN DIENTES.DIRECCIONES direccion
+                       ON secondusuario.ID_DIRECCION = direccion.ID_DIRECCION
+                   FULL OUTER JOIN DIENTES.CIUDADES ciudad
+                       ON direccion.ID_CIUDAD = ciudad.ID_CIUDAD
+                   FULL OUTER JOIN DIENTES.ESTADO estados
+                       ON ciudad.ID_ESTADO = estados.ID_ESTADO
+             WHERE mainusuario.ID = usuario;
+    END get_user_info;
+
+    PROCEDURE get_usernames (usernames OUT SYS_REFCURSOR)
+    AS
+    BEGIN
+        OPEN usernames FOR
+            SELECT djangousers.ID, djangousers.USERNAME
+              FROM DIENTES.AUTH_USER djangousers;
+    END get_usernames;
+
+    PROCEDURE get_groups (gruposdjango OUT SYS_REFCURSOR)
+    AS
+    BEGIN
+        OPEN gruposdjango FOR
+            SELECT grupitos.ID, grupitos.NAME
+              FROM DIENTES.AUTH_GROUP grupitos;
+    END get_groups;
+
+    PROCEDURE get_users (usernames OUT SYS_REFCURSOR)
+    AS
+    BEGIN
+        OPEN usernames FOR
+            SELECT djangousers.ID, djangousers.USERNAME
+              FROM DIENTES.AUTH_USER djangousers;
+    END;
+
+    PROCEDURE GET_USER (USUARIOID IN NUMBER, USERNAMES OUT SYS_REFCURSOR)
+    AS
+    BEGIN
+        OPEN USERNAMES FOR
+            SELECT TABLAUSER.USERNAME,
+                   TABLAUSER.FIRST_NAME,
+                   TABLAUSER.LAST_NAME
+              FROM DIENTES.AUTH_USER TABLAUSER
+             WHERE TABLAUSER.ID = USUARIOID;
+    END GET_USER;
+
+    PROCEDURE GET_TRATAMIENTOS (OUT_TRATAMIENTOS OUT SYS_REFCURSOR)
+    AS
+    BEGIN
+        OPEN OUT_TRATAMIENTOS FOR
+            SELECT TRATAMIENTOS.ID_TRATAMIENTO,
+                   ESPECIALIDAD.NOMBRE,
+                   TRATAMIENTOS.COSTO
+              FROM DIENTES.TRATAMIENTO  TRATAMIENTOS
+                   INNER JOIN DIENTES.ESPECIALIDADES ESPECIALIDAD
+                       ON TRATAMIENTOS.ID_ESPECIALIDAD =
+                              ESPECIALIDAD.ID_ESPECIALIDAD;
+    END GET_TRATAMIENTOS;
+
+    PROCEDURE GET_MATERIAL (OUT_MATERIAL OUT SYS_REFCURSOR)
+    AS
+    BEGIN
+        OPEN OUT_MATERIAL FOR
+            SELECT MATERIALES.ID_MATERIAL, MATERIALES.NOMBRE
+              FROM DIENTES.MATERIAL MATERIALES;
+    END GET_MATERIAL;
+
+    PROCEDURE GET_MATERIAL_TRATAMIENTO (
+        ID_TRATAMIENTO_V   IN     NUMBER,
+        OUT_MATERIAL          OUT SYS_REFCURSOR)
+    AS
+    BEGIN
+        OPEN OUT_MATERIAL FOR
+            SELECT MATERIALES.ID_MATERIAL, MATERIALES.NOMBRE
+              FROM DIENTES.TRATAMIENTO  TRATAMIENTOS
+                   INNER JOIN DIENTES.TRATAMIENTO_MATERIAL TRAT_MAT
+                       ON TRATAMIENTOS.ID_TRATAMIENTO =
+                              TRAT_MAT.ID_TRATAMIENTO
+                   INNER JOIN DIENTES.MATERIAL MATERIALES
+                       ON TRAT_MAT.ID_MATERIAL = MATERIALES.ID_MATERIAL;
+    END GET_MATERIAL_TRATAMIENTO;
 END GET_PKG;
 /
-
