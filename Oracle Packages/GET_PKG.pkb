@@ -201,6 +201,20 @@ begin
     open gruposdjango for
         select grupitos.ID, grupitos.NAME from DIENTES.AUTH_GROUP grupitos;
 end get_groups;
+
+procedure get_users (usernames out sys_refcursor)
+as
+begin
+    open usernames for
+        select djangousers.ID, djangousers.USERNAME from DIENTES.AUTH_USER djangousers;
+end;
+
+PROCEDURE GET_USER(USUARIOID IN NUMBER, USERNAMES OUT SYS_REFCURSOR)
+AS
+BEGIN
+    OPEN USERNAMES FOR
+        SELECT TABLAUSER.USERNAME, TABLAUSER.FIRST_NAME, TABLAUSER.LAST_NAME FROM DIENTES.AUTH_USER TABLAUSER WHERE TABLAUSER.ID=USUARIOID; 
+END GET_USER;
 END GET_PKG;
 /
 

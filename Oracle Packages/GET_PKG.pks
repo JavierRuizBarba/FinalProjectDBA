@@ -18,5 +18,6 @@ procedure get_blood(blood out sys_refcursor);
 procedure get_user_info(usuario in integer, informacion out sys_refcursor);
 procedure get_usernames (usernames out sys_refcursor);
 procedure get_groups (gruposdjango out sys_refcursor);
+PROCEDURE GET_USER(USUARIOID IN NUMBER, USERNAMES OUT SYS_REFCURSOR);
 END GET_PKG;
 /
