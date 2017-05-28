@@ -8,43 +8,51 @@
     {{ form.as_p }}
     <button id ="Save" class="btn btn-info" element onclick="GuardarDir()">Guardar</button>
     <a href='register/home' class="btn btn-danger">Cancelar</a>
+    <a href='/horarios' id = "Horarios" class="btn btn-default">Modificar Horario</a>
     </div>
 {% endblock %}
 {% block scripts %}
 <script>
-    exists = false;
+    grupo = "{{ grupo }}"
+    if(grupo != "Doctores"){
+        $('#Horarios').hide();
+    }
+</script>
+<script>
     $.ajax({  //Call ajax function sending the option loaded
             url: "search_ajax/",  //This is the url of the ajax view where you make the search
             type: 'POST',
             dataType: "json",
             data: {tag:"populateuser"},
                 success: function(response) {
-                    user_info=response[0];
-                    if(user_info != null) {
-                        exists=true;
+                    user_info = response[0];
+                    if (user_info != null) {
                         $('#id_Nombre').val(user_info[0]);
                         $('#id_Apellido').val(user_info[1]);
                         $('#id_Correo').val(user_info[2]);
                         $('#id_Direccion').val(user_info[3]);
                         $('#id_Numero_Exterior').val(user_info[4]);
                         $('#id_Celular').val(user_info[8]);
-                        $('#id_Sexo').val(user_info[9]);
-                        $('#id_Paises').val(user_info[7]);
-                        $('#id_Paises').trigger('change');
-                        setTimeout(function () {
-                            $('#id_Estados').val(user_info[6]);
-                            $('#id_Estados').trigger('change');
-                        }, 500);
-                        setTimeout(function(){
-                            $('#id_Ciudades').val(user_info[5]);
-                        }, 1000);
-                        $('#id_Tipo_Sangre').val(user_info[10]);
+                        if(user_info[9] != null) {
+                            $('#id_Sexo').val(user_info[9]);
+                        }
+                        if(user_info[7] != null) {
+                            $('#id_Paises').val(user_info[7]);
+                            $('#id_Paises').trigger('change');
+                            setTimeout(function () {
+                                $('#id_Estados').val(user_info[6]);
+                                $('#id_Estados').trigger('change');
+                            }, 500);
+                            setTimeout(function () {
+                                $('#id_Ciudades').val(user_info[5]);
+                            }, 1000);
+                        }
+                        if(user_info[10]!=null) {
+                            $('#id_Tipo_Sangre').val(user_info[10]);
+                        }
                     }
-                },
-                error: function(){
-                    exists= false;
                 }
-            });
+                });
     </script>
     <script>
     $('#id_Paises').on('change',function(){
@@ -90,75 +98,45 @@
             });
     });
 </script>
-<script>
+    <script>
         function GuardarDir(){
-            if(!exists) {
-                calle = $('#id_Direccion').val();
-                exterior = $('#id_Numero_Exterior').val();
-                ciudad = $('#id_Ciudades').val();
-                sexo = $('#id_Sexo').val();
-                celular = $('#id_Celular').val();
-                blood = $('#id_Tipo_Sangre').val();
-                if (ciudad == null || exterior == '' || calle == '') {
-                    alert('Llenar todos los campos');
-                }
-                else {
-                    $.ajax({  //Call ajax function sending the option loaded
-                        url: "search_ajax/",  //This is the url of the ajax view where you make the search
-                        type: 'POST',
-                        dataType: "json",
-                        data: {
-                            calle: calle,
-                            exterior: exterior,
-                            ciudad: ciudad,
-                            celular: celular,
-                            sexo: sexo,
-                            blood: blood,
-                            tag: "savedir"
-                        },
-                        success: function (response) {
-                            alert('Datos Actualizados')
-                        }
-                    });
-                }
+            nombre = $('#id_Nombre').val();
+            apellido = $('#id_Apellido').val();
+            correo = $('#id_Correo').val();
+            ciudad = $('#id_Ciudades').val();
+            calle = $('#id_Direccion').val();
+            exterior = $('#id_Numero_Exterior').val();
+            sexo = $('#id_Sexo').val();
+            celular = $('#id_Celular').val();
+            blood = $('#id_Tipo_Sangre').val();
+            if(nombre != "" && apellido != "" && correo != "" && ciudad != "" && calle !=null && exterior != "" &&
+                sexo != null && celular != "" && blood != null) {
+                $.ajax({  //Call ajax function sending the option loaded
+                    url: "search_ajax/",  //This is the url of the ajax view where you make the search
+                    type: 'POST',
+                    dataType: "json",
+                    data: {
+                        nombre: nombre,
+                        apellido: apellido,
+                        correo: correo,
+                        ciudad: ciudad,
+                        calle: calle,
+                        exterior: exterior,
+                        sexo: sexo,
+                        celular: celular,
+                        blood: blood,
+                        tag: "savedir"
+                    },
+                    success: function (response) {
+                        alert('Datos Actualizados');
+                    }
+                });
             }
             else
             {
-                calle = $('#id_Direccion').val();
-                exterior = $('#id_Numero_Exterior').val();
-                ciudad = $('#id_Ciudades').val();
-                sexo = $('#id_Sexo').val();
-                celular = $('#id_Celular').val();
-                nombre = $('#id_Nombre').val();
-                apellido = $('#id_Apellido').val();
-                correo = $('#id_Correo').val();
-                blood = $('#id_Tipo_Sangre').val();
-                if (ciudad == null || exterior == '' || calle == '') {
-                    alert('Llenar todos los campos');
-                }
-                else {
-                    $.ajax({  //Call ajax function sending the option loaded
-                        url: "search_ajax/",  //This is the url of the ajax view where you make the search
-                        type: 'POST',
-                        dataType: "json",
-                        data: {
-                            nombre: nombre,
-                            apellido: apellido,
-                            correo: correo,
-                            calle: calle,
-                            exterior: exterior,
-                            ciudad: ciudad,
-                            celular: celular,
-                            sexo: sexo,
-                            blood: blood,
-                            tag: "updatedir"
-                        },
-                        success: function (response) {
-                            alert('Datos Actualizados')
-                        }
-                    });
-                }
+                alert('Completar todos los campos');
             }
         }
-</script>
+    </script>
+
 {% endblock %}

@@ -31,6 +31,8 @@ AS
                          ASISTIO_V       IN DIENTES.CITA.ASISTIO%TYPE,
                          ACTIVO_V        IN DIENTES.CITA.ACTIVO%TYPE,
                          ACEPTADA_V      IN DIENTES.CITA.ACEPTADA%TYPE);
+                         
+    PROCEDURE EDIT_CITA_ACEPTAR(ID_CITA_V IN DIENTES.CITA.ID_CITA%TYPE);
 
     PROCEDURE EDIT_DETALLE_CITA (
         ID_CITA_V                  IN DIENTES.DETALLE_CITA.ID_CITA%TYPE,

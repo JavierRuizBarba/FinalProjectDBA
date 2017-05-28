@@ -30,5 +30,10 @@ urlpatterns = [
     url(r'^update_user_info', views.update_user_info),
     url(r'^search_ajax/?$', views.search_ajax),
     url(r'^grupos', views.grupos_usuarios),
-    url(r'^nueva_cita', views.new_app),
+    url(r'^nueva_cita', views.new_app, name='nueva_cita'),
+    url(r'^editar_cita', views.edit_app, name='editar_cita'),
+    url(r'^todas_citas', views.todas_citas),
+    url(r'^citas_confirmar', views.citas_confirmar),
+    url(r'^horario', views.horario_vista),
+    (url(r'^pacientes', views.pacientes))
 ]
