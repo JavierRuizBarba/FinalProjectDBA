@@ -309,6 +309,7 @@ def asignar_tratamientos(request):
     if not request.user.is_authenticated:
         return redirect('%s?next=%s' % (settings.LOGIN_URL, request.path))
     else:
+        usuario = request.user.id
         groups = request.user.groups.all()
         if not groups:
             grupo = "Pacientes"
@@ -321,7 +322,7 @@ def asignar_tratamientos(request):
                 form = tratamientos_pacientes(request.user, request.POST)
             else:
                 form = tratamientos_pacientes(request.user)
-        return render(request, 'asignar_tratamiento.html', {'form':form})
+        return render(request, 'asignar_tratamiento.html', {'form':form, 'usuario':usuario})
 
 
 
@@ -427,13 +428,17 @@ def search_ajax(request):
         viernes = request.POST.get('viernes')
         sabado = request.POST.get('sabado')
         domingo = request.POST.get('domingo')
+        existe = request.POST.get('exists')
 
         res=''
         cur = connection.cursor()
         horario_id = ''
-        if request.POST.get('exists')==0:
+        print(existe)
+        if existe == "false":
+            print('agregar')
             cur.callproc('dientes.add_pkg.add_horario', [horario_id, usuario, lunes, martes, miercoles, jueves, viernes, sabado, domingo])
         else:
+            print('modify')
             cur.callproc('dientes.edit_pkg.edit_horarios', [lunes, martes, miercoles, jueves, viernes, sabado, domingo, 1, usuario])
 
     elif request.POST.get('tag') == 'dynamichorarios':
@@ -469,6 +474,11 @@ def search_ajax(request):
         for item in res:
             res2.append((item[0],item[3]))
         res = res2
+
+    elif request.POST.get('tag') == 'asignartratamientos':
+        cur = connection.cursor()
+        cur.callproc()
+
     return HttpResponse(json.dumps(res))
 
 

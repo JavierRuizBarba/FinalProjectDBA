@@ -184,3 +184,6 @@ class tratamientos_pacientes(forms.Form):
     Tratamientos = forms.ChoiceField(choices=res2, required = True)
     Costo = forms.DecimalField(disabled=True, required=True)
     Citas = forms.IntegerField(required=True)
+    dias = [('Lunes','Lunes'), ('Martes','Martes'), ('Miercoles','Miercoles'), ('Jueves','Jueves'), ('Viernes','Viernes'), ('Sabado','Sabado'), ('Domingo','Domingo')]
+    Dia = forms.ChoiceField(choices=dias)
+    Hora_Preferencia = forms.DateField(widget=forms.DateInput(attrs={'class': 'timepicker'}), required=True)
