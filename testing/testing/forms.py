@@ -146,3 +146,41 @@ class forma_horarios_Fin(forms.Form):
     Viernes_Fin = forms.DateField(widget=forms.DateInput(attrs={'class': 'timepicker'}), required=True)
     Sabado_Fin = forms.DateField(widget=forms.DateInput(attrs={'class': 'timepicker'}), required=True)
     Domingo_Fin = forms.DateField(widget=forms.DateInput(attrs={'class': 'timepicker'}), required=True)
+
+class forma_tratamientos(forms.Form):
+    def __init__(self, *args, **kwargs):
+        super(forma_tratamientos, self).__init__(*args, **kwargs)
+    cur = connection.cursor()
+    rawCursor = cur.connection.cursor()
+
+    cur.callproc('dientes.get_pkg.get_especialidades', [rawCursor])
+    res = rawCursor.fetchall()
+
+    Nombre = forms.CharField(max_length=100, required = True)
+
+    Especialidad = forms.ChoiceField(choices=res, required = True)
+
+    Costo = forms.IntegerField(required=True)
+
+class tratamientos_pacientes(forms.Form):
+    def __init__(self, user, *args, **kwargs):
+        self.user = user
+        super(tratamientos_pacientes, self).__init__(*args, **kwargs)
+
+    cur = connection.cursor()
+    rawCursor = cur.connection.cursor()
+
+    cur.callproc('dientes.get_pkg.get_pacientes_doctor', [1, rawCursor])
+    res = rawCursor.fetchall()
+    Pacientes = forms.ChoiceField(choices=res, required=True)
+
+    cur.callproc('dientes.get_pkg.get_tratamientos', [rawCursor])
+
+    res = rawCursor.fetchall()
+    res2 = []
+
+    for item in res:
+        res2.append((item[0],item[1]))
+    Tratamientos = forms.ChoiceField(choices=res2, required = True)
+    Costo = forms.IntegerField(disabled=True, required=True)
+    Citas = forms.IntegerField(required=True)

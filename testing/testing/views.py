@@ -2,6 +2,7 @@ from django.shortcuts import redirect, render
 import cx_Oracle
 from django.db import connection
 from testing.forms import update_address, user_groups, nueva_cita_doc, nueva_cita_paciente, nueva_cita_admin, forma_horarios_Inicio, forma_horarios_Fin
+from testing.forms import forma_tratamientos, tratamientos_pacientes
 from testing import settings
 from django.http import HttpResponse
 import json
@@ -23,14 +24,11 @@ def getTable3(cursor):
     return myTable(exptData)
 
 def getTable(cursor, metodo):
-    class CheckColumn(tables.Column):
-        def render(self, value):
-            return format_html('<input type="checkbox" id="" class="checkbox"/>', value)
     exptData = dictfetchall(cursor)
     class NameTable(tables.Table):
         if metodo == 'tablapacientes':
-            FIRST_NAME = tables.Column()
-            LAST_NAME = tables.Column()
+            PACIENTE_ID = tables.Column()
+            PACIENTE = tables.Column()
         elif metodo == 'tablacitas':
             ID_CITA = tables.Column()
             PACIENTE = tables.Column()
@@ -176,24 +174,31 @@ def todas_citas(request):
         usuario = request.user.id
         groups = request.user.groups.all()
         if not groups:
-            grupo = "Paciente"
+            grupo = "Pacientes"
         else:
             grupo = str(groups[0])
+        cur = connection.cursor()
+        rawCursor = cur.connection.cursor()
         if grupo == "Doctores":
             basehtml = 'base.html'
-            cur = connection.cursor()
-            rawCursor = cur.connection.cursor()
+            proc = 'dientes.get_pkg.get_cita_doctor'
 
-            cur.callproc('dientes.get_pkg.get_cita_doctor', [rawCursor, usuario])
-            res = rawCursor.fetchall()
-            if not res:
-                citas = None
-                return render(request, 'todas_citas.html', {'citas':citas,'basehtml':basehtml, 'usuario':usuario, 'grupo':grupo})
-            else:
-                cur.callproc('dientes.get_pkg.get_cita_doctor', [rawCursor, usuario])
-                tablaFinal = getTable(rawCursor, "tablacitas")
-                RequestConfig(request).configure(tablaFinal)
-                return render(request, 'todas_citas.html', {'citas':tablaFinal, 'basehtml':basehtml, 'usuario':usuario, 'grupo':grupo})
+        elif grupo == "Pacientes":
+            basehtml = 'basepaciente.html'
+            proc = 'dientes.get_pkg.get_cita_p'
+
+        cur.callproc(proc, [rawCursor, usuario])
+        res = rawCursor.fetchall()
+        if not res:
+            citas = None
+            return render(request, 'todas_citas.html', {'citas':citas,'basehtml':basehtml, 'usuario':usuario, 'grupo':grupo})
+        else:
+            cur.callproc(proc, [rawCursor, usuario])
+            tablaFinal = getTable(rawCursor, "tablacitas")
+            RequestConfig(request).configure(tablaFinal)
+
+
+        return render(request, 'todas_citas.html', {'citas':tablaFinal, 'basehtml':basehtml, 'usuario':usuario, 'grupo':grupo})
 
 def citas_confirmar(request):
     if not request.user.is_authenticated:
@@ -202,18 +207,23 @@ def citas_confirmar(request):
         usuario = request.user.id
         groups = request.user.groups.all()
         if not groups:
-            grupo = "Paciente"
+            grupo = "Pacientes"
         else:
             grupo = str(groups[0])
         if grupo == "Doctores":
             basehtml = 'base.html'
-            cur = connection.cursor()
-            rawCursor = cur.connection.cursor()
+            proc = 'dientes.get_pkg.get_cita_doctor'
+        elif grupo == "Pacientes":
+            basehtml = 'basepaciente.html'
+            proc = 'dientes.get_pkg.get_cita_na_p'
 
-            cur.callproc('dientes.get_pkg.get_cita_na', [rawCursor, usuario])
+        cur = connection.cursor()
+        rawCursor = cur.connection.cursor()
 
-            tablaFinal = getTable(rawCursor, "tablacitas")
-            RequestConfig(request).configure(tablaFinal)
+        cur.callproc(proc, [rawCursor, usuario])
+
+        tablaFinal = getTable(rawCursor, "tablacitas")
+        RequestConfig(request).configure(tablaFinal)
     return render(request, 'citas_confirmar.html', {'citas':tablaFinal, 'basehtml':basehtml, 'usuario':usuario, 'grupo':grupo})
 
 def horario_vista(request):
@@ -282,16 +292,39 @@ def tratamientos(request):
         cur.callproc('dientes.get_pkg.get_tratamientos', [rawCursor])
         res = rawCursor.fetchall()
 
-    if not res:
-        tablaFinal = None
-        return render(request, 'lista_tratamientos.html', {'tratamientos': tablaFinal, 'basehtml': basehtml})
+        if not res:
+            tablaFinal = None
+        else:
+            cur.callproc('dientes.get_pkg.get_tratamientos', [rawCursor])
+            tablaFinal = getTable(rawCursor, "tablatratamientos")
+            RequestConfig(request).configure(tablaFinal)
+            if request.method == "POST":
+                form = forma_tratamientos(request.POST)
+            else:
+                form = forma_tratamientos()
+
+        return render(request, 'lista_tratamientos.html', {'tratamientos':tablaFinal, 'basehtml':basehtml, 'grupo': grupo, 'form':form})
+
+def asignar_tratamientos(request):
+    if not request.user.is_authenticated:
+        return redirect('%s?next=%s' % (settings.LOGIN_URL, request.path))
     else:
-        cur.callproc('dientes.get_pkg.get_tratamientos', [rawCursor])
-        tablaFinal = getTable(rawCursor, "tablatratamientos")
-        RequestConfig(request).configure(tablaFinal)
-        return render(request, 'lista_tratamientos.html', {'tratamientos':tablaFinal, 'basehtml':basehtml})
-			
-			
+        groups = request.user.groups.all()
+        if not groups:
+            grupo = "Pacientes"
+        else:
+            grupo = str(groups[0])
+        if grupo == "Pacientes":
+            return redirect("/register/home")
+        else:
+            if request.method == "POST":
+                form = tratamientos_pacientes(request.user, request.POST)
+            else:
+                form = tratamientos_pacientes(request.user)
+        return render(request, 'asignar_tratamiento.html', {'form':form})
+
+
+
 @csrf_exempt
 def search_ajax(request):
     if request.POST.get('tag') == 'getstate':
@@ -308,6 +341,7 @@ def search_ajax(request):
         rawCursor = cur.connection.cursor()
 
         cur.callproc('dientes.get_pkg.get_ciudades', [id_estado, rawCursor])
+
         res = rawCursor.fetchall()
 
     elif request.POST.get('tag') == 'savedir':
@@ -416,9 +450,11 @@ def search_ajax(request):
 
     elif request.POST.get('tag') == 'aceptarcita':
         cur = connection.cursor()
-        citaid = request.POST.get('citasid')
-
-        cur.callproc('dientes.edit_pkg.edit_cita_aceptar', [citaid])
+        citaid = request.POST.get('citasids')
+        res=''
+        values = [int(x) for x in citaid.split(',') if x]
+        for item in values:
+            cur.callproc('dientes.edit_pkg.edit_cita_aceptar', [item])
     return HttpResponse(json.dumps(res))
 
 

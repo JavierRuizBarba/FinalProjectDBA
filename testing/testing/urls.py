@@ -37,4 +37,5 @@ urlpatterns = [
     url(r'^horario', views.horario_vista),
     url(r'^pacientes', views.pacientes),
 	url(r'^tratamientos', views.tratamientos),
+    url(r'^asignar_tratamientos', views.asignar_tratamientos),
 ]
