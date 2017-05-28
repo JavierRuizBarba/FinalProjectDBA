@@ -11,7 +11,7 @@ def registro(request):
         form = UserRegistration(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('/admin')
+            return redirect("/login")
     else:
         form = UserRegistration()
     return render(request, 'registro/registro.html', {'form':form})
@@ -20,24 +20,28 @@ def home(request):
     if not request.user.is_authenticated:
         return redirect('%s?next=%s' % (settings.LOGIN_URL, request.path))
     else:
-        user = request.user.username
+        userid = request.user.id
         group = request.user.groups.all()
-        print(group)
         if not group:
             grupo = ""
         else:
             grupo = str(group[0])
-        if grupo == "Doctores":
+        if grupo == "Doctores" or grupo =="Administrador":
             basehtml = 'base.html'
         else:
             basehtml = 'basepaciente.html'
-        cursor = connection.cursor()
-        rawCursor = cursor.connection.cursor()
-        cursor.callproc('dientes.get_user', [user, rawCursor])
+        cur = connection.cursor()
+        rawCursor = cur.connection.cursor()
+        cur.callproc('dientes.get_pkg.get_address_id', [userid,rawCursor])
         res = rawCursor.fetchall()
-        for item in res:
-            username = item[0]
-            name = item[1]
-            lastname = item[2]
+        if not res:
+            return redirect('/update_user_info')
+        else:
+            cur.callproc('dientes.get_pkg.get_user', [userid, rawCursor])
+            res = rawCursor.fetchall()
+            for item in res:
+                username = item[0]
+                name = item[1]
+                lastname = item[2]
 
     return render(request, 'registro/Home.html', {'username':username, 'nombre':name, 'apellido':lastname, 'grupo':grupo, 'basehtml':basehtml})
