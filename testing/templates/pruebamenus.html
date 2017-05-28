@@ -42,10 +42,10 @@
                             setTimeout(function () {
                                 $('#id_Estados').val(user_info[6]);
                                 $('#id_Estados').trigger('change');
-                            }, 500);
+                            }, 1500);
                             setTimeout(function () {
                                 $('#id_Ciudades').val(user_info[5]);
-                            }, 1000);
+                            }, 3500);
                         }
                         if(user_info[10]!=null) {
                             $('#id_Tipo_Sangre').val(user_info[10]);
@@ -129,6 +129,7 @@
                     },
                     success: function (response) {
                         alert('Datos Actualizados');
+                        window.location.href = '/register/home';
                     }
                 });
             }

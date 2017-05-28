@@ -255,6 +255,8 @@ def horario_vista(request):
             return redirect('/register/home')
 
 def pacientes(request):
+    def __init__(self, *args, **kwargs):
+        super(pacientes, self).__init__(*args, **kwargs)
     if not request.user.is_authenticated:
         return redirect('%s?next=%s' % (settings.LOGIN_URL, request.path))
     else:
@@ -481,9 +483,17 @@ def search_ajax(request):
             res2.append((item[0],item[3]))
         res = res2
 
-    elif request.POST.get('tag') == 'asignartratamientos':
+    elif request.POST.get('tag') == 'asignartratamiento':
         cur = connection.cursor()
-        cur.callproc()
+        id_tratamiento_paciente=0
+        tratamiento = request.POST.get('tratamiento')
+        doctor = request.POST.get('doctor')
+        paciente = request.POST.get('paciente')
+        citas = request.POST.get('citas')
+        dia = request.POST.get('dia')
+        hora = request.POST.get('hora')
+        res = ''
+        cur.callproc('dientes.add_pkg.add_tratamiento_paciente', [id_tratamiento_paciente, tratamiento, paciente, doctor, citas, dia, hora])
 
     return HttpResponse(json.dumps(res))
 

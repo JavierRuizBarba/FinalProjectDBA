@@ -12,7 +12,7 @@
         $(document).ready(function(){
             $('.datepicker').datepicker();
             $('.timepicker').timepicker({
-                timeFormat: 'h:mm p',
+                timeFormat: 'H:mm',
                 interval:30,
                 minTime:'',
                 maxTime:'',
@@ -46,15 +46,19 @@
                     $('.timepicker').data('TimePicker').options.maxTime = horamaxima;
                     $('.timepicker').data('TimePicker').items = null;
                     $('.timepicker').data('TimePicker').widget.instance = null;
-                }, 500);
+                }, 1500);
         });
     </script>
     <script>
     function Assign(){
         doctor = "{{ usuario }}";
         paciente = $('#id_Pacientes').val();
-        tratamiento = $('#id_Traatmientos').val();
+        tratamiento = $('#id_Tratamientos').val();
         citas = $('#id_Citas').val();
+        dia = $('#id_Dia').val();
+        hora = $('#id_Hora_Preferencia').val();
+        hora = hora.substring(0,hora.indexOf(":"));
+        alert(hora);
         $.ajax({  //Call ajax function sending the option loaded
             url: "search_ajax/",  //This is the url of the ajax view where you make the search
             type: 'POST',
@@ -64,17 +68,12 @@
                 paciente: paciente,
                 tratamiento: tratamiento,
                 citas: citas,
+                dia: dia,
+                hora: hora,
                 tag:"asignartratamiento"},
                 success: function(response) {
-                    result=response;
-                    costo=0
-                    for(i=0; i<result.length; ++i){
-                        item = result[i];
-                        if(item[0]==$('#id_Tratamientos').val()){
-                            $('#id_Costo').val(item[1]);
-                            break;
-                        }
-                    }
+                alert('Tratamiento Asignado');
+                window.location.href = "/register/home"
                 }
             });
     }
