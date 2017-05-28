@@ -170,9 +170,13 @@ class tratamientos_pacientes(forms.Form):
     cur = connection.cursor()
     rawCursor = cur.connection.cursor()
 
-    cur.callproc('dientes.get_pkg.get_pacientes_doctor', [1, rawCursor])
+    cur.callproc('dientes.get_pkg.get_paciente_cita', [rawCursor])
     res = rawCursor.fetchall()
-    Pacientes = forms.ChoiceField(choices=res, required=True)
+    res2= []
+
+    for item in res:
+        res2.append((item[0], item[1]+" "+item[2]))
+    Pacientes = forms.ChoiceField(choices=res2, required=True)
 
     cur.callproc('dientes.get_pkg.get_tratamientos', [rawCursor])
 
@@ -184,6 +188,6 @@ class tratamientos_pacientes(forms.Form):
     Tratamientos = forms.ChoiceField(choices=res2, required = True)
     Costo = forms.DecimalField(disabled=True, required=True)
     Citas = forms.IntegerField(required=True)
-    dias = [('Lunes','Lunes'), ('Martes','Martes'), ('Miercoles','Miercoles'), ('Jueves','Jueves'), ('Viernes','Viernes'), ('Sabado','Sabado'), ('Domingo','Domingo')]
+    dias = [(0,'Seleccione un día'),('Lunes','Lunes'), ('Martes','Martes'), ('Miercoles','Miercoles'), ('Jueves','Jueves'), ('Viernes','Viernes'), ('Sabado','Sabado'), ('Domingo','Domingo')]
     Dia = forms.ChoiceField(choices=dias)
     Hora_Preferencia = forms.DateField(widget=forms.DateInput(attrs={'class': 'timepicker'}), required=True)
