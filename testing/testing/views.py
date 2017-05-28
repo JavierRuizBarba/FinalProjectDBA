@@ -221,10 +221,16 @@ def citas_confirmar(request):
         rawCursor = cur.connection.cursor()
 
         cur.callproc(proc, [rawCursor, usuario])
+        res = rawCursor.fetchall()
+        if not res:
+            citas = None
+            return render(request, 'citas_confirmar.html', {'citas':citas,'basehtml':basehtml, 'usuario':usuario, 'grupo':grupo})
+        else:
+            cur.callproc(proc, [rawCursor, usuario])
+            tablaFinal = getTable(rawCursor, "tablacitas")
+            RequestConfig(request).configure(tablaFinal)
 
-        tablaFinal = getTable(rawCursor, "tablacitas")
-        RequestConfig(request).configure(tablaFinal)
-    return render(request, 'citas_confirmar.html', {'citas':tablaFinal, 'basehtml':basehtml, 'usuario':usuario, 'grupo':grupo})
+        return render(request, 'citas_confirmar.html', {'citas':tablaFinal, 'basehtml':basehtml, 'usuario':usuario, 'grupo':grupo})
 
 def horario_vista(request):
     if not request.user.is_authenticated:
