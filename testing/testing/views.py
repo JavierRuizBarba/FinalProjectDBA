@@ -308,7 +308,6 @@ def search_ajax(request):
         rawCursor = cur.connection.cursor()
 
         cur.callproc('dientes.get_pkg.get_ciudades', [id_estado, rawCursor])
-
         res = rawCursor.fetchall()
 
     elif request.POST.get('tag') == 'savedir':
