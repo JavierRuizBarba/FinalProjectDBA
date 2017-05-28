@@ -57,8 +57,12 @@
         citas = $('#id_Citas').val();
         dia = $('#id_Dia').val();
         hora = $('#id_Hora_Preferencia').val();
-        hora = hora.substring(0,hora.indexOf(":"));
-        alert(hora);
+        parseohora = hora.substring(0,hora.indexOf(":"));
+        minutos = hora.substring(hora.indexOf(":")+1,hora.length);
+        hora = parseInt(parseohora)*2;
+        minutos = parseInt(minutos)/30;
+        horafinal = hora+minutos;
+        alert(horafinal);
         $.ajax({  //Call ajax function sending the option loaded
             url: "search_ajax/",  //This is the url of the ajax view where you make the search
             type: 'POST',
@@ -69,7 +73,7 @@
                 tratamiento: tratamiento,
                 citas: citas,
                 dia: dia,
-                hora: hora,
+                hora: horafinal,
                 tag:"asignartratamiento"},
                 success: function(response) {
                 alert('Tratamiento Asignado');
