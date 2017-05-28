@@ -398,5 +398,13 @@ AS
                      BLOOD,
                      ADDRESSID);
     END ADD_USER_INFO;
+    
+    procedure add_user_group(idusuario in integer, idgrupo in integer)
+is
+id_usergroup integer;
+begin
+    id_usergroup := DIENTES.AUTH_USER_GROUPS_SQ.NEXTVAL;
+    Insert into DIENTES.AUTH_USER_GROUPS usergroups (usergroups.ID, usergroups.USER_ID, usergroups.GROUP_ID) values (id_usergroup, idusuario, idgrupo);
+end;
 END ADD_PKG;
 /

@@ -110,5 +110,6 @@ AS
                              GENERO      IN VARCHAR2,
                              CELL        IN NUMBER,
                              BLOOD       IN VARCHAR2);
+    procedure add_user_group(idusuario in integer, idgrupo in integer);
 END ADD_PKG;
 /
