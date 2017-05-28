@@ -300,12 +300,12 @@ def tratamientos(request):
             cur.callproc('dientes.get_pkg.get_tratamientos', [rawCursor])
             tablaFinal = getTable(rawCursor, "tablatratamientos")
             RequestConfig(request).configure(tablaFinal)
-            if request.method == "POST":
-                form = forma_tratamientos(request.POST)
-            else:
-                form = forma_tratamientos()
+        if request.method == "POST":
+            form = forma_tratamientos(request.POST)
+        else:
+            form = forma_tratamientos()
 
-        return render(request, 'lista_tratamientos.html', {'tratamientos':tablaFinal, 'basehtml':basehtml, 'grupo': grupo, 'form':form})
+    return render(request, 'lista_tratamientos.html', {'tratamientos':tablaFinal, 'basehtml':basehtml, 'grupo': grupo, 'form':form})
 
 def asignar_tratamientos(request):
     if not request.user.is_authenticated:
@@ -452,6 +452,7 @@ def search_ajax(request):
         cur.callproc('dientes.get_pkg.get_horario_dia', [doctor, dia, rawCursor])
 
         res=dictfetchall(rawCursor)
+
         res = res[0]
         res = res[dia.upper()]
 
