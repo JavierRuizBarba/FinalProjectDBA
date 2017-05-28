@@ -19,9 +19,17 @@
             url: "search_ajax/",  //This is the url of the ajax view where you make the search
             type: 'POST',
             dataType: "json",
-            data: {, tag:"gettreatmentcost"},
+            data: { tag:"gettreatmentcost"},
                 success: function(response) {
                     result=response;
+                    costo=0
+                    for(i=0; i<result.length; ++i){
+                        item = result[i];
+                        if(item[0]==$('#id_Tratamientos').val()){
+                            $('#id_Costo').val(item[1]);
+                            break;
+                        }
+                    }
                 }
             });
         });

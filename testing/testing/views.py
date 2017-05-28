@@ -212,7 +212,7 @@ def citas_confirmar(request):
             grupo = str(groups[0])
         if grupo == "Doctores":
             basehtml = 'base.html'
-            proc = 'dientes.get_pkg.get_cita_doctor'
+            proc = 'dientes.get_pkg.get_cita_na_doctor'
         elif grupo == "Pacientes":
             basehtml = 'basepaciente.html'
             proc = 'dientes.get_pkg.get_cita_na_p'
@@ -387,7 +387,7 @@ def search_ajax(request):
 
         if not grupoid:
             print('NOT')
-            cur.callproc('dientes.add_user_group', [usuario, grupo])
+            cur.callproc('dientes.add_pkg.add_user_group', [usuario, grupo])
         else:
             grupoid = grupoid[0]
             grupoid = grupoid[0]
@@ -455,6 +455,19 @@ def search_ajax(request):
         values = [int(x) for x in citaid.split(',') if x]
         for item in values:
             cur.callproc('dientes.edit_pkg.edit_cita_aceptar', [item])
+
+    elif request.POST.get('tag') == 'gettreatmentcost':
+        cur = connection.cursor()
+        rawCursor = cur.connection.cursor()
+
+        cur.callproc('dientes.get_pkg.get_tratamientos', [rawCursor])
+
+        res=rawCursor.fetchall()
+        res2=[]
+
+        for item in res:
+            res2.append((item[0],item[3]))
+        res = res2
     return HttpResponse(json.dumps(res))
 
 

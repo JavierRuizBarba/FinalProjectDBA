@@ -182,5 +182,5 @@ class tratamientos_pacientes(forms.Form):
     for item in res:
         res2.append((item[0],item[1]))
     Tratamientos = forms.ChoiceField(choices=res2, required = True)
-    Costo = forms.IntegerField(disabled=True, required=True)
+    Costo = forms.DecimalField(disabled=True, required=True)
     Citas = forms.IntegerField(required=True)
