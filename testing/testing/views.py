@@ -39,7 +39,12 @@ def getTable(cursor, metodo):
             ACEPTADA = tables.Column()
             DETALLE = tables.Column()
             ASISTIO = tables.Column()
-
+		elif metodo == 'tablatratamientos':
+			ID_TRATAMIENTO = tables.Column()
+			NOMBRE = tables.Column()
+			ESPECIALIDAD = tables.Column()
+			COSTO = tables.Column()
+			
         class Meta:
             attrs={"class":"paleblue", "id":"tablamamalona"}
 
@@ -261,6 +266,32 @@ def pacientes(request):
         else:
             return redirect('/register/home')
 
+def tratamientos(request):
+	if not request.user.is_authenticated:
+        return redirect('%s?next=%s' % (settings.LOGIN_URL, request.path))
+    else:
+        groups = request.user.groups.all()
+        if not groups:
+            grupo = "Paciente"
+        else:
+            grupo = str(groups[0])
+		
+		basehtml = 'base.html'
+        cur = connection.cursor()
+        rawCursor = cur.connection.cursor()
+		cur.callproc('dientes.get_pkg.get_tratamientos', [rawCursor])
+		res = rawCursor.fetchall()
+		
+        if not res:
+            tablaFinal = None
+            return render(request, 'lista_tratamientos.html', {'tratamientos': tablaFinal, 'basehtml': basehtml})
+        else:
+            cur.callproc('dientes.get_pkg.get_tratamientos', [rawCursor])
+            tablaFinal = getTable(rawCursor, "tablatratamientos")
+            RequestConfig(request).configure(tablaFinal)
+            return render(request, 'lista_tratamientos.html', {'tratamientos':tablaFinal, 'basehtml':basehtml})
+			
+			
 @csrf_exempt
 def search_ajax(request):
     if request.POST.get('tag') == 'getstate':

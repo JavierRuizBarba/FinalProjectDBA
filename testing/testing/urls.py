@@ -35,5 +35,6 @@ urlpatterns = [
     url(r'^todas_citas', views.todas_citas),
     url(r'^citas_confirmar', views.citas_confirmar),
     url(r'^horario', views.horario_vista),
-    (url(r'^pacientes', views.pacientes))
+    url(r'^pacientes', views.pacientes),
+	url(r'^tratamientos', views.tratamientos),
 ]
