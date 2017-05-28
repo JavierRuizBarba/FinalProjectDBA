@@ -44,7 +44,7 @@ AS
              WHERE tablaCitas.ID_DENTISTA = DOCTOR AND tablaCitas.ACTIVO = 1;
     END GET_CITA_DOCTOR;
 
-    PROCEDURE GET_CITA_NA (CITAS OUT SYS_REFCURSOR, DOCTOR IN INTEGER)
+    PROCEDURE GET_CITA_NA_DOCTOR (CITAS OUT SYS_REFCURSOR, DOCTOR IN INTEGER)
     AS
     BEGIN
         OPEN CITAS FOR
@@ -64,8 +64,51 @@ AS
              WHERE     tablaCitas.ID_DENTISTA = DOCTOR
                    AND tablaCitas.ACEPTADA = 0
                    AND tablaCitas.ACTIVO = 1;
-    END GET_CITA_NA;
-
+    END GET_CITA_NA_DOCTOR;
+    
+    PROCEDURE GET_CITA_P(CITAS OUT SYS_REFCURSOR, PACIENTE IN INTEGER)
+    AS
+    BEGIN
+        OPEN CITAS FOR
+            SELECT tablaCitas.ID_CITA,
+                   pacientes.FIRST_NAME || ' ' || pacientes.LAST_NAME
+                       AS PACIENTE,
+                   dentistas.FIRST_NAME || ' ' || dentistas.LAST_NAME
+                       AS DENTISTA,
+                   tablaCitas.FECHA_HORA,
+                   tablaCitas.ACEPTADA,
+                   tablaCitas.DETALLE,
+                   tablaCitas.ASISTIO
+              FROM DIENTES.CITA  tablaCitas
+                   INNER JOIN DIENTES.AUTH_USER pacientes
+                       ON tablaCitas.ID_PACIENTE = pacientes.ID
+                   INNER JOIN DIENTES.AUTH_USER dentistas
+                       ON tablaCitas.ID_DENTISTA = dentistas.ID
+             WHERE tablaCitas.ID_PACIENTE = PACIENTE AND tablaCitas.ACTIVO = 1;
+    END GET_CITA_P;
+    
+    PROCEDURE GET_CITA_NA_P(CITAS OUT SYS_REFCURSOR, PACIENTE IN INTEGER)
+    AS
+    BEGIN
+    OPEN CITAS FOR
+    SELECT tablaCitas.ID_CITA,
+                   pacientes.FIRST_NAME || ' ' || pacientes.LAST_NAME
+                       AS PACIENTE,
+                   dentistas.FIRST_NAME || ' ' || dentistas.LAST_NAME
+                       AS DENTISTA,
+                   tablaCitas.FECHA_HORA,
+                   tablaCitas.DETALLE,
+                   tablaCitas.ASISTIO
+              FROM DIENTES.CITA  tablaCitas
+                   INNER JOIN DIENTES.AUTH_USER pacientes
+                       ON tablaCitas.ID_PACIENTE = pacientes.ID
+                   INNER JOIN DIENTES.AUTH_USER dentistas
+                       ON tablaCitas.ID_DENTISTA = dentistas.ID
+             WHERE     tablaCitas.ID_PACIENTE = PACIENTE
+                   AND tablaCitas.ACEPTADA = 0
+                   AND tablaCitas.ACTIVO = 1;
+    END GET_CITA_NA_P;
+    
     PROCEDURE GET_CITA_A_NA (CITAS OUT SYS_REFCURSOR)
     AS
     BEGIN
@@ -145,7 +188,7 @@ AS
     AS
     BEGIN
         OPEN pacientes FOR
-            SELECT DISTINCT AUTH.FIRST_NAME, AUTH.LAST_NAME
+            SELECT DISTINCT AUTH.ID AS PACIENTE_ID, AUTH.FIRST_NAME || ' ' || AUTH.LAST_NAME AS PACIENTE
               FROM DIENTES.CITA  CITAS
                    INNER JOIN DIENTES.AUTH_USER AUTH
                        ON CITAS.ID_PACIENTE = AUTH.ID
@@ -287,5 +330,12 @@ AS
                    INNER JOIN DIENTES.MATERIAL MATERIALES
                        ON TRAT_MAT.ID_MATERIAL = MATERIALES.ID_MATERIAL;
     END GET_MATERIAL_TRATAMIENTO;
+    
+    PROCEDURE GET_ESPECIALIDADES(ESPECIALIDAD OUT SYS_REFCURSOR)
+    AS
+    BEGIN
+        OPEN ESPECIALIDAD FOR
+            SELECT ESPEC.ID_ESPECIALIDAD, ESPEC.NOMBRE FROM DIENTES.ESPECIALIDADES ESPEC;
+    END GET_ESPECIALIDADES;
 END GET_PKG;
 /
