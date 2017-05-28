@@ -387,7 +387,7 @@ def search_ajax(request):
 
         if not grupoid:
             print('NOT')
-            cur.callproc('dientes.add_user_group', [usuario, grupo])
+            cur.callproc('dientes.add_pkg.add_user_group', [usuario, grupo])
         else:
             grupoid = grupoid[0]
             grupoid = grupoid[0]
