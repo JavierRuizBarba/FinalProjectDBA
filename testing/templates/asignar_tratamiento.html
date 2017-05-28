@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block head %}
+    <title>Asignar Tratamientos</title>
+{% endblock %}
+{% block body %}
+    {{ form.as_p }}
+    <button id="asignar" class="btn btn-info" element onclick="Assign()">Asignar</button>
+    <a href="/register/home"  class="btn btn-danger">Cancelar</a>
+{% endblock %}
+{% block scripts %}
+    <script>
+    function Assign(){
+        alert('Hi')
+    }
+    </script>
+    <script>
+        $('#id_Tratamientos').on('change',function(){
+            $.ajax({  //Call ajax function sending the option loaded
+            url: "search_ajax/",  //This is the url of the ajax view where you make the search
+            type: 'POST',
+            dataType: "json",
+            data: {, tag:"gettreatmentcost"},
+                success: function(response) {
+                    result=response;
+                }
+            });
+        });
+    </script>
+{% endblock %}
