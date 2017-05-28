@@ -1,0 +1,28 @@
+{% extends basehtml %}
+{% load render_table from django_tables2 %}
+{% block head %}
+    <title>Todas las Citas</title>
+{% endblock %}
+{% block body %}
+    {% if  citas != None %}
+        {% render_table citas %}
+    {% else %}
+        <h1>No hay citas agendadas</h1>
+    {% endif %}
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        $('#tablamamalona tbody tr').each(function() {
+            var customerId = $(this).find(".ID_CITA").html();
+            if($(this).find(".ACEPTADA").html()==1) {
+                $(this).append("<button id=\"" + customerId + " \" class=\"btn btn-info\">Confirmar</>");
+            }
+            else
+            {
+                $(this).append("<button id=\"" + customerId + " \" class=\"btn btn-info\">Confirmar</>");
+            }
+
+        });
+    </script>
+{% endblock %}
