@@ -1,0 +1,31 @@
+{% extends basehtml %}
+{% load render_table from django_tables2 %}
+{% block head %}
+    <title>Citas por confirmar</title>
+{% endblock %}
+{% block body %}
+    {% if  citas != None %}
+        {% render_table citas %}
+        <button class="btn btn-info" element onclick="AcceptApp()">Aceptar Citas</button>
+    {% else %}
+        <h1>No hay citas por confirmar</h1>
+    {% endif %}
+
+{% endblock %}
+
+{% block scripts %}
+    <script>
+    $("#tablamamalona thead tr").append("<td><strong>ACEPTAR</strong></td>");
+    $('#tablamamalona tbody tr').each(function() {
+            var customerId = $(this).find(".ID_CITA").html();
+                $(this).append("<input id=\"" + customerId + " \" class=\"checkbox\" type=\"checkbox\">");
+        });
+    $('td:nth-child(1),th:nth-child(1)').hide();
+    </script>
+    <script>
+        function AcceptApp(){
+            alert($('.checkbox:checkbox:checked'))
+
+        }
+    </script>
+{% endblock %}
