@@ -39,11 +39,11 @@ def getTable(cursor, metodo):
             ACEPTADA = tables.Column()
             DETALLE = tables.Column()
             ASISTIO = tables.Column()
-		elif metodo == 'tablatratamientos':
-			ID_TRATAMIENTO = tables.Column()
-			NOMBRE = tables.Column()
-			ESPECIALIDAD = tables.Column()
-			COSTO = tables.Column()
+        elif metodo == 'tablatratamientos':
+            ID_TRATAMIENTO = tables.Column()
+            NOMBRE = tables.Column()
+            ESPECIALIDAD = tables.Column()
+            COSTO = tables.Column()
 			
         class Meta:
             attrs={"class":"paleblue", "id":"tablamamalona"}
@@ -267,7 +267,7 @@ def pacientes(request):
             return redirect('/register/home')
 
 def tratamientos(request):
-	if not request.user.is_authenticated:
+    if not request.user.is_authenticated:
         return redirect('%s?next=%s' % (settings.LOGIN_URL, request.path))
     else:
         groups = request.user.groups.all()
@@ -275,21 +275,21 @@ def tratamientos(request):
             grupo = "Paciente"
         else:
             grupo = str(groups[0])
-		
-		basehtml = 'base.html'
+
+        basehtml = 'base.html'
         cur = connection.cursor()
         rawCursor = cur.connection.cursor()
-		cur.callproc('dientes.get_pkg.get_tratamientos', [rawCursor])
-		res = rawCursor.fetchall()
-		
-        if not res:
-            tablaFinal = None
-            return render(request, 'lista_tratamientos.html', {'tratamientos': tablaFinal, 'basehtml': basehtml})
-        else:
-            cur.callproc('dientes.get_pkg.get_tratamientos', [rawCursor])
-            tablaFinal = getTable(rawCursor, "tablatratamientos")
-            RequestConfig(request).configure(tablaFinal)
-            return render(request, 'lista_tratamientos.html', {'tratamientos':tablaFinal, 'basehtml':basehtml})
+        cur.callproc('dientes.get_pkg.get_tratamientos', [rawCursor])
+        res = rawCursor.fetchall()
+
+    if not res:
+        tablaFinal = None
+        return render(request, 'lista_tratamientos.html', {'tratamientos': tablaFinal, 'basehtml': basehtml})
+    else:
+        cur.callproc('dientes.get_pkg.get_tratamientos', [rawCursor])
+        tablaFinal = getTable(rawCursor, "tablatratamientos")
+        RequestConfig(request).configure(tablaFinal)
+        return render(request, 'lista_tratamientos.html', {'tratamientos':tablaFinal, 'basehtml':basehtml})
 			
 			
 @csrf_exempt
@@ -308,7 +308,6 @@ def search_ajax(request):
         rawCursor = cur.connection.cursor()
 
         cur.callproc('dientes.get_pkg.get_ciudades', [id_estado, rawCursor])
-
         res = rawCursor.fetchall()
 
     elif request.POST.get('tag') == 'savedir':
