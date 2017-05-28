@@ -33,7 +33,6 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'django_tables2',
     'registro',
-    'bootstrap3',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -83,8 +82,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.oracle',
         'NAME': 'XE',
         'USER': 'DIENTES',
-        'PASSWORD': 'dientes',
-        'HOST': '127.0.0.1',
+        'PASSWORD': 'qaz1wsx2edc3',
+        'HOST': '198.199.84.234',
         'PORT': '1521'
     }
 }
