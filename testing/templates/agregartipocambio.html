@@ -22,14 +22,16 @@
         </div>
         <div class="col-md-1"></div>
     </div>
-
+ <form method="post">
     <div class="row">
         <div class="col-md-1"></div>
         <div class="col-lg-10">
             <div class="panel">
                 <div class="panel-body text-center">
                     <div class="row">
-                        {{ form.as_p }}
+                        {% csrf_token %}
+                        {% load l10n %}
+                        {{ form.as_p | unlocalize }}
                     </div>
                 </div>
             </div>
@@ -43,7 +45,7 @@
             <div class="panel">
                 <div class="panel-body text-center">
                     <div class="row">
-                        <button class="btn btn-info" element onclick="AgregarTipoCambio()">Agregar Tipo Cambio</button>
+                        <button class="btn btn-info" type="submit">Agregar Tipo Cambio</button>
                         <a href="/register/home" class="btn btn-danger">Cancelar</a>
                     </div>
                 </div>
@@ -51,11 +53,11 @@
         </div>
         <div class="col-md-1"></div>
     </div>
-
+ </form>
 {% endblock %}
 {% block scripts %}
     <script>
-        function AgregarTipoCambio() {
+        /*function AgregarTipoCambio() {
             tipocambio = $('#id_Tipo_Cambio').val();
             if (parseFloat(tipocambio)) {
                 $.ajax({  //Call ajax function sending the option loaded
@@ -72,6 +74,6 @@
             else {
                 alert('Ingrese un valor válido');
             }
-        }
+        }*/
     </script>
 {% endblock %}

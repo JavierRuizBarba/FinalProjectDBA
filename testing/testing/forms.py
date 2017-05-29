@@ -3,7 +3,6 @@ from django.db import models
 from django.forms import ModelForm
 from django.db import connection
 from functools import partial
-
 import cx_Oracle
 
 DateInput = partial(forms.DateInput, {'class':'datepicker'})
@@ -236,4 +235,4 @@ class forma_pagos(forms.Form):
     Tipo_Pago = forms.ChoiceField(choices=res, required=True)
 
 class forma_tipo_cambio(forms.Form):
-    Tipo_Cambio = forms.CharField(required=True)
+    Tipo_Cambio = forms.DecimalField(required=True, decimal_places=2)

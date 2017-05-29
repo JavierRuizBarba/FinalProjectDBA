@@ -367,9 +367,18 @@ def nuevo_tratamiento(request):
             basehtml = 'bases/baseadministrador.html'
             if request.method == "POST":
                 form = forma_tratamientos(request.POST)
+                if form.is_valid():
+                    cur = connection.cursor()
+                    nombre = request.POST.get("Nombre")
+                    costo = request.POST.get("Costo")
+                    especialidad = request.POST.get("Especialidad")
+                    cur.callproc('dientes.add_pkg.add_tratamiento', [nombre, costo, especialidad])
+                    cur.close()
+                    return redirect('/home')
             else:
                 form = forma_tratamientos()
             return render(request,'nuevo_tratamiento.html', {'form':form, 'basehtml':basehtml})
+
 def asignar_tratamientos(request):
     if not request.user.is_authenticated:
         return redirect('%s?next=%s' % (settings.LOGIN_URL, request.path))
@@ -493,6 +502,13 @@ def agregartipocambio(request):
         else:
             if request.method == "POST":
                 form = forma_tipo_cambio(request.POST)
+                if form.is_valid():
+                    cur=connection.cursor()
+                    tipocambio = request.POST.get('Tipo_Cambio')
+                    print(tipocambio)
+                    #cur.callproc('dientes.add_pkg.add_cambio', [tipocambio])
+                    #cur.close()
+                    return redirect('/home')
             else:
                 form = forma_tipo_cambio()
         return render(request, 'agregartipocambio.html', {'form':form, 'basehtml':basehtml})
@@ -650,12 +666,7 @@ def search_ajax(request):
     elif request.POST.get('tag') == 'addtipocambio':
         tipocambio = request.POST.get('tipocambio')
         cur.callproc('dientes.add_pkg.add_cambio', [tipocambio])
-    elif request.POST.get('tag') == 'addtratamiento':
-        nombre = request.POST.get('nombre')
-        especialidad = request.POST.get('especialidad')
-        costo = request.POST.get('costo')
 
-        cur.callproc('dientes.add_pkg.add_tratamiento', [nombre, costo, especialidad])
     return HttpResponse(json.dumps(res))
 
 
