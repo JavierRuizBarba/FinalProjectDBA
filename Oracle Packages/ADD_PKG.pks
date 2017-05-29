@@ -12,11 +12,7 @@ AS
                          FECHA                         DATE,
                          ID_PAGO                       NUMBER);
 
-    PROCEDURE ADD_CAMBIO (OUT_CAMBIO         OUT NUMBER,
-                          ID_MONEDA_1_V   IN     CAMBIO.ID_MONEDA_1%TYPE,
-                          ID_MONEDA_2_V   IN     CAMBIO.ID_MONEDA_2%TYPE,
-                          TIPO_CAMBIO_V   IN     CAMBIO.TIPO_CAMBIO%TYPE,
-                          FECHA_V         IN     CAMBIO.FECHA%TYPE);
+    PROCEDURE ADD_CAMBIO (TIPO_CAMBIO_V   IN     CAMBIO.TIPO_CAMBIO%TYPE);
 
     PROCEDURE ADD_CITA (OUT_CITA           OUT NUMBER,
                         ID_PACIENTE_V   IN     DIENTES.CITA.ID_PACIENTE%TYPE,
@@ -72,10 +68,10 @@ AS
         OUT_PAGO            OUT DIENTES.PAGOS.ID_PAGO%TYPE,
         ID_DENTISTA_V    IN     DIENTES.PAGOS.ID_DENTISTA%TYPE,
         ID_PACIENTE_V    IN     DIENTES.PAGOS.ID_PACIENTE%TYPE,
-        FECHA_V          IN     DIENTES.PAGOS.FECHA%TYPE,
         TOTAL_V          IN     DIENTES.PAGOS.TOTAL%TYPE,
         ID_TIPOPAGOS_V   IN     DIENTES.PAGOS.ID_TIPOPAGOS%TYPE,
-        ID_CAMBIO_V      IN     DIENTES.PAGOS.ID_CAMBIO%TYPE);
+        ID_TRATAMIENTO_V   IN     NUMBER,
+        OUT_CAMBIO         OUT    SYS_REFCURSOR);
 
     PROCEDURE ADD_TIPO_PAGO (OUT_TIPOPAGOS OUT INTEGER, NOMBRE_V IN VARCHAR2);
 

@@ -1,4 +1,4 @@
-/* Formatted on 5/28/2017 8:42:00 PM (QP5 v5.300) */
+/* Formatted on 5/28/2017 11:53:04 PM (QP5 v5.300) */
 CREATE OR REPLACE PACKAGE BODY DIENTES.GET_PKG
 AS
     PROCEDURE GET_PACIENTE_CITA (PACIENTE OUT SYS_REFCURSOR)
@@ -128,7 +128,7 @@ AS
         OPEN CITAS FOR
             SELECT *
               FROM DIENTES.CITA tablaCitas
-             WHERE tablaCitas.ACEPTADA = 0;
+             WHERE tablaCitas.ACEPTADA = 0 AND tablaCitas.ACTIVO = 1;
     END GET_CITA_A_NA;
 
     PROCEDURE GET_CITA_A (CITAS OUT SYS_REFCURSOR)
@@ -136,7 +136,8 @@ AS
     BEGIN
         OPEN CITAS FOR
             SELECT *
-              FROM DIENTES.CITA tablaCitas;
+              FROM DIENTES.CITA tablaCitas
+             WHERE tablaCitas.ACTIVO = 1;
     END GET_CITA_A;
 
     PROCEDURE GET_HORARIO_DOC (DOCTOR IN NUMBER, HORAS OUT SYS_REFCURSOR)
@@ -157,7 +158,7 @@ AS
                    HORARIO.SABADO,
                    HORARIO.DOMINGO
               FROM DIENTES.HORARIOS HORARIO
-             WHERE HORARIO.ID_HORARIO = HORARIO_ID;
+             WHERE HORARIO.ID_HORARIO = HORARIO_ID AND HORARIO.ACTIVO = 1;
     END GET_HORARIO_DOC;
 
     PROCEDURE GET_HORARIO_DIA (DOCTOR    IN     NUMBER,
@@ -174,7 +175,7 @@ AS
         OPEN horadia FOR
             SELECT *
               FROM DIENTES.HORARIOS HORA
-             WHERE HORA.ID_HORARIO = HORARIO_ID;
+             WHERE HORA.ID_HORARIO = HORARIO_ID AND HORA.ACTIVO = 1;
     END GET_HORARIO_DIA;
 
     PROCEDURE GET_ADDRESS_ID (USUARIO      IN     NUMBER,
@@ -207,7 +208,7 @@ AS
               FROM DIENTES.CITA  CITAS
                    INNER JOIN DIENTES.AUTH_USER AUTH
                        ON CITAS.ID_PACIENTE = AUTH.ID
-             WHERE CITAS.ID_DENTISTA = DOCTOR;
+             WHERE CITAS.ID_DENTISTA = DOCTOR AND CITAS.ACTIVO = 1;
     END GET_PACIENTES_DOCTOR;
 
     PROCEDURE GET_COUNTRY (PAIS OUT SYS_REFCURSOR)
@@ -322,15 +323,32 @@ AS
                      INNER JOIN DIENTES.ESPECIALIDADES ESPECIALIDAD
                          ON TRATAMIENTOS.ID_ESPECIALIDAD =
                                 ESPECIALIDAD.ID_ESPECIALIDAD
+               WHERE TRATAMIENTOS.ACTIVO = 1
             ORDER BY TRATAMIENTOS.NOMBRE ASC;
     END GET_TRATAMIENTOS;
+
+    PROCEDURE GET_TRATAMIENTO_PACIENTE (
+        OUT_TRATAMIENTO      OUT SYS_REFCURSOR,
+        ID_PACIENTE_V     IN     NUMBER)
+    AS
+    BEGIN
+        OPEN OUT_TRATAMIENTO FOR
+            SELECT TRAT_PAC.ID_TRATAMIENTOPACIENTE, TRATAMIENTOS.NOMBRE
+              FROM DIENTES.TRATAMIENTO_PACIENTE  TRAT_PAC
+                   INNER JOIN DIENTES.TRATAMIENTO TRATAMIENTOS
+                       ON TRAT_PAC.ID_TRATAMIENTO =
+                              TRATAMIENTOS.ID_TRATAMIENTO
+             WHERE     TRAT_PAC.ID_PACIENTE = ID_PACIENTE_V
+                   AND TRAT_PAC.ACTIVO = 1;
+    END GET_TRATAMIENTO_PACIENTE;
 
     PROCEDURE GET_MATERIAL (OUT_MATERIAL OUT SYS_REFCURSOR)
     AS
     BEGIN
         OPEN OUT_MATERIAL FOR
             SELECT MATERIALES.ID_MATERIAL, MATERIALES.NOMBRE
-              FROM DIENTES.MATERIAL MATERIALES;
+              FROM DIENTES.MATERIAL MATERIALES
+             WHERE MATERIALES.ACTIVO = 1;
     END GET_MATERIAL;
 
     PROCEDURE GET_MATERIAL_TRATAMIENTO (
@@ -391,6 +409,8 @@ AS
         THEN
             OPEN OUT_ABONO FOR
                 SELECT abono.ID_ABONOS,
+                       USUARIO.FIRST_NAME || ' ' || USUARIO.LAST_NAME
+                           AS PACIENTE,
                        TRATA.NOMBRE,
                        abono.FECHA,
                        TRUNC (abono.COSTO, 2) AS COSTO,
@@ -401,13 +421,15 @@ AS
                                   TRAT.ID_TRATAMIENTOPACIENTE
                        INNER JOIN DIENTES.TRATAMIENTO TRATA
                            ON TRAT.ID_TRATAMIENTO = TRATA.ID_TRATAMIENTO
+                       INNER JOIN DIENTES.AUTH_USER USUARIO
+                           ON TRAT.ID_PACIENTE = USUARIO.ID
                  WHERE abono.ACTIVO = 1;
         ELSE
             OPEN OUT_ABONO FOR
                 SELECT abono.ID_ABONOS,
                        TRATA.NOMBRE,
                        abono.FECHA,
-                       TRUNC(abono.COSTO, 2) AS COSTO,
+                       TRUNC (abono.COSTO, 2) AS COSTO,
                        abono.PAGADO
                   FROM DIENTES.ABONOS  abono
                        INNER JOIN DIENTES.TRATAMIENTO_PACIENTE TRAT
@@ -419,22 +441,56 @@ AS
         END IF;
     END GET_ABONO;
 
-    PROCEDURE GET_PAGO (USER_ID     IN     NUMBER,
-                        GRUPO              VARCHAR2,
-                        OUT_PAGO     OUT SYS_REFCURSOR)
+    PROCEDURE GET_PAGO (USER_ID    IN     NUMBER,
+                        GRUPO             VARCHAR2,
+                        OUT_PAGO      OUT SYS_REFCURSOR)
     AS
     BEGIN
         IF GRUPO = 'Doctores'
         THEN
             OPEN OUT_PAGO FOR
-                SELECT *
-                  FROM DIENTES.PAGOS PAGO
+                SELECT PAGO.ID_PAGO,
+                       PAGO.FECHA,
+                       TRATAMIENTOS.NOMBRE,
+                       PAGO.TOTAL,
+                       USUARIO.FIRST_NAME || ' ' || USUARIO.LAST_NAME
+                           AS PACIENTE
+                  FROM DIENTES.PAGOS  PAGO
+                       INNER JOIN DIENTES.ABONOS ABONO
+                           ON PAGO.ID_PAGO = ABONO.ID_PAGO
+                       INNER JOIN DIENTES.TRATAMIENTO_PACIENTE TRAT
+                           ON ABONO.ID_TRATAMIENTO_PACIENTE =
+                                  TRAT.ID_TRATAMIENTOPACIENTE
+                       INNER JOIN DIENTES.TRATAMIENTO TRATAMIENTOS
+                           ON TRAT.ID_TRATAMIENTO =
+                                  TRATAMIENTOS.ID_TRATAMIENTO
+                       INNER JOIN DIENTES.AUTH_USER USUARIO
+                           ON TRAT.ID_PACIENTE = USUARIO.ID
                  WHERE PAGO.ID_DENTISTA = USER_ID AND PAGO.ACTIVO = 1;
         ELSIF GRUPO = 'Administrador'
         THEN
             OPEN OUT_PAGO FOR
-                SELECT *
-                  FROM DIENTES.PAGOS PAGO
+                SELECT PAGO.ID_PAGO,
+                       PAGO.FECHA,
+                       TRATAMIENTOS.NOMBRE,
+                       PAGO.TOTAL,
+                       USUARIO.FIRST_NAME || ' ' || USUARIO.LAST_NAME
+                           AS PACIENTE,
+                       DENTISTA.FIRST_NAME || ' ' || DENTISTA.LAST_NAME
+                           AS PACIENTE
+                  FROM DIENTES.PAGOS  PAGO
+                       INNER JOIN DIENTES.ABONOS ABONO
+                           ON PAGO.ID_PAGO = ABONO.ID_PAGO
+                       INNER JOIN DIENTES.TRATAMIENTO_PACIENTE TRAT
+                           ON ABONO.ID_TRATAMIENTO_PACIENTE =
+                                  TRAT.ID_TRATAMIENTOPACIENTE
+                       INNER JOIN DIENTES.TRATAMIENTO TRATAMIENTOS
+                           ON TRAT.ID_TRATAMIENTO =
+                                  TRATAMIENTOS.ID_TRATAMIENTO
+                       INNER JOIN DIENTES.AUTH_USER USUARIO
+                           ON TRAT.ID_PACIENTE = USUARIO.ID
+                       INNER JOIN DIENTES.AUTH_USER DENTISTA
+                           ON DENTISTA.ID = USER_ID
                  WHERE PAGO.ACTIVO = 1;
         ELSE
             OPEN OUT_PAGO FOR
@@ -443,5 +499,14 @@ AS
                  WHERE PAGO.ID_PACIENTE = USER_ID AND PAGO.ACTIVO = 1;
         END IF;
     END GET_PAGO;
+
+    PROCEDURE GET_TIPO_PAGO (OUT_TIPO_PAGO OUT SYS_REFCURSOR)
+    AS
+    BEGIN
+        OPEN OUT_TIPO_PAGO FOR
+            SELECT TIPOPAGOS.ID_TIPOPAGOS, TIPOPAGOS.NOMBRE
+              FROM DIENTES.TIPO_PAGOS TIPOPAGOS
+             WHERE TIPOPAGOS.ACTIVO = 1;
+    END GET_TIPO_PAGO;
 END GET_PKG;
 /

@@ -1,3 +1,4 @@
+/* Formatted on 5/28/2017 11:25:45 PM (QP5 v5.300) */
 CREATE OR REPLACE PACKAGE BODY DIENTES.ADD_PKG
 AS
     PROCEDURE ADD_ALERGIA (OUT_ALERGIA OUT NUMBER, ALERGIA VARCHAR2)
@@ -35,24 +36,20 @@ AS
                      ID_PAGO);
     END ADD_ABONO;
 
-    PROCEDURE ADD_CAMBIO (OUT_CAMBIO         OUT NUMBER,
-                          ID_MONEDA_1_V   IN     CAMBIO.ID_MONEDA_1%TYPE,
-                          ID_MONEDA_2_V   IN     CAMBIO.ID_MONEDA_2%TYPE,
-                          TIPO_CAMBIO_V   IN     CAMBIO.TIPO_CAMBIO%TYPE,
-                          FECHA_V         IN     CAMBIO.FECHA%TYPE)
-    AS
+    PROCEDURE ADD_CAMBIO (TIPO_CAMBIO_V   IN     CAMBIO.TIPO_CAMBIO%TYPE)
+    IS
+    OUT_CAMBIO NUMBER;
     BEGIN
         OUT_CAMBIO := DIENTES.CAMBIO_SQ.NEXTVAL;
-
         INSERT INTO DIENTES.CAMBIO (ID_MONEDA_1,
                                     ID_MONEDA_2,
                                     TIPO_CAMBIO,
                                     FECHA,
                                     ID_CAMBIO)
-             VALUES (ID_MONEDA_1_V,
-                     ID_MONEDA_2_V,
+             VALUES (0,
+                     1,
                      TIPO_CAMBIO_V,
-                     FECHA_V,
+                     SYSDATE,
                      OUT_CAMBIO);
     END ADD_CAMBIO;
 
@@ -216,24 +213,78 @@ AS
     END ADD_PACIENTE_ENFERMEDAD;
 
     PROCEDURE ADD_PAGOS (
-        OUT_PAGO            OUT DIENTES.PAGOS.ID_PAGO%TYPE,
-        ID_DENTISTA_V    IN     DIENTES.PAGOS.ID_DENTISTA%TYPE,
-        ID_PACIENTE_V    IN     DIENTES.PAGOS.ID_PACIENTE%TYPE,
-        FECHA_V          IN     DIENTES.PAGOS.FECHA%TYPE,
-        TOTAL_V          IN     DIENTES.PAGOS.TOTAL%TYPE,
-        ID_TIPOPAGOS_V   IN     DIENTES.PAGOS.ID_TIPOPAGOS%TYPE,
-        ID_CAMBIO_V      IN     DIENTES.PAGOS.ID_CAMBIO%TYPE)
+        OUT_PAGO              OUT DIENTES.PAGOS.ID_PAGO%TYPE,
+        ID_DENTISTA_V      IN     DIENTES.PAGOS.ID_DENTISTA%TYPE,
+        ID_PACIENTE_V      IN     DIENTES.PAGOS.ID_PACIENTE%TYPE,
+        TOTAL_V            IN     DIENTES.PAGOS.TOTAL%TYPE,
+        ID_TIPOPAGOS_V     IN     DIENTES.PAGOS.ID_TIPOPAGOS%TYPE,
+        ID_TRATAMIENTO_V   IN     NUMBER,
+        OUT_CAMBIO         OUT    SYS_REFCURSOR)
     IS
-        ABONOS_C       NUMBER;
-        LEFT_AMOUNT    NUMBER;
-        CURRENT_AMOUNT NUMBER;
-        ID_ABONOS      ARRAY_NUMBER;
-        ABONO_COSTOS   ARRAY_NUMBER;
-        ABONO_TP       ARRAY_NUMBER;
+        ABONOS_C         NUMBER;
+        LEFT_AMOUNT      NUMBER;
+        CURRENT_AMOUNT   NUMBER;
+        FECHA_V          DATE;
+        ID_ABONOS        ARRAY_NUMBER;
+        ABONO_COSTOS     ARRAY_NUMBER;
+        ABONO_TP         ARRAY_NUMBER;
+        TIPO_CAMBIARIO   NUMBER;
+        ID_CAMBIO_V      NUMBER;
+        FALTANTE         NUMBER;
     BEGIN
         OUT_PAGO := DIENTES.PAGOS_SQ.NEXTVAL;
 
-        INSERT INTO DIENTES.PAGOS (ID_PAGO,
+        SELECT SYSDATE INTO FECHA_V FROM DUAL;
+
+        IF ID_TIPOPAGOS_V = 5
+        THEN
+            SELECT CAMBIOS.TIPO_CAMBIO, CAMBIOS.ID_CAMBIO
+              INTO TIPO_CAMBIARIO, ID_CAMBIO_V
+              FROM DIENTES.CAMBIO CAMBIOS
+             WHERE CAMBIOS.FECHA =
+                       (SELECT MAX (CAMBIOS.FECHA) FROM DIENTES.CAMBIO) AND CAMBIOS.ACTIVO = 1;
+        ELSE
+            TIPO_CAMBIARIO := 1;
+
+            SELECT CAMBIOS.ID_CAMBIO
+              INTO ID_CAMBIO_V
+              FROM DIENTES.CAMBIO CAMBIOS
+             WHERE CAMBIOS.FECHA =
+                       (SELECT MAX (CAMBIOS.FECHA) FROM DIENTES.CAMBIO) AND CAMBIOS.ACTIVO = 1;
+        END IF;
+
+        SELECT COUNT (*),SUM(abono.COSTO - abono.PAGADO)
+          INTO ABONOS_C, FALTANTE
+          FROM DIENTES.ABONOS  abono
+               INNER JOIN DIENTES.TRATAMIENTO_PACIENTE paciente_trat
+                   ON abono.ID_TRATAMIENTO_PACIENTE =
+                          paciente_trat.ID_TRATAMIENTOPACIENTE
+         WHERE     paciente_trat.ID_PACIENTE = ID_PACIENTE_V
+               AND (abono.PAGADO - abono.COSTO) != 0
+               AND paciente_trat.ID_TRATAMIENTOPACIENTE = ID_TRATAMIENTO_V
+               AND abono.ACTIVO = 1
+               AND paciente_trat.ACTIVO = 1;
+        
+        OPEN OUT_CAMBIO FOR
+            SELECT (TOTAL_V - FALTANTE) FROM DUAL;
+
+        IF FALTANTE < TOTAL_V THEN
+            INSERT INTO DIENTES.PAGOS (ID_PAGO,
+                                   ID_DENTISTA,
+                                   ID_PACIENTE,
+                                   FECHA,
+                                   TOTAL,
+                                   ID_TIPOPAGOS,
+                                   ID_CAMBIO)
+             VALUES (OUT_PAGO,
+                     ID_DENTISTA_V,
+                     ID_PACIENTE_V,
+                     FECHA_V,
+                     FALTANTE,
+                     ID_TIPOPAGOS_V,
+                     ID_CAMBIO_V);
+        ELSE
+            INSERT INTO DIENTES.PAGOS (ID_PAGO,
                                    ID_DENTISTA,
                                    ID_PACIENTE,
                                    FECHA,
@@ -247,14 +298,8 @@ AS
                      TOTAL_V,
                      ID_TIPOPAGOS_V,
                      ID_CAMBIO_V);
+        END IF;
 
-        SELECT COUNT (*)
-          INTO ABONOS_C
-          FROM DIENTES.ABONOS  abono
-               INNER JOIN DIENTES.TRATAMIENTO_PACIENTE paciente_trat
-                   ON abono.ID_TRATAMIENTO_PACIENTE =
-                          paciente_trat.ID_TRATAMIENTOPACIENTE
-         WHERE paciente_trat.ID_PACIENTE = ID_PACIENTE_V AND abono.PAGADO = 0;
 
         SELECT abono.ID_ABONOS, abono.COSTO, abono.ID_TRATAMIENTO_PACIENTE
           BULK COLLECT INTO ID_ABONOS, ABONO_COSTOS, ABONO_TP
@@ -262,9 +307,13 @@ AS
                INNER JOIN DIENTES.TRATAMIENTO_PACIENTE paciente_trat
                    ON abono.ID_TRATAMIENTO_PACIENTE =
                           paciente_trat.ID_TRATAMIENTOPACIENTE
-         WHERE paciente_trat.ID_PACIENTE = ID_PACIENTE_V AND (abono.PAGADO - abono.COSTO) != 0;
+         WHERE     paciente_trat.ID_PACIENTE = ID_PACIENTE_V
+               AND (abono.PAGADO - abono.COSTO) != 0
+               AND paciente_trat.ID_TRATAMIENTOPACIENTE = ID_TRATAMIENTO_V
+               AND abono.ACTIVO = 1
+               AND paciente_trat.ACTIVO = 1;
 
-        LEFT_AMOUNT := TOTAL_V;
+        LEFT_AMOUNT := TOTAL_V * TIPO_CAMBIARIO;
 
         IF ABONOS_C > 0
         THEN
@@ -276,7 +325,7 @@ AS
                 IF LEFT_AMOUNT > 0
                 THEN
                     DIENTES.EDIT_PKG.EDIT_ABONOS (ID_ABONOS (INDX),
-                                                  ABONO_COSTOS(INDX),
+                                                  ABONO_COSTOS (INDX),
                                                   ABONO_TP (INDX),
                                                   ABONO_COSTOS (INDX),
                                                   FECHA_V,
@@ -291,6 +340,7 @@ AS
                                                   OUT_PAGO,
                                                   1);
                 END IF;
+
                 EXIT WHEN LEFT_AMOUNT <= 0;
             END LOOP;
         END IF;
@@ -433,8 +483,8 @@ AS
               INTO DETALLE_V, COSTO_TV
               FROM DIENTES.TRATAMIENTO TRATAMIENTOS
              WHERE TRATAMIENTOS.ID_TRATAMIENTO = ID_TRATAMIENTO_V;
-            
-            COSTO_TV := (COSTO_TV/CITAS_TOTAL_V);
+
+            COSTO_TV := (COSTO_TV / CITAS_TOTAL_V);
             DIENTES.ADD_PKG.ADD_CITA (CITA_ACTUAL,
                                       ID_PACIENTE_V,
                                       ID_DENTISTA_V,
@@ -468,7 +518,7 @@ AS
            SET USUARIOPRIMARIO.FIRST_NAME = NOMBRE,
                USUARIOPRIMARIO.LAST_NAME = APELLIDO,
                USUARIOPRIMARIO.EMAIL = CORREO
-         WHERE USUARIOPRIMARIO.ID = USUARIOID;
+         WHERE USUARIOPRIMARIO.ID = USUARIOID AND USUARIOPRIMARIO.IS_ACTIVE = 1 ;
 
         ADD_DIRECCION (ADDRESSID,
                        CIUDADID,
