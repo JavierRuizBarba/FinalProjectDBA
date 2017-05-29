@@ -73,7 +73,7 @@ class nueva_cita_doc(forms.Form):
 
     Pacientes = forms.ChoiceField(choices=res, required=True, widget=forms.Select(attrs={'placeholder': 'Paciente', 'class':'form-control'}))
     Detalle = forms.CharField(widget=forms.Textarea(attrs={'placeholder': 'Detalle', 'class':'form-control'}), required = True)
-    Fecha = forms.DateField(widget= forms.DateInput, required=True)
+    Fecha = forms.DateField(widget=DateInput(), required=True)
     Hora = forms.DateField(widget=forms.DateInput(attrs={'class':'timepicker'}), required=True)
 
 class nueva_cita_paciente(forms.Form):
@@ -153,7 +153,7 @@ class forma_tratamientos(forms.Form):
 
     Especialidad = forms.ChoiceField(choices=res, required = True)
 
-    Costo = forms.IntegerField(required=True)
+    Costo = forms.CharField(required=True)
 
 class doc_tratamientos_pacientes(forms.Form):
     def __init__(self, user, *args, **kwargs):

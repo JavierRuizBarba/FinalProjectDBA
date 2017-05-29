@@ -27,7 +27,7 @@ def getTable(cursor, metodo):
     exptData = dictfetchall(cursor)
     class NameTable(tables.Table):
         if metodo == 'tablapacientes':
-            PACIENTE_ID = tables.Column()
+            ID = tables.Column()
             PACIENTE = tables.Column()
         elif metodo == 'tablacitas':
             ID_CITA = tables.Column()
@@ -310,6 +310,16 @@ def pacientes(request):
                     return render(request, 'lista_pacientes.html', {'pacientes':tablaFinal, 'basehtml':basehtml})
             elif grupo == "Administrador":
                 basehtml = 'bases/baseadministrador.html'
+                cur.callproc('dientes.get_pkg.get_paciente_cita', [rawCursor])
+                res = rawCursor.fetchall()
+                if not res:
+                    tablaFinal = None
+                    return render(request, 'lista_pacientes.html', {'pacientes': tablaFinal, 'basehtml': basehtml})
+                else:
+                    cur.callproc('dientes.get_pkg.get_paciente_cita', [rawCursor])
+                    tablaFinal = getTable(rawCursor, "tablapacientes")
+                    RequestConfig(request).configure(tablaFinal)
+                    return render(request, 'lista_pacientes.html', {'pacientes': tablaFinal, 'basehtml': basehtml})
         else:
             return redirect('/home')
 
@@ -339,13 +349,27 @@ def tratamientos(request):
             cur.callproc('dientes.get_pkg.get_tratamientos', [rawCursor])
             tablaFinal = getTable(rawCursor, "tablatratamientos")
             RequestConfig(request).configure(tablaFinal)
-        if request.method == "POST":
-            form = forma_tratamientos(request.POST)
+
+    return render(request, 'lista_tratamientos.html', {'tratamientos':tablaFinal, 'basehtml':basehtml, 'grupo': grupo})
+
+def nuevo_tratamiento(request):
+    if not request.user.is_authenticated:
+        return redirect('%s?next=%s' % (settings.LOGIN_URL, request.path))
+    else:
+        groups = request.user.groups.all()
+        if not groups:
+            grupo = "Pacientes"
         else:
-            form = forma_tratamientos()
-
-    return render(request, 'lista_tratamientos.html', {'tratamientos':tablaFinal, 'basehtml':basehtml, 'grupo': grupo, 'form':form})
-
+            grupo = str(groups[0])
+        if grupo == "Pacientes" or grupo == "Doctores":
+            return redirect('/home')
+        elif grupo == "Administrador":
+            basehtml = 'bases/baseadministrador.html'
+            if request.method == "POST":
+                form = forma_tratamientos(request.POST)
+            else:
+                form = forma_tratamientos()
+            return render(request,'nuevo_tratamiento.html', {'form':form, 'basehtml':basehtml})
 def asignar_tratamientos(request):
     if not request.user.is_authenticated:
         return redirect('%s?next=%s' % (settings.LOGIN_URL, request.path))
@@ -535,7 +559,6 @@ def search_ajax(request):
         cur.callproc('dientes.functionality.cita_rep', [fecha, citanum, rawCursor])
         res = rawCursor.fetchall()
         res = res[0]
-        print(res[0])
         if res[0] == 1:
             cur.callproc('dientes.add_pkg.add_cita', [citanum, paciente, doctor, fecha, detalle, 0, aceptada])
     elif request.POST.get('tag') == "gethorario":
@@ -627,6 +650,12 @@ def search_ajax(request):
     elif request.POST.get('tag') == 'addtipocambio':
         tipocambio = request.POST.get('tipocambio')
         cur.callproc('dientes.add_pkg.add_cambio', [tipocambio])
+    elif request.POST.get('tag') == 'addtratamiento':
+        nombre = request.POST.get('nombre')
+        especialidad = request.POST.get('especialidad')
+        costo = request.POST.get('costo')
+
+        cur.callproc('dientes.add_pkg.add_tratamiento', [nombre, costo, especialidad])
     return HttpResponse(json.dumps(res))
 
 
