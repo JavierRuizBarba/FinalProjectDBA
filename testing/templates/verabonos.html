@@ -12,7 +12,9 @@
 {% endblock %}
 {% block scripts %}
     <script>
-        $('td:nth-child(2),th:nth-child(2)').hide();
-        $('td:nth-child(1),th:nth-child(1)').hide();
+        if("{{ grupo }}" != "Administrador") {
+            $('td:nth-child(2),th:nth-child(2)').hide();
+            $('td:nth-child(1),th:nth-child(1)').hide();
+        }
     </script>
 {% endblock %}

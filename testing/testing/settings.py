@@ -190,6 +190,6 @@ BOOTSTRAP3 = {
     },
 }
 
-LOGIN_REDIRECT_URL =  '/register/home'
+LOGIN_REDIRECT_URL = '/home'
 
 LOGIN_URL = '/login'

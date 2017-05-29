@@ -195,20 +195,25 @@ def todas_citas(request):
         if grupo == "Doctores":
             basehtml = 'bases/basedentista.html'
             proc = 'dientes.get_pkg.get_cita_doctor'
-
+            cur.callproc(proc, [rawCursor, usuario])
         elif grupo == "Pacientes":
             basehtml = 'bases/basepaciente.html'
             proc = 'dientes.get_pkg.get_cita_p'
+            cur.callproc(proc, [rawCursor, usuario])
         elif grupo == "Administrador":
-            basehtml = 'baseadministraor.html'
+            basehtml = 'bases/baseadministrador.html'
+            proc = 'dientes.get_pkg.get_cita_a'
+            cur.callproc(proc, [rawCursor])
 
-        cur.callproc(proc, [rawCursor, usuario])
         res = rawCursor.fetchall()
         if not res:
             citas = None
             return render(request, 'todas_citas.html', {'citas':citas,'basehtml':basehtml, 'usuario':usuario, 'grupo':grupo})
         else:
-            cur.callproc(proc, [rawCursor, usuario])
+            if grupo =="Administrador":
+                cur.callproc(proc, [rawCursor])
+            else:
+                cur.callproc(proc, [rawCursor, usuario])
             tablaFinal = getTable(rawCursor, "tablacitas")
             RequestConfig(request).configure(tablaFinal)
 
@@ -221,6 +226,8 @@ def citas_confirmar(request):
     else:
         usuario = request.user.id
         groups = request.user.groups.all()
+        cur = connection.cursor()
+        rawCursor = cur.connection.cursor()
         if not groups:
             grupo = "Pacientes"
         else:
@@ -228,25 +235,25 @@ def citas_confirmar(request):
         if grupo == "Doctores":
             basehtml = 'bases/basedentista.html'
             proc = 'dientes.get_pkg.get_cita_na_doctor'
+            cur.callproc(proc, [rawCursor, usuario])
         elif grupo == "Pacientes":
             basehtml = 'bases/basepaciente.html'
             proc = 'dientes.get_pkg.get_cita_na_p'
+            cur.callproc(proc, [rawCursor, usuario])
         elif grupo == "Administrador":
             basehtml = 'bases/baseadministrador.html'
             proc = 'dientes.get_pkg.get_cita_a_na'
-
-        cur = connection.cursor()
-        rawCursor = cur.connection.cursor()
-        if grupo != "Administrador":
-            cur.callproc(proc, [rawCursor, usuario])
-        else:
             cur.callproc(proc, [rawCursor])
+
         res = rawCursor.fetchall()
         if not res:
             citas = None
-            return render(request, 'citas_confirmar.html', {'citas':citas,'basehtml':basehtml, 'usuario':usuario, 'grupo':grupo})
+            return render(request, 'citas_confirmar.html', {'citas':citas, 'basehtml':basehtml, 'usuario':usuario, 'grupo':grupo})
         else:
-            cur.callproc(proc, [rawCursor, usuario])
+            if grupo =="Administrador":
+                cur.callproc(proc, [rawCursor])
+            else:
+                cur.callproc(proc, [rawCursor, usuario])
             tablaFinal = getTable(rawCursor, "tablacitas")
             RequestConfig(request).configure(tablaFinal)
 
@@ -301,6 +308,8 @@ def pacientes(request):
                     tablaFinal = getTable(rawCursor, "tablapacientes")
                     RequestConfig(request).configure(tablaFinal)
                     return render(request, 'lista_pacientes.html', {'pacientes':tablaFinal, 'basehtml':basehtml})
+            elif grupo == "Administrador":
+                basehtml = 'bases/baseadministrador.html'
         else:
             return redirect('/home')
 
@@ -390,7 +399,7 @@ def verabonos(request):
                 tablaFinal = getTable(rawCursor, "tablaabonos")
                 RequestConfig(request).configure(tablaFinal)
 
-    return render(request,'verabonos.html', {'basehtml':basehtml, 'tablaFinal':tablaFinal})
+    return render(request,'verabonos.html', {'basehtml':basehtml, 'grupo':grupo, 'tablaFinal':tablaFinal})
 
 def hacerpagos(request):
     if not request.user.is_authenticated:

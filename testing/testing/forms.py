@@ -69,14 +69,9 @@ class nueva_cita_doc(forms.Form):
 
     cur.callproc('dientes.get_pkg.get_paciente_cita', [rawCursor])
     res = rawCursor.fetchall()
-    res2 = []
-    i=0
-    for item in res:
-        nombre = item[1] + ' ' + item[2]
-        res2.append((item[0], nombre))
 
 
-    Pacientes = forms.ChoiceField(choices=res2, required=True, widget=forms.Select(attrs={'placeholder': 'Paciente', 'class':'form-control'}))
+    Pacientes = forms.ChoiceField(choices=res, required=True, widget=forms.Select(attrs={'placeholder': 'Paciente', 'class':'form-control'}))
     Detalle = forms.CharField(widget=forms.Textarea(attrs={'placeholder': 'Detalle', 'class':'form-control'}), required = True)
     Fecha = forms.DateField(widget= forms.DateInput, required=True)
     Hora = forms.DateField(widget=forms.DateInput(attrs={'class':'timepicker'}), required=True)
@@ -121,12 +116,8 @@ class nueva_cita_admin(forms.Form):
 
     cur.callproc('dientes.get_pkg.get_paciente_cita', [rawCursor])
     res = rawCursor.fetchall()
-    res2 = []
-    i = 0
-    for item in res:
-        nombre = item[1] + ' ' + item[2]
-        res2.append((item[0], nombre))
-    Pacientes = forms.ChoiceField(choices=res2, required=True)
+
+    Pacientes = forms.ChoiceField(choices=res, required=True)
     Detalle = forms.CharField(widget=forms.Textarea, required=True)
     Fecha = forms.DateField(widget=DateInput(), required=True)
     Hora = forms.DateField(widget=forms.DateInput(attrs={'class': 'timepicker'}), required=True)
@@ -174,11 +165,8 @@ class doc_tratamientos_pacientes(forms.Form):
 
     cur.callproc('dientes.get_pkg.get_paciente_cita', [rawCursor])
     res = rawCursor.fetchall()
-    res2= []
 
-    for item in res:
-        res2.append((item[0], item[1]+" "+item[2]))
-    Pacientes = forms.ChoiceField(choices=res2, required=True)
+    Pacientes = forms.ChoiceField(choices=res, required=True)
 
     cur.callproc('dientes.get_pkg.get_tratamientos', [rawCursor])
 
@@ -204,11 +192,8 @@ class admn_tratamientos_pacientes(forms.Form):
 
     cur.callproc('dientes.get_pkg.get_paciente_cita', [rawCursor])
     res = rawCursor.fetchall()
-    res2= []
 
-    for item in res:
-        res2.append((item[0], item[1]+" "+item[2]))
-    Pacientes = forms.ChoiceField(choices=res2, required=True)
+    Pacientes = forms.ChoiceField(choices=res, required=True)
 
     cur.callproc('dientes.get_pkg.get_tratamientos', [rawCursor])
 
