@@ -1,4 +1,3 @@
-/* Formatted on 5/28/2017 5:04:43 PM (QP5 v5.300) */
 CREATE OR REPLACE PACKAGE BODY DIENTES.ADD_PKG
 AS
     PROCEDURE ADD_ALERGIA (OUT_ALERGIA OUT NUMBER, ALERGIA VARCHAR2)
@@ -436,7 +435,6 @@ AS
              WHERE TRATAMIENTOS.ID_TRATAMIENTO = ID_TRATAMIENTO_V;
             
             COSTO_TV := (COSTO_TV/CITAS_TOTAL_V);
-            
             DIENTES.ADD_PKG.ADD_CITA (CITA_ACTUAL,
                                       ID_PACIENTE_V,
                                       ID_DENTISTA_V,

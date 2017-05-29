@@ -1,4 +1,3 @@
-/* Formatted on 5/25/2017 12:40:07 AM (QP5 v5.300) */
 CREATE OR REPLACE PACKAGE DIENTES.EDIT_PKG
 AS
     PROCEDURE EDIT_ABONOS (
@@ -26,7 +25,7 @@ AS
     PROCEDURE EDIT_CITA (ID_CITA_V       IN DIENTES.CITA.ID_CITA%TYPE,
                          ID_PACIENTE_V   IN DIENTES.CITA.ID_PACIENTE%TYPE,
                          ID_DENTISTA_V   IN DIENTES.CITA.ID_DENTISTA%TYPE,
-                         FECHA_HORA_V    IN DIENTES.CITA.FECHA_HORA%TYPE,
+                         FECHA_HORA_V    IN VARCHAR2,
                          DETALLE_V       IN DIENTES.CITA.DETALLE%TYPE,
                          ASISTIO_V       IN DIENTES.CITA.ASISTIO%TYPE,
                          ACTIVO_V        IN DIENTES.CITA.ACTIVO%TYPE,
