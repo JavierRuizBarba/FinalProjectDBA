@@ -100,7 +100,7 @@
                     doctor = "{{ usuario }}";
                     paciente = $('#id_Pacientes').val();
                 }
-                else if (grupo== "Paciente")
+                else if (grupo== "Pacientes")
                 {
                     doctor = $('#id_Doctores').val();
                     paciente = "{{ usuario }}"
@@ -123,8 +123,15 @@
                             tag: "addcita"
                         },
                         success: function (response) {
-                            alert('Cita Agendada')
-                            window.location.href = '/register/home';
+                            result = response;
+                            if(result==1) {
+                                alert('Cita Agendada')
+                                window.location.href = '/todas_citas';
+                            }
+                            else
+                            {
+                                alert('Fecha y/o hora no disponibles');
+                            }
                         }
                     });
             }

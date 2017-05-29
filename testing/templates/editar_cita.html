@@ -6,9 +6,43 @@
     <h1>Editar Cita</h1>
     <h3>Llenar todos los campos solicitados</h3>
     {{ form.as_p }}
-    <button class="btn btn-info" element onclick="AddAppointment()">Editar Cita</button>
+    <button class="btn btn-info" element onclick="EditAppointment()">Editar Cita</button>
 {% endblock %}
 {% block scripts %}
+    <script>
+        var cita =sessionStorage.getItem("sent");
+        grupo = "{{ grupo }}";
+        $.ajax({  //Call ajax function sending the option loaded
+            url: "search_ajax/",  //This is the url of the ajax view where you make the search
+            type: 'POST',
+            dataType: "json",
+            data: {
+                cita: cita,
+                tag: "populatecita"
+            },
+            success: function (response) {
+                info_cita = response[0];
+                doctor = info_cita[0];
+                paciente = info_cita[1];
+                fecha = info_cita[2];
+                detalle = info_cita[3]
+                hora = fecha.substring(fecha.indexOf(" ")+1, fecha.length-3);
+                fecha = fecha.substring(0,fecha.indexOf(" "));
+                partesfecha = fecha.split('-');
+                if(grupo == "Pacientes" || grupo=="Administrador"){
+                    $('#id_Doctores').val(doctor);
+                }
+                else if(grupo == "Doctores" || grupo == "Administrador"){
+                    $('#id_Pacientes').val(paciente);
+                }
+                $('#id_Detalle').val(detalle);
+                $('#id_Fecha').val(partesfecha[1]+"/"+partesfecha[2]+"/"+partesfecha[0]);
+                $('#id_Fecha').trigger('change');
+                $('#id_Hora').val(hora);
+
+            }
+        });
+    </script>
     <script>
         horaminima = '';
         horamaxima = '';
@@ -80,7 +114,7 @@
                     $('.timepicker').data('TimePicker').options.maxTime = horamaxima;
                     $('.timepicker').data('TimePicker').items = null;
                     $('.timepicker').data('TimePicker').widget.instance = null;
-                }, 500);
+                }, 1500);
             });
     </script>
     <script>
@@ -91,7 +125,7 @@
             });
     </script>
     <script>
-        function AddAppointment(){
+        function EditAppointment(){
             detalle = $('#id_Detalle').val();
             fecha = $('#id_Fecha').val() + " " + $('#id_Hora').val();
             grupo = "{{ grupo }}";
@@ -120,10 +154,20 @@
                             detalle: detalle,
                             fecha: fecha,
                             grupo: grupo,
-                            tag: "addcita"
+                            citanum: cita,
+                            tag: "editcita"
                         },
                         success: function (response) {
-                            alert('Cita Agendada')
+                            result = response;
+                            if(result==1){
+                                alert('Modificación exitosa');
+                                window.close();
+                            }
+                            else
+                            {
+                                alert('Fecha y/o hora no disponibles');
+                            }
+
                         }
                     });
             }

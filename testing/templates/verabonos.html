@@ -1,0 +1,18 @@
+{% extends basehtml %}
+{% load render_table from django_tables2 %}
+{% block head %}
+    <title>Abonos</title>
+{% endblock %}
+{% block body %}
+    {% if tablaFinal == None %}
+        <h1>No hay Abonos Pagados</h1>
+    {% else %}
+        {% render_table tablaFinal  %}
+    {% endif %}
+{% endblock %}
+{% block scripts %}
+    <script>
+        $('td:nth-child(2),th:nth-child(2)').hide();
+        $('td:nth-child(1),th:nth-child(1)').hide();
+    </script>
+{% endblock %}

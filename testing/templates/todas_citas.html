@@ -17,14 +17,13 @@
         $('td:nth-child(7),th:nth-child(7)').hide();
         $('#tablamamalona tbody tr').each(function() {
             var customerId = $(this).find(".ID_CITA").html();
-            if($(this).find(".ACEPTADA").html()==1) {
-                $(this).append("<button id=\"" + customerId + " \" class=\"btn btn-info\">Confirmar</>");
-            }
-            else
-            {
-                $(this).append("<button id=\"" + customerId + " \" class=\"btn btn-info\">Confirmar</>");
-            }
-
+        $(this).append("<button value=\"" + customerId + "\" onclick =\"ModificarCita("+customerId+")\" class=\"btn btn-info\">Modificar</>");
         });
+    </script>
+    <script>
+        function ModificarCita(citaincoming){
+            sessionStorage.setItem("sent", citaincoming);
+            window.open('/editar_cita')
+        }
     </script>
 {% endblock %}

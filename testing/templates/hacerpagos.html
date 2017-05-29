@@ -1,0 +1,85 @@
+{% extends basehtml %}
+{% block head %}
+    <title>Nuevo Pago</title>
+{% endblock %}
+{% block body %}
+    {{ form.as_p }}
+    <button class="btn btn-info" element onclick="AgregarPago()">Confirmar Pago</button>
+    <a href="/register/home" class="btn btn-danger">Cancelar</a>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        $('#id_Doctores').on('change', function(){
+            $.ajax({  //Call ajax function sending the option loaded
+            url: "search_ajax/",  //This is the url of the ajax view where you make the search
+            type: 'POST',
+            dataType: "json",
+            data: {doctor:$('#id_Doctores').val(),
+                tag:"pagopaciente"},
+                success: function(response) {
+                    result=response;
+                    $('#id_Pacientes').empty();
+                    $('#id_Pacientes').append($('<option>', {value:0, text:'Seleccione un Paciente'}));
+                        for (i=0; i<result.length; i++)
+                        {
+                            valor = result[i];
+                            numero = valor[0];
+                            texto = valor[1];
+                            $('#id_Pacientes').append($('<option>', {value:numero, text:texto}));
+                        }
+                }
+            });
+        });
+
+        $('#id_Pacientes').on('change', function(){
+            $.ajax({  //Call ajax function sending the option loaded
+            url: "search_ajax/",  //This is the url of the ajax view where you make the search
+            type: 'POST',
+            dataType: "json",
+            data: {paciente:$('#id_Pacientes').val(),
+                tag:"pagotratamiento"},
+                success: function(response) {
+                    result=response;
+                    $('#id_Tratamiento').empty();
+                    $('#id_Tratamiento').append($('<option>', {value:0, text:'Seleccione un Tratamiento'}));
+                        for (i=0; i<result.length; i++)
+                        {
+                            valor = result[i];
+                            numero = valor[0];
+                            texto = valor[1];
+                            $('#id_Tratamiento').append($('<option>', {value:numero, text:texto}));
+                        }
+                }
+            });
+        });
+    </script>
+    <script>
+        function AgregarPago(){
+            $.ajax({  //Call ajax function sending the option loaded
+                url: "search_ajax/",  //This is the url of the ajax view where you make the search
+                type: 'POST',
+                dataType: "json",
+                data: {
+                    paciente: $('#id_Pacientes').val(),
+                    doctor: $('#id_Doctores').val(),
+                    tratamiento: $('#id_Tratamiento').val(),
+                    total: $('#id_Total').val(),
+                    tipopago: $('#id_Tipo_Pago').val(),
+                    tag: "addpago"
+                },
+                success: function (response) {
+                    result = response
+                    if(result>0)
+                    {
+                        alert('Pago exitoso, el cambio es: $' + result + ' M.N.');
+                    }
+                    else{
+                        alert('Pago exitoso');
+                    }
+                    window.location.href='/abonos'
+                }
+            });
+        }
+    </script>
+{% endblock %}
