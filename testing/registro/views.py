@@ -23,11 +23,13 @@ def home(request):
         userid = request.user.id
         group = request.user.groups.all()
         if not group:
-            grupo = ""
+            grupo = "Pacientes"
         else:
             grupo = str(group[0])
-        if grupo == "Doctores" or grupo =="Administrador":
-            basehtml = 'base.html'
+        if grupo == "Doctores":
+            basehtml = 'basedentista.html'
+        elif grupo =="Administrador":
+            basehtml = 'baseadministrador.html'
         else:
             basehtml = 'basepaciente.html'
         cur = connection.cursor()

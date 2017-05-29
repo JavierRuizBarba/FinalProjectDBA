@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends basehtml %}
 {% block head %}
     <title>Grupos de Usuarios</title>
 {% endblock %}
@@ -6,7 +6,7 @@
     <h1>Agregar Usuarios a Grupos</h1>
     {{ form.as_p }}
     <button class="btn btn-info" element onclick="AddUserGroup()">Agregar Usuario a Grupo</button>
-    <a href='/register/home' class="btn btn-danger">Cancelar</a>
+    <a href='/home' class="btn btn-danger">Cancelar</a>
 {% endblock %}
 {% block scripts %}
     <script>

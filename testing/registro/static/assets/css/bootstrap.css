@@ -5637,6 +5637,15 @@ button.close {
   margin-right: auto;
   margin-left: auto;
 }
+.center{
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin-left: 30%;
+  margin-right: 30%;
+  width: 450pt; /* Need a specific value to work */
+  height: 150%;
+}
 .pull-right {
   float: right !important;
 }

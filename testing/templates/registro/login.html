@@ -1,13 +1,12 @@
-{% extends 'baseoff.html' %}
 
-{% block head %}
-    <title>Log In</title>
-{% endblock %}
+{% extends 'bases/pages-login.html' %}
+
 {% block body %}
-    <h1>Inicia Sesión</h1>
-<form method="post" class="form">
-  {% csrf_token %}
-    {{ form.as_p }}
-    <button style="float: left" type="submit" class="btn btn-primary">Ingresar</button>
+        <h1>Consultorio Dental</h1>
+        <h3>Inicia Sesión</h3>
+        <form method="post" class="form-inline">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-block btn-primary">Ingresar</button>
+        </form>
 {% endblock %}
-</form>

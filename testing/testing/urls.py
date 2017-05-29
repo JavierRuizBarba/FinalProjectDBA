@@ -41,4 +41,5 @@ urlpatterns = [
     url(r'^abonos', views.verabonos),
     url(r'^nuevo_pago', views.hacerpagos),
     url(r'^agregar_tipo_cambio', views.agregartipocambio),
+    url(r'^home', views.home),
 ]

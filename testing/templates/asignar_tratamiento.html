@@ -1,11 +1,56 @@
-{% extends 'base.html' %}
+{% extends basehtml %}
 {% block head %}
-    <title>Asignar Tratamientos</title>
+    <title>Clinica Dental || Asignar tratamiento</title>
 {% endblock %}
+
+{% block title %}
+    <h3><i class="fa fa-list"></i> Asignar tratamientos</h3>
+{% endblock %}
+
 {% block body %}
-    {{ form.as_p }}
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-lg-10">
+            <div class="panel">
+                <div class="panel-body text-center">
+                    <div class="row">
+                        <h1>Asignar tratamientos</h1>
+                        <h4>Tratamientos a realizar con pacientes</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-lg-10">
+            <div class="panel">
+                <div class="panel-body text-center">
+                    <div class="row">
+                        {{ form.as_p }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-lg-10">
+            <div class="panel">
+                <div class="panel-body text-center">
+                    <div class="row">
+
     <button id="asignar" class="btn btn-info" element onclick="Assign()">Asignar</button>
-    <a href="/register/home"  class="btn btn-danger">Cancelar</a>
+    <a href="/home"  class="btn btn-danger">Cancelar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+
 {% endblock %}
 {% block scripts %}
     <script>
@@ -77,7 +122,7 @@
                 tag:"asignartratamiento"},
                 success: function(response) {
                 alert('Tratamiento Asignado');
-                window.location.href = "/register/home"
+                window.location.href = "/home"
                 }
             });
     }

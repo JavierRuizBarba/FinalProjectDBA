@@ -68,7 +68,7 @@ def login_redirect(request):
     if not request.user.is_authenticated:
         return redirect('/login')
     else:
-        return redirect('/register/home')
+        return redirect('/home')
 
 def update_user_info(request):
     if not request.user.is_authenticated:
@@ -77,13 +77,18 @@ def update_user_info(request):
         groups = request.user.groups.all()
         if not groups:
             grupo = "Paciente"
+            basehtml = 'bases/basepaciente.html'
         else:
             grupo = str(groups[0])
+        if grupo =="Doctores":
+            basehtml = 'bases/basedentista.html'
+        elif grupo=="Administrador":
+            basehtml = 'bases/baseadministrador.html'
         if request.method == "POST":
             form = update_address(request.POST)
         else:
             form = update_address()
-        return render(request, 'pruebamenus.html', {'form':form, 'usuario':request.user.username, 'grupo':grupo})
+        return render(request, 'pruebamenus.html', {'form':form, 'usuario':request.user.username, 'basehtml':basehtml, 'grupo':grupo})
 
 def grupos_usuarios(request):
     if not request.user.is_authenticated:
@@ -92,13 +97,14 @@ def grupos_usuarios(request):
         groups = request.user.groups.all()
         grupo = str(groups[0])
         if grupo != "Administrador":
-            return redirect('/register/home')
+            return redirect('/home')
         else:
+            basehtml = 'bases/baseadministrador.html'
             if request.method == "POST":
                 form = user_groups(request.POST)
             else:
                 form = user_groups()
-            return render(request, 'user_groups.html', {'form':form})
+            return render(request, 'user_groups.html', {'form':form, 'basehtml':basehtml})
 
 def new_app(request):
     if not request.user.is_authenticated:
@@ -118,19 +124,19 @@ def new_app(request):
             else:
                 grupo = str(groups[0])
             if grupo == "Doctores":
-                basehtml = 'base.html'
+                basehtml = 'bases/basedentista.html'
                 if request.method == "POST":
                     form = nueva_cita_doc(request.POST)
                 else:
                     form = nueva_cita_doc()
             elif grupo == "Pacientes":
-                basehtml = 'basepaciente.html'
+                basehtml = 'bases/basepaciente.html'
                 if request.method == "POST":
                     form = nueva_cita_paciente(request.POST)
                 else:
                     form = nueva_cita_paciente()
             elif grupo == "Administrador":
-                basehtml = 'base.html'
+                basehtml = 'bases/baseadministrador.html'
                 if request.method == "POST":
                     form = nueva_cita_admin(request.POST)
                 else:
@@ -155,19 +161,19 @@ def edit_app(request):
             else:
                 grupo = str(groups[0])
             if grupo == "Doctores":
-                basehtml = 'base.html'
+                basehtml = 'bases/basedentista.html'
                 if request.method == "POST":
                     form = nueva_cita_doc(request.POST)
                 else:
                     form = nueva_cita_doc()
             elif grupo == "Pacientes":
-                basehtml = 'basepaciente.html'
+                basehtml = 'bases/basepaciente.html'
                 if request.method == "POST":
                     form = nueva_cita_paciente(request.POST)
                 else:
                     form = nueva_cita_paciente()
             elif grupo == "Administrador":
-                basehtml = 'base.html'
+                basehtml = 'baseadinistrador.html'
                 if request.method == "POST":
                     form = nueva_cita_admin(request.POST)
                 else:
@@ -187,12 +193,14 @@ def todas_citas(request):
         cur = connection.cursor()
         rawCursor = cur.connection.cursor()
         if grupo == "Doctores":
-            basehtml = 'base.html'
+            basehtml = 'bases/basedentista.html'
             proc = 'dientes.get_pkg.get_cita_doctor'
 
         elif grupo == "Pacientes":
-            basehtml = 'basepaciente.html'
+            basehtml = 'bases/basepaciente.html'
             proc = 'dientes.get_pkg.get_cita_p'
+        elif grupo == "Administrador":
+            basehtml = 'baseadministraor.html'
 
         cur.callproc(proc, [rawCursor, usuario])
         res = rawCursor.fetchall()
@@ -218,16 +226,21 @@ def citas_confirmar(request):
         else:
             grupo = str(groups[0])
         if grupo == "Doctores":
-            basehtml = 'base.html'
+            basehtml = 'bases/basedentista.html'
             proc = 'dientes.get_pkg.get_cita_na_doctor'
         elif grupo == "Pacientes":
-            basehtml = 'basepaciente.html'
+            basehtml = 'bases/basepaciente.html'
             proc = 'dientes.get_pkg.get_cita_na_p'
+        elif grupo == "Administrador":
+            basehtml = 'bases/baseadministrador.html'
+            proc = 'dientes.get_pkg.get_cita_a_na'
 
         cur = connection.cursor()
         rawCursor = cur.connection.cursor()
-
-        cur.callproc(proc, [rawCursor, usuario])
+        if grupo != "Administrador":
+            cur.callproc(proc, [rawCursor, usuario])
+        else:
+            cur.callproc(proc, [rawCursor])
         res = rawCursor.fetchall()
         if not res:
             citas = None
@@ -250,7 +263,7 @@ def horario_vista(request):
         else:
             grupo = str(groups[0])
         if grupo == "Doctores":
-            basehtml = 'base.html'
+            basehtml = 'bases/basedentista.html'
             if request.method == "POST":
                 form1 = forma_horarios_Inicio(request.POST)
                 form2 = forma_horarios_Fin(request.POST)
@@ -258,8 +271,8 @@ def horario_vista(request):
                 form1 = forma_horarios_Inicio()
                 form2 = forma_horarios_Fin()
             return render(request, 'horarios.html', {'form1': form1, 'form2': form2, 'usuario': usuario, 'grupo': grupo, 'basehtml': basehtml})
-        elif grupo == "Paciente":
-            return redirect('/register/home')
+        elif grupo == "Paciente" or grupo == "Administrador":
+            return redirect('/home')
 
 def pacientes(request):
     def __init__(self, *args, **kwargs):
@@ -273,10 +286,10 @@ def pacientes(request):
         else:
             grupo = str(groups[0])
         if grupo == "Doctores" or grupo == "Administrador":
-            basehtml = 'base.html'
             cur = connection.cursor()
             rawCursor = cur.connection.cursor()
             if grupo == "Doctores":
+                basehtml = 'bases/basedentista.html'
                 doctor = request.user.id
                 cur.callproc('dientes.get_pkg.get_pacientes_doctor', [doctor, rawCursor])
                 res = rawCursor.fetchall()
@@ -289,7 +302,7 @@ def pacientes(request):
                     RequestConfig(request).configure(tablaFinal)
                     return render(request, 'lista_pacientes.html', {'pacientes':tablaFinal, 'basehtml':basehtml})
         else:
-            return redirect('/register/home')
+            return redirect('/home')
 
 def tratamientos(request):
     if not request.user.is_authenticated:
@@ -297,11 +310,15 @@ def tratamientos(request):
     else:
         groups = request.user.groups.all()
         if not groups:
-            grupo = "Paciente"
+            grupo = "Pacientes"
         else:
             grupo = str(groups[0])
-
-        basehtml = 'base.html'
+        if grupo == "Pacientes":
+            basehtml = 'bases/basepaciente.html'
+        elif grupo == "Doctores":
+            basehtml = 'bases/basedentista.html'
+        elif grupo == "Administrador":
+            basehtml = 'bases/baseadministrador.html'
         cur = connection.cursor()
         rawCursor = cur.connection.cursor()
         cur.callproc('dientes.get_pkg.get_tratamientos', [rawCursor])
@@ -331,18 +348,20 @@ def asignar_tratamientos(request):
         else:
             grupo = str(groups[0])
         if grupo == "Pacientes":
-            return redirect("/register/home")
+            return redirect("/home")
         elif grupo == "Doctores":
+            basehtml = 'bases/basedentista.html'
             if request.method == "POST":
                 form = doc_tratamientos_pacientes(request.user, request.POST)
             else:
                 form = doc_tratamientos_pacientes(request.user)
         elif grupo == "Administrador":
+            basehtml='bases/baseadministrador.html'
             if request.method == "POST":
                 form = admn_tratamientos_pacientes(request.user, request.POST)
             else:
                 form = admn_tratamientos_pacientes(request.user)
-        return render(request, 'asignar_tratamiento.html', {'form':form, 'usuario':usuario})
+        return render(request, 'asignar_tratamiento.html', {'form':form, 'usuario':usuario, 'basehtml':basehtml})
 
 def verabonos(request):
     if not request.user.is_authenticated:
@@ -352,12 +371,12 @@ def verabonos(request):
         groups = request.user.groups.all()
         if not groups:
             grupo = "Pacientes"
-            basehtml = 'basepaciente.html'
+            basehtml = 'bases/basepaciente.html'
         else:
             grupo = str(groups[0])
-            basehtml='base.html'
+            basehtml='bases/baseadministrador.html'
         if grupo == "Doctores":
-            return redirect('/register/home')
+            return redirect('/home')
         else:
             cur = connection.cursor()
             rawCursor = cur.connection.cursor()
@@ -383,15 +402,47 @@ def hacerpagos(request):
             grupo = "Pacientes"
         else:
             grupo = str(groups[0])
-            basehtml='base.html'
+            basehtml='bases/baseadministrador.html'
         if grupo == "Doctores" or grupo == "Pacientes":
-            return redirect('/register/home')
+            return redirect('/home')
         else:
             if request.method == "POST":
                 form = forma_pagos(request.POST)
             else:
                 form = forma_pagos()
         return render(request, 'hacerpagos.html', {'form':form, 'basehtml':basehtml})
+
+def home(request):
+    if not request.user.is_authenticated:
+        return redirect('%s?next=%s' % (settings.LOGIN_URL, request.path))
+    else:
+        userid = request.user.id
+        group = request.user.groups.all()
+        if not group:
+            grupo = "Pacientes"
+        else:
+            grupo = str(group[0])
+        if grupo == "Doctores":
+            basehtml = 'bases/basedentista.html'
+        elif grupo =="Administrador":
+            basehtml = 'bases/baseadministrador.html'
+        else:
+            basehtml = 'bases/basepaciente.html'
+        cur = connection.cursor()
+        rawCursor = cur.connection.cursor()
+        cur.callproc('dientes.get_pkg.get_address_id', [userid,rawCursor])
+        res = rawCursor.fetchall()
+        if not res:
+            return redirect('/update_user_info')
+        else:
+            cur.callproc('dientes.get_pkg.get_user', [userid, rawCursor])
+            res = rawCursor.fetchall()
+            for item in res:
+                username = item[0]
+                name = item[1]
+                lastname = item[2]
+
+    return render(request, 'registro/Home.html', {'username':username, 'nombre':name, 'apellido':lastname, 'grupo':grupo, 'basehtml':basehtml})
 
 def agregartipocambio(request):
     if not request.user.is_authenticated:
@@ -403,9 +454,9 @@ def agregartipocambio(request):
             grupo = "Pacientes"
         else:
             grupo = str(groups[0])
-            basehtml='base.html'
+            basehtml='bases/baseadministrador.html'
         if grupo == "Doctores" or grupo == "Pacientes":
-            return redirect('/register/home')
+            return redirect('/home')
         else:
             if request.method == "POST":
                 form = forma_tipo_cambio(request.POST)
