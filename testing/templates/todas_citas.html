@@ -13,6 +13,8 @@
 
 {% block scripts %}
     <script>
+        $('td:nth-child(1),th:nth-child(1)').hide();
+        $('td:nth-child(7),th:nth-child(7)').hide();
         $('#tablamamalona tbody tr').each(function() {
             var customerId = $(this).find(".ID_CITA").html();
             if($(this).find(".ACEPTADA").html()==1) {

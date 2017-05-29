@@ -1,0 +1,28 @@
+{% extends basehtml %}
+{% load render_table from django_tables2 %}
+{% block head %}
+    <title>Lista Tratamientos</title>
+{% endblock %}
+{% block body %}
+    {% if tratamientos != None %}
+        {% render_table tratamientos %}
+    {% else %}
+        <h1>No tiene tratamientos registrados</h1>
+    {% endif %}
+    {% if grupo == "Administrador" %}
+        <br>
+        <h1>Agregar Tratamientos</h1>
+        {{ form.as_p }}
+        <button class="btn btn-info" element onclick="AddTreat()">Agregar Tratamiento</button>
+    {% endif %}
+{% endblock %}
+{% block scripts %}
+    <script>
+        function AddTreat(){
+
+        }
+    </script>
+    <script>
+        $('td:nth-child(1),th:nth-child(1)').hide();
+    </script>
+{% endblock %}

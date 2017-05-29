@@ -6,7 +6,9 @@
 {% block body %}
     {% if  citas != None %}
         {% render_table citas %}
-        <button class="btn btn-info" element onclick="AcceptApp()">Aceptar Citas</button>
+        {% if grupo != "Pacientes" %}
+        <button id="accept" class="btn btn-info" element onclick="AcceptApp()">Aceptar Citas</button>
+        {% endif %}
     {% else %}
         <h1>No hay citas por confirmar</h1>
     {% endif %}
@@ -15,17 +17,42 @@
 
 {% block scripts %}
     <script>
-    $("#tablamamalona thead tr").append("<td><strong>ACEPTAR</strong></td>");
-    $('#tablamamalona tbody tr').each(function() {
+    grupo = "{{ grupo }}"
+    if(grupo != "Pacientes") {
+        $("#tablamamalona thead tr").append("<td><strong>ACEPTAR</strong></td>");
+        $('#tablamamalona tbody tr').each(function () {
             var customerId = $(this).find(".ID_CITA").html();
-                $(this).append("<input id=\"" + customerId + " \" class=\"checkbox\" type=\"checkbox\">");
+            $(this).append("<input value=\"" + customerId + " \" class=\"checkbox\" name=\"type\" type=\"checkbox\">");
         });
+    }
     $('td:nth-child(1),th:nth-child(1)').hide();
+    $('td:nth-child(5),th:nth-child(5)').hide();
+    $('td:nth-child(7),th:nth-child(7)').hide();
     </script>
     <script>
-        function AcceptApp(){
-            alert($('.checkbox:checkbox:checked'))
-
+        function AcceptApp() {
+            yourArray = new Array()
+            $("input:checkbox[name=type]:checked").each(function () {
+                yourArray.push($(this).val());
+            });
+            if (yourArray.length == 0) {
+                alert('Seleccionar citas por confirmar')
+            }
+            else {
+                citasids = String(yourArray);
+                alert(citasids);
+                $.ajax({  //Call ajax function sending the option loaded
+                    url: "search_ajax/",  //This is the url of the ajax view where you make the search
+                    type: 'POST',
+                    dataType: "json",
+                    data: {
+                        citasids: citasids,
+                        tag: "aceptarcita"
+                    },
+                    success: function (response) {
+                    }
+                });
+            }
         }
     </script>
 {% endblock %}

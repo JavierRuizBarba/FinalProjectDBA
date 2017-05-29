@@ -1,4 +1,3 @@
-/* Formatted on 5/25/2017 12:58:21 AM (QP5 v5.300) */
 CREATE OR REPLACE PACKAGE BODY DIENTES.EDIT_PKG
 AS
     PROCEDURE EDIT_ABONOS (
@@ -53,7 +52,7 @@ AS
     PROCEDURE EDIT_CITA (ID_CITA_V       IN DIENTES.CITA.ID_CITA%TYPE,
                          ID_PACIENTE_V   IN DIENTES.CITA.ID_PACIENTE%TYPE,
                          ID_DENTISTA_V   IN DIENTES.CITA.ID_DENTISTA%TYPE,
-                         FECHA_HORA_V    IN DIENTES.CITA.FECHA_HORA%TYPE,
+                         FECHA_HORA_V    IN VARCHAR2,
                          DETALLE_V       IN DIENTES.CITA.DETALLE%TYPE,
                          ASISTIO_V       IN DIENTES.CITA.ASISTIO%TYPE,
                          ACTIVO_V        IN DIENTES.CITA.ACTIVO%TYPE,
@@ -63,7 +62,7 @@ AS
         UPDATE DIENTES.CITA
            SET ID_PACIENTE = ID_PACIENTE_V,
                ID_DENTISTA = ID_DENTISTA_V,
-               FECHA_HORA = FECHA_HORA_V,
+               FECHA_HORA = TO_DATE(FECHA_HORA_V, 'MM/DD/YYYY HH24:MI'),
                DETALLE = DETALLE_V,
                ASISTIO = ASISTIO_V,
                ACTIVO = ACTIVO_V,
@@ -343,7 +342,3 @@ AS
     END;
 END EDIT_PKG;
 /
-
-begin
-DIENTES.EDIT_PKG.EDIT_USER_GROUP(6, 3);
-end;

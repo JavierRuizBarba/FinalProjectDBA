@@ -1,4 +1,3 @@
-/* Formatted on 5/25/2017 12:22:17 AM (QP5 v5.300) */
 CREATE OR REPLACE PACKAGE DIENTES.ADD_PKG
 AS
     
@@ -110,5 +109,6 @@ AS
                              GENERO      IN VARCHAR2,
                              CELL        IN NUMBER,
                              BLOOD       IN VARCHAR2);
+    procedure add_user_group(idusuario in integer, idgrupo in integer);
 END ADD_PKG;
 /
