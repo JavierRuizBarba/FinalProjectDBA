@@ -38,4 +38,9 @@ urlpatterns = [
     url(r'^pacientes', views.pacientes),
 	url(r'^tratamientos', views.tratamientos),
     url(r'^asignar_tratamientos', views.asignar_tratamientos),
+    url(r'^abonos', views.verabonos),
+    url(r'^nuevo_pago', views.hacerpagos),
+    url(r'^agregar_tipo_cambio', views.agregartipocambio),
+    url(r'^home', views.home),
+    url(r'^nuevo_tratamiento', views.nuevo_tratamiento),
 ]

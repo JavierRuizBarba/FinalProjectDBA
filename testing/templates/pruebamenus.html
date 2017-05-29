@@ -1,16 +1,60 @@
-{% extends 'base.html' %}
+{% extends 'bases/basedentista.html' %}
+
+{% block head %}
+    <title>Clinica Dental || Editar Usuario</title>
+{% endblock %}
+
+{% block title %}
+    <h3><i class="fa fa-edit"></i> Editar usuario </h3>
+{% endblock %}
 
 {% block body %}
-    <h1>Actualizar Información de Usuario</h1>
-    <h2>Usuario: {{ usuario }}</h2>
-    <br>
-    <div class="container">
-    {{ form.as_p }}
-    <button id ="Save" class="btn btn-info" element onclick="GuardarDir()">Guardar</button>
-    <a href='register/home' class="btn btn-danger">Cancelar</a>
-    <a href='/horarios' id = "Horarios" class="btn btn-default">Modificar Horario</a>
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-lg-10">
+            <div class="panel">
+                <div class="panel-body text-center">
+                    <div class="row">
+                        <h1>Actualizar Información de Usuario</h1>
+                        <h4>Usuario: {{ usuario }}</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-lg-10">
+            <div class="panel">
+                <div class="panel-body text-center">
+                    <div class="row">
+                        <div class="container">
+                            {{ form.as_p }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-lg-10">
+            <div class="panel">
+                <div class="panel-body text-center">
+                    <div class="row">
+                        <button id="Save" class="btn btn-info btn-lg" element onclick="GuardarDir()">Guardar</button>
+                        <a href='home' class="btn btn-danger  btn-lg">Cancelar</a>
+                        <a href='/horarios' id="Horarios" class="btn btn-default btn-lg">Modificar Horario</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-1"></div>
     </div>
 {% endblock %}
+
 {% block scripts %}
 <script>
     grupo = "{{ grupo }}"

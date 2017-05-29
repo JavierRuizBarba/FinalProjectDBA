@@ -1,0 +1,37 @@
+{% extends basehtml %}
+{% block head %}
+    <title>Agregar Tratamiento</title>
+{% endblock %}
+{% block body %}
+    {{ form.as_p }}
+    <button class="btn btn-default" element onclick="AgregarTratamiento()">Agregar</button>
+    <a href="/home" type="btn btn-danger">Cancelar</a>
+{% endblock %}
+{% block scripts %}
+    <script>
+    function AgregarTratamiento() {
+        costo = $('#id_Costo').val()
+        if(parseFloat(costo)) {
+            $.ajax({  //Call ajax function sending the option loaded
+                url: "search_ajax/",  //This is the url of the ajax view where you make the search
+                type: 'POST',
+                dataType: "json",
+                data: {
+                    costo: costo,
+                    especialidad: $('#id_Especialidad').val(),
+                    nombre: $('#id_Nombre').val(),
+                    tag: "addtratamiento"
+                },
+                success: function (response) {
+                    result = response;
+                    alert('Tratamiento agregado exitosamente');
+                }
+            });
+        }
+        else
+        {
+            alert('Ingresar costo correcto');
+        }
+    }
+    </script>
+{% endblock %}

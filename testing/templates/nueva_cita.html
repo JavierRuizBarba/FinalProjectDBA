@@ -1,24 +1,74 @@
 {% extends basehtml %}
 {% block head %}
-    <title>Agendar Cita</title>
+    {% load static %}
+    <!-- Datepicker-->
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+    <link rel="stylesheet" href="{% static 'django_tables2/themes/paleblue/css/screen.css' %}" />
+    <title>Clinica Dental || Nueva Cita</title>
 {% endblock %}
+
+{% block title %}
+    <h3><i class="fa fa-calendar"></i> Nueva Cita </h3>
+{% endblock %}
+
 {% block body %}
-    <h1>Agendar Nueva Cita</h1>
-    <h3>Llenar todos los campos solicitados</h3>
-    {{ form.as_p }}
-    <button class="btn btn-info" element onclick="AddAppointment()">Agendar Cita</button>
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-lg-10">
+            <div class="panel">
+                <div class="panel-body text-center">
+                    <div class="row">
+                        <h1>Agendar Nueva Cita</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-lg-10">
+            <div class="panel">
+                <div class="panel-body text-center">
+                    <div class="row">
+                        <h3>Llenar todos los campos solicitados</h3>
+                        {{ form.as_p }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-lg-10">
+            <div class="panel">
+                <div class="panel-body text-center">
+                    <div class="row">
+                        <button class="btn btn-info btn-lg" element onclick="AddAppointment()">Agendar Cita</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
 {% endblock %}
+
 {% block scripts %}
+    <!-- Datepicker-->
+    <script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
     <script>
         horaminima = '';
         horamaxima = '';
-        $(document).ready(function(){
+        $(document).ready(function () {
             $('.datepicker').datepicker({minDate: 0});
             $('#id_Hora').timepicker({
                 timeFormat: 'H:mm',
-                interval:30,
-                minTime:'',
-                maxTime:'',
+                interval: 30,
+                minTime: '',
+                maxTime: '',
                 dropdown: true,
                 scrollbar: true,
                 dynamic: false
@@ -26,7 +76,7 @@
         });
     </script>
     <script>
-        $('#id_Fecha').on('change',function() {
+        $('#id_Fecha').on('change', function () {
             date = $(this).datepicker('getDate');
             dayOfWeek = date.getUTCDay();
             dia = "";
@@ -74,62 +124,57 @@
                     horaminima = horadia.substr(0, horadia.indexOf('-'));
                     horamaxima = horadia.substr(horadia.indexOf('-') + 1, horadia.length);
                 }
-                });
-                setTimeout(function() {
-                    $('.timepicker').data('TimePicker').options.minTime = horaminima;
-                    $('.timepicker').data('TimePicker').options.maxTime = horamaxima;
-                    $('.timepicker').data('TimePicker').items = null;
-                    $('.timepicker').data('TimePicker').widget.instance = null;
-                }, 1500);
             });
+            setTimeout(function () {
+                $('.timepicker').data('TimePicker').options.minTime = horaminima;
+                $('.timepicker').data('TimePicker').options.maxTime = horamaxima;
+                $('.timepicker').data('TimePicker').items = null;
+                $('.timepicker').data('TimePicker').widget.instance = null;
+            }, 1500);
+        });
     </script>
     <script>
-          $('.timepicker').select(function()
-            {
-                alert('Seleccionado');
+        $('.timepicker').select(function () {
+            alert('Seleccionado');
 
-            });
+        });
     </script>
     <script>
-        function AddAppointment(){
+        function AddAppointment() {
             detalle = $('#id_Detalle').val();
             fecha = $('#id_Fecha').val() + " " + $('#id_Hora').val();
             grupo = "{{ grupo }}";
-            if(detalle != "" && $('#id_Fecha').val() != "" && $('#id_Hora').val() != "" ) {
+            if (detalle != "" && $('#id_Fecha').val() != "" && $('#id_Hora').val() != "") {
                 if (grupo == "Doctores") {
                     doctor = "{{ usuario }}";
                     paciente = $('#id_Pacientes').val();
                 }
-                else if (grupo== "Paciente")
-                {
+                else if (grupo == "Paciente") {
                     doctor = $('#id_Doctores').val();
                     paciente = "{{ usuario }}"
                 }
-                else if (grupo== "Administrador")
-                {
+                else if (grupo == "Administrador") {
                     doctor = $('#id_Doctores').val();
                     paciente = $('#id_Pacientes').val();
                 }
-                    $.ajax({  //Call ajax function sending the option loaded
-                        url: "search_ajax/",  //This is the url of the ajax view where you make the search
-                        type: 'POST',
-                        dataType: "json",
-                        data: {
-                            doctor: doctor,
-                            paciente: paciente,
-                            detalle: detalle,
-                            fecha: fecha,
-                            grupo: grupo,
-                            tag: "addcita"
-                        },
-                        success: function (response) {
-                            alert('Cita Agendada')
-                            window.location.href = '/register/home';
-                        }
-                    });
+                $.ajax({  //Call ajax function sending the option loaded
+                    url: "search_ajax/",  //This is the url of the ajax view where you make the search
+                    type: 'POST',
+                    dataType: "json",
+                    data: {
+                        doctor: doctor,
+                        paciente: paciente,
+                        detalle: detalle,
+                        fecha: fecha,
+                        grupo: grupo,
+                        tag: "addcita"
+                    },
+                    success: function (response) {
+                        alert('Cita Agendada')
+                    }
+                });
             }
-            else
-            {
+            else {
                 alert('Complete todos los campos')
             }
         }
