@@ -15,9 +15,9 @@
             <div id="navbar-container" class="boxed">
                 <!--Brand logo & name-->
                 <!--================================-->
-                <div class="navbar-header" width="100%">
-                    <a href="index-2.html" class="navbar-brand">
-                        <img class="pad-all img" src={% static 'img/logo-nom.png' %} height="100%" >
+                <div class="navbar-header">
+                    <a href="/home" class="navbar-brand">
+                        <img class="pad-all img" src={% static 'img/logo-nom.png' %} height="100%">
                     </a>
                 </div>
                 <!--================================-->
@@ -25,6 +25,56 @@
                 <!--Navbar Dropdown-->
                 <!--================================-->
                 <div class="navbar-content clearfix">
+                    <ul class="megamenu">
+                    <ul class="navbar-default pull-left">
+                        <div class="navbar-header">
+                            <button type="button" data-toggle="collapse" data-target="#defaultmenu"
+                                    class="navbar-toggle">
+                                <span class="icon-bar"></span><span class="icon-bar"></span><span
+                                    class="icon-bar"></span>
+                            </button>
+                        </div>
+                        <div id="defaultmenu" class="navbar-collapse collapse ">
+                            <ul class="nav navbar-nav">
+                                <li>
+                                    <a href="/home"> Inicio </a>
+                                </li>
+                                <!-- standard drop down -->
+                                <li class="dropdown">
+                                    <a href="#" data-toggle="dropdown" class="dropdown-toggle"> Citas <b
+                                            class="caret"></b></a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="/nueva_cita">Nueva cita</a></li>
+                                        <li><a href="/todas_citas">Todas las citas </a></li>
+                                    </ul>
+                                    <!-- end dropdown-menu -->
+                                </li>
+                                <!-- end standard drop down -->
+                                <!-- standard drop down -->
+                                <li class="dropdown">
+                                    <a href="#" data-toggle="dropdown" class="dropdown-toggle"> Tratamientos <b
+                                            class="caret"></b></a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="/tratamientos"> Todos los tratamientos </a></li>
+                                        <li><a href="/asignar_tratamientos"> Tratamientos asignados</a></li>
+                                    </ul>
+                                    <!-- end dropdown-menu -->
+                                </li>
+                                <!-- end standard drop down -->
+                                <li>
+                                    <a href="/abonos"> Abonos </a>
+                                </li>
+                                <!-- standard drop down -->
+                                <li>
+                                    <a href="/ver_pagos"> Pagos </a>
+                                </li>
+
+                                <!-- end standard drop down -->
+                            </ul>
+                            <!-- end nav navbar-nav -->
+                        </div>
+
+                    </ul>
                     <ul class="nav navbar-top-links pull-right">
                         <!--Profile toogle button-->
                         <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -39,7 +89,7 @@
                         <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
                         <li id="dropdown-user" class="dropdown">
                             <a href="#" data-toggle="dropdown" class="dropdown-toggle text-right">
-                                    <span class="pull-right"> <i class="fa fa-user fa-fw"></i> {{ nombre }}
+                                    <span class="pull-right"> <i class="fa fa-user fa-fw"></i>
                                     </span></a>
                             <div class="dropdown-menu dropdown-menu-right with-arrow">
                                 <!-- User dropdown menu -->
@@ -56,56 +106,9 @@
                         <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
                         <!--End user dropdown-->
                     </ul>
-                </div>
+                </ul></div>
                 <!--================================-->
                 <!--End Navbar Dropdown-->
-                <nav class="navbar navbar-default megamenu">
-                    <div class="navbar-header">
-                        <button type="button" data-toggle="collapse" data-target="#defaultmenu" class="navbar-toggle">
-                            <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
-                        </button>
-                    </div>
-                    <!-- end navbar-header -->
-                    <div id="defaultmenu" class="navbar-collapse collapse ">
-                        <ul class="nav navbar-nav">
-                            <li>
-                                <a href="/home"> Inicio </a>
-                            </li>
-                            <!-- standard drop down -->
-                            <li class="dropdown">
-                                <a href="#" data-toggle="dropdown" class="dropdown-toggle"> Citas <b class="caret"></b></a>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li><a href="/nueva_cita">Nueva cita</a></li>
-                                    <li><a href="/todas_citas">Todas las citas </a></li>
-                                </ul>
-                                <!-- end dropdown-menu -->
-                            </li>
-                            <!-- end standard drop down -->
-                            <!-- standard drop down -->
-                            <li class="dropdown">
-                                <a href="#" data-toggle="dropdown" class="dropdown-toggle"> Tratamientos <b class="caret"></b></a>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li><a href="/tratamientos"> Todos los tratamientos </a></li>
-                                    <li><a href="/trat_asignados"> Tratamientos asignados</a></li>
-                                </ul>
-                                <!-- end dropdown-menu -->
-                            </li>
-                            <!-- end standard drop down -->
-                            <li>
-                                <a href="/abonos"> Abonos </a>
-                            </li>
-                            <!-- standard drop down -->
-                            <li>
-                                <a href="/ver_pagos"> Pagos </a>
-                            </li>
-
-                            <!-- end standard drop down -->
-                        </ul>
-                        <!-- end nav navbar-nav -->
-                    </div>
-                    <!-- end #navbar-collapse-1 -->
-                </nav>
-                <!-- end navbar navbar-default megamenu -->
             </div>
 
         </header>
@@ -119,7 +122,7 @@
                 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
             <div class="row">
                 <div class="col-md-1"></div>
-                    <div class="col-md-10 pageheader">
+                    <div class="col-md-10 pageheader offset">
                         {% block title %}
                         {% endblock %}
                     </div>

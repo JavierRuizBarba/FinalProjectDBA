@@ -52,7 +52,7 @@ def getTable(cursor, metodo):
             ID_ALERGIA = tables.Column()
             NOMBRE = tables.Column(verbose_name='ALERGIA')
         class Meta:
-            attrs={"class":"table table-hover table-vcenter", "id":"tablamamalona"}
+            attrs={"class":"table table-hover table-vcenter table-responsive", "id":"tablamamalona"}
 
     table = NameTable(exptData)
     return table
