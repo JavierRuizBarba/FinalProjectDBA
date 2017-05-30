@@ -43,3 +43,17 @@
     </div>
 
 {% endblock %}
+{% block scripts %}
+    <script>
+        $('#tablamamalona tbody tr').each(function() {
+            var customerId = $(this).find(".ID").html();
+        $(this).append("<td class=\"Historial btn-sm\"><button value=\"" + customerId + "\" onclick =\"HistorialPaciente("+customerId+")\" class=\"btn btn-info\">Ver historial</></td>");
+        });
+    </script>
+    <script>
+        function HistorialPaciente(pacienteid){
+            sessionStorage.setItem("paciente", pacienteid);
+            window.open('/paciente_perfil')
+        }
+    </script>
+{% endblock %}

@@ -17,7 +17,7 @@ def getTable(cursor, metodo):
     class NameTable(tables.Table):
         if metodo == 'tablapacientes':
             ID = tables.Column()
-            PACIENTE = tables.LinkColumn('perfil')
+            PACIENTE = tables.Column()
         elif metodo == 'tablacitas':
             ID_CITA = tables.Column()
             PACIENTE = tables.Column()
@@ -1078,12 +1078,29 @@ def actualizar_historial(request):
                     form2= forms.enfermedad_paciente_admn()
             return render(request, 'alergia_paciente.html', {'form':form, 'form2':form2, 'basehtml':basehtml})
 
+def paciente_perfil(request):
+    if not request.user.is_authenticated:
+        return redirect('%s?next=%s' % (settings.LOGIN_URL, request.path))
+    else:
+        usuario = request.user.id
+        groups = request.user.groups.all()
+        if not groups:
+            grupo = "Pacientes"
+        else:
+            grupo = str(groups[0])
+        if grupo == "Pacientes":
+            return redirect('/home')
+        elif grupo == "Doctores":
+            basehtml = 'bases/bsaedentista.html'
+        elif grupo == "Administrador":
+            basehtml = 'bases/baseadministrador.html'
+        return render(request, 'perfilpaciente.html', {'basehtml':basehtml})
 
 @csrf_exempt
 def search_ajax(request):
     cur = connection.cursor()
     rawCursor = cur.connection.cursor()
-    res = ''
+    #res = ''
     if request.POST.get('tag') == 'getstate':
         id_pais = request.POST.get('pais')
         cur.callproc('dientes.get_pkg.get_estados', [id_pais, rawCursor])
@@ -1143,6 +1160,41 @@ def search_ajax(request):
         cur.callproc('dientes.get_pkg.get_tratamiento_paciente', [rawCursor, paciente])
         res = rawCursor.fetchall()
         cur.close()
+    elif request.POST.get('tag') == 'populateperfil':
+        paciente = request.POST.get('paciente')
+        res=[]
+        cur.callproc('dientes.get_pkg.get_user', [paciente, rawCursor])
+        res2 = rawCursor.fetchall()
+        res2=res2[0]
+        for item in res2:
+            res.append(item)
+        cur.callproc('dientes.get_pkg.get_user_home', [paciente, rawCursor])
+        res2 = rawCursor.fetchall()
+        res2=res2[0]
+        for item in res2:
+            res.append(item)
+    elif request.POST.get('tag') == 'tablaalergia':
+        paciente = request.POST.get('paciente')
+        cur.callproc('dientes.get_pkg.get_alergia_p', [rawCursor, paciente])
+        res2 = rawCursor.fetchall()
+        res=[]
+        for item in res2:
+            res.append(item[1])
+    elif request.POST.get('tag') == 'tablatratamientos':
+        paciente = request.POST.get('paciente')
+        cur.callproc('dientes.get_pkg.get_tratamiento_paciente', [rawCursor, paciente])
+        res2 = rawCursor.fetchall()
+        res = []
+        for item in res2:
+            res.append(item[1])
+    elif request.POST.get('tag') == 'tablaenfermedades':
+        paciente = request.POST.get('paciente')
+        cur.callproc('dientes.get_pkg.get_enfermedad_p', [rawCursor, paciente])
+        res2 = rawCursor.fetchall()
+        print(res2)
+        res = []
+        for item in res2:
+            res.append(item[0])
     return HttpResponse(json.dumps(res))
 
 
