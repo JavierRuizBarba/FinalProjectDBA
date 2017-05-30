@@ -30,7 +30,7 @@ def getTable(cursor, metodo):
     class NameTable(tables.Table):
         if metodo == 'tablapacientes':
             ID = tables.Column()
-            PACIENTE = tables.Column()
+            PACIENTE = tables.LinkColumn('perfil')
         elif metodo == 'tablacitas':
             ID_CITA = tables.Column()
             PACIENTE = tables.Column()
