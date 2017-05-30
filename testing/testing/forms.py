@@ -252,3 +252,60 @@ class forma_pagos(forms.Form):
 
 class forma_tipo_cambio(forms.Form):
     Tipo_Cambio = forms.DecimalField(required=True, decimal_places=2)
+
+class agregar_alergia(forms.Form):
+
+    Alergia = forms.CharField(required=True)
+
+class alergia_paciente(forms.Form):
+    def __init__(self, *args, **kwargs):
+        super(alergia_paciente, self).__init__(*args, **kwargs)
+
+    cur = connection.cursor()
+    rawCursor = cur.connection.cursor()
+
+    cur.callproc('dientes.get_pkg.get_alergia', [rawCursor])
+    res = rawCursor.fetchall()
+
+    Alergia = forms.MultipleChoiceField(choices=res, widget=forms.CheckboxSelectMultiple, required = False)
+
+class alergia_paciente_admn(forms.Form):
+    def __init__(self, *args, **kwargs):
+        super(alergia_paciente_admn, self).__init__(*args, **kwargs)
+
+    cur = connection.cursor()
+    rawCursor = cur.connection.cursor()
+
+    cur.callproc('dientes.get_pkg.get_paciente_cita', [rawCursor])
+    res = rawCursor.fetchall()
+
+    Pacientes = forms.ChoiceField(choices=res, required=True)
+
+    cur.callproc('dientes.get_pkg.get_alergia', [rawCursor])
+    res = rawCursor.fetchall()
+
+    Alergia = forms.MultipleChoiceField(choices=res,widget=forms.CheckboxSelectMultiple, required = False)
+
+class enfermedad_paciente(forms.Form):
+    def __init__(self, *args, **kwargs):
+        super(enfermedad_paciente, self).__init__(*args, **kwargs)
+
+    cur = connection.cursor()
+    rawCursor = cur.connection.cursor()
+
+    cur.callproc('dientes.get_pkg.get_enfermedad', [rawCursor])
+    res = rawCursor.fetchall()
+
+    Enfermedad = forms.MultipleChoiceField(choices=res, widget=forms.CheckboxSelectMultiple, required = False)
+
+class enfermedad_paciente_admn(forms.Form):
+    def __init__(self, *args, **kwargs):
+        super(enfermedad_paciente_admn, self).__init__(*args, **kwargs)
+
+    cur = connection.cursor()
+    rawCursor = cur.connection.cursor()
+
+    cur.callproc('dientes.get_pkg.get_enfermedad', [rawCursor])
+    res = rawCursor.fetchall()
+
+    Enfermedad = forms.MultipleChoiceField(choices=res,widget=forms.CheckboxSelectMultiple, required = False)
