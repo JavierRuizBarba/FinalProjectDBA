@@ -1,24 +1,21 @@
 {% extends basehtml %}
-
+{% load render_table from django_tables2 %}
 {% block head %}
-    {% load static %}
-    <title>Clinica Dental || Tratamientos</title>
+    <title>Clinica Dental || Materiales </title>
 {% endblock %}
 
 {% block title %}
-    <h3><i class="fa fa-heartbeat"></i> Tratamientos</h3>
+    <h3><i class="fa fa-group"></i> Materiales </h3>
 {% endblock %}
 
-{% load render_table from django_tables2 %}
-
 {% block body %}
-<div class="row">
+    <div class="row">
         <div class="col-md-1"></div>
         <div class="col-lg-10">
             <div class="panel">
                 <div class="panel-body text-center">
                     <div class="row">
-                        <h1>Listado de tratamientos</h1>
+                        <h1>Listado de materiales</h1>
                     </div>
                 </div>
             </div>
@@ -31,26 +28,16 @@
             <div class="panel">
                 <div class="panel-body text-center">
                     <div class="row">
-                        {% if tratamientos != None %}
-        {% render_table tratamientos %}
-    {% else %}
-        <h1>No tiene tratamientos registrados</h1>
-    {% endif %}
+                        {% if materiales != None %}
+                            {% render_table materiales %}
+                        {% else %}
+                            <h1>No tiene materiales registrados</h1>
+                        {% endif %}
                     </div>
                 </div>
             </div>
         </div>
         <div class="col-md-1"></div>
     </div>
-    
-{% endblock %}
-{% block scripts %}
-    <script>
-        function AddTreat(){
 
-        }
-    </script>
-    <script>
-        $('td:nth-child(1),th:nth-child(1)').hide();
-    </script>
 {% endblock %}
