@@ -44,4 +44,5 @@ urlpatterns = [
     url(r'^home', views.home),
     url(r'^nuevo_tratamiento', views.nuevo_tratamiento),
     url(r'^materiales',views.lista_materiales),
+    url(r'^perfil', views.perfil),
 ]

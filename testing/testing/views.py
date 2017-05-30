@@ -55,7 +55,7 @@ def getTable(cursor, metodo):
             ID_MATERIAL = tables.Column()
             NOMBRE = tables.Column(verbose_name='MATERIAL')
         class Meta:
-            attrs={"class":"paleblue", "id":"tablamamalona"}
+            attrs={"class":"table table-hover table-vcenter", "id":"tablamamalona"}
 
     table = NameTable(exptData)
     return table
@@ -735,13 +735,13 @@ def home(request):
             grupo = str(group[0])
         if grupo == "Doctores":
             basehtml = 'bases/basedentista.html'
-        elif grupo =="Administrador":
+        elif grupo == "Administrador":
             basehtml = 'bases/baseadministrador.html'
         else:
             basehtml = 'bases/basepaciente.html'
         cur = connection.cursor()
         rawCursor = cur.connection.cursor()
-        cur.callproc('dientes.get_pkg.get_address_id', [userid,rawCursor])
+        cur.callproc('dientes.get_pkg.get_address_id', [userid, rawCursor])
         res = rawCursor.fetchall()
         if not res:
             return redirect('/update_user_info')
@@ -752,8 +752,71 @@ def home(request):
                 username = item[0]
                 name = item[1]
                 lastname = item[2]
+            cur.callproc('dientes.get_pkg.get_user_home', [userid, rawCursor])
+            res = rawCursor.fetchall()
+            for item in res:
+                name = item[0]
+                email = item[1]
+                calle = item[2]
+                numero = item[3]
+                ciudad = item[4]
+                entidad = item[5]
+                pais = item[6]
+                celular = item[7]
+                sexo = item[8]
+                tipo_sangre = item[9]
+            if grupo == "Doctores":
+                cur.callproc('dientes.get_pkg.get_cita_cuenta_d', [rawCursor, userid])
+                res = rawCursor.fetchall()
+                for item in res:
+                    cuenta = item[0]
+                cur.callproc('dientes.get_pkg.get_pago_semana_d', [userid, rawCursor])
+                res = rawCursor.fetchall()
+                for item in res:
+                    pagos_d = item[0]
+                return render(request, 'registro/Home.html',
+                              {'pagos_d':pagos_d,'cuenta':cuenta,'sexo': sexo, 'correo': email, 'calle': calle, 'numero': numero, 'ciudad': ciudad,
+                               'entidad': entidad, 'pais': pais, 'celular': celular, 'tipo_sangre': tipo_sangre,
+                               'username': username, 'nombre': name, 'apellido': lastname, 'grupo': grupo,
+                               'basehtml': basehtml})
+            elif grupo == "Administrador":
+                cur.callproc('dientes.get_pkg.get_pago_semana', [rawCursor])
+                res = rawCursor.fetchall()
+                for item in res:
+                    pagos_t = item[0]
+                cur.callproc('dientes.get_pkg.get_cita_cuenta_a', [rawCursor])
+                res = rawCursor.fetchall()
+                for item in res:
+                    cuenta = item[0]
+                return render(request, 'registro/Home.html',
+                              {'pagos_t':pagos_t,'cuenta':cuenta,'sexo': sexo, 'correo': email,
+                               'calle': calle, 'numero': numero, 'ciudad': ciudad,
+                               'entidad': entidad, 'pais': pais, 'celular': celular, 'tipo_sangre': tipo_sangre,
+                               'username': username, 'nombre': name, 'apellido': lastname, 'grupo': grupo,
+                               'basehtml': basehtml})
+            else:
+                cur.callproc('dientes.get_pkg.get_next_cita_p', [rawCursor, userid])
+                res = rawCursor.fetchall()
+                for item in res:
+                    name_dent = item[1]
+                    fecha = item[2]
+                    detalle = item[3]
+                cur.callproc('dientes.get_pkg.get_next_abono_p', [userid, rawCursor])
+                res = rawCursor.fetchall()
+                for item in res:
+                    nom_trat = item[1]
+                    fecha_ab = item[2]
+                    costo = item[3]
+                    pago = item[4]
 
-    return render(request, 'registro/Home.html', {'username':username, 'nombre':name, 'apellido':lastname, 'grupo':grupo, 'basehtml':basehtml})
+                return render(request, 'registro/Home.html',
+                              {'nom_trat': nom_trat, 'fecha_ab': fecha_ab, 'costo': costo, 'pago': pago,
+                               'name_dent': name_dent, 'fecha': fecha, 'detalle': detalle, 'sexo': sexo,
+                               'correo': email,
+                               'calle': calle, 'numero': numero, 'ciudad': ciudad,
+                               'entidad': entidad, 'pais': pais, 'celular': celular, 'tipo_sangre': tipo_sangre,
+                               'username': username, 'nombre': name, 'apellido': lastname, 'grupo': grupo,
+                               'basehtml': basehtml})
 
 def lista_materiales(request):
     if not request.user.is_authenticated:
@@ -809,6 +872,53 @@ def agregartipocambio(request):
                 form = forma_tipo_cambio()
         return render(request, 'agregartipocambio.html', {'form':form, 'basehtml':basehtml})
 
+def perfil(request):
+    if not request.user.is_authenticated:
+        return redirect('%s?next=%s' % (settings.LOGIN_URL, request.path))
+    else:
+        usuario = request.user.id
+        groups = request.user.groups.all()
+        cur = connection.cursor()
+        rawCursor = cur.connection.cursor()
+        cur.callproc('dientes.get_pkg.get_address_id', [usuario, rawCursor])
+        res = rawCursor.fetchall()
+        if not res:
+            return redirect('/update_user_info')
+        else:
+            if not groups:
+                grupo = "Pacientes"
+            else:
+                grupo = str(groups[0])
+            if grupo == "Doctores":
+                basehtml = 'bases/basedentista.html'
+            elif grupo == "Pacientes":
+                basehtml = 'bases/basepaciente.html'
+            elif grupo == "Administrador":
+                basehtml = 'bases/baseadministrador.html'
+        cur.callproc('dientes.get_pkg.get_user', [usuario, rawCursor])
+        res = rawCursor.fetchall()
+        for item in res:
+            username = item[0]
+            name = item[1]
+            lastname = item[2]
+        cur.callproc('dientes.get_pkg.get_user_home', [usuario, rawCursor])
+        res = rawCursor.fetchall()
+        for item in res:
+            name = item[0]
+            email = item[1]
+            calle = item[2]
+            numero = item[3]
+            ciudad = item[4]
+            entidad = item[5]
+            pais = item[6]
+            celular = item[7]
+            sexo = item[8]
+            tipo_sangre = item[9]
+
+    return render(request, 'perfil.html',
+                  {'sexo': sexo, 'correo': email, 'calle': calle, 'numero': numero, 'ciudad': ciudad,
+                   'entidad': entidad, 'pais': pais, 'celular': celular, 'tipo_sangre': tipo_sangre,
+                   'username': username, 'nombre': name, 'apellido': lastname, 'grupo': grupo, 'basehtml': basehtml})
 
 @csrf_exempt
 def search_ajax(request):
