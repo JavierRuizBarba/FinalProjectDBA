@@ -540,7 +540,7 @@ display:block
 	position: relative;
 	font-size: 26px;
 	z-index: 2;
-	overflow: hidden;
+	overflow: visible;
 	width: 260px
 }
 .navbar-brand:hover, .navbar-brand:focus {
