@@ -537,7 +537,7 @@ display:block
 	color: #000000;
 	padding: 0;
 	height: 60px;
-	position: fixed;
+	position: relative;
 	font-size: 26px;
 	z-index: 2;
 	overflow: hidden;
@@ -1077,7 +1077,7 @@ display:block
 	text-align: center;
 }
 #container.mainnav-full #page-content {
-	padding: 40px 20px 0;
+	padding: 5px 20px 0;
 }
 #container.mainnav-full .shortcut-grid:hover {
 	box-shadow: inset 4px 0 0 0 #2986b8;
@@ -1802,15 +1802,15 @@ div#container.mainnav-lg.aside-left.aside-in #fullwidth-container, div#container
 /* Footer */
 
 #footer {
-	background: #edf1f2;
-	border-top: rgba(0,0,0,0.07);
-	position: absolute;
-	padding-top: 15px;
-	bottom: 0;
-	z-index: 2;
-	left: 0;
-	right: 0;
-	height: 50px;
+    background: #edf1f2;
+    border-top: rgba(0,0,0,0.07);
+    position: fixed;
+    padding-top: 15px;
+    bottom: 0;
+    z-index: 2;
+    left: 0;
+    right: 0;
+    height: 50px;
 }
 #footer p {
 	margin-bottom: 5px

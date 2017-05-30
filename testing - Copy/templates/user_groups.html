@@ -1,13 +1,57 @@
-{% extends 'base.html' %}
+{% extends basehtml %}
+
 {% block head %}
-    <title>Grupos de Usuarios</title>
+{% load static %}
+    <title>Clinica Dental || Usuarios</title>
 {% endblock %}
+
+{% block title %}
+    <h3><i class="fa fa-group"></i> Grupos de usuarios</h3>
+{% endblock %}
+
 {% block body %}
-    <h1>Agregar Usuarios a Grupos</h1>
-    {{ form.as_p }}
-    <button class="btn btn-info" element onclick="AddUserGroup()">Agregar Usuario a Grupo</button>
-    <a href='/register/home' class="btn btn-danger">Cancelar</a>
+<div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-lg-10">
+            <div class="panel">
+                <div class="panel-body text-center">
+                    <div class="row">
+                        <h1>Agregar Usuarios a Grupos</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-lg-10">
+            <div class="panel">
+                <div class="panel-body text-center">
+                    <div class="row">
+                        {{ form.as_p }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+<div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-lg-10">
+            <div class="panel">
+                <div class="panel-body text-center">
+                    <div class="row">
+                            <button class="btn btn-info" element onclick="AddUserGroup()">Agregar Usuario a Grupo</button>
+    <a href='/home' class="btn btn-danger">Cancelar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
 {% endblock %}
+
 {% block scripts %}
     <script>
         function AddUserGroup(){

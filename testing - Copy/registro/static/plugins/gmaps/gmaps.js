@@ -4,7 +4,7 @@
     module.exports = factory();
   }
   else if(typeof define === 'function' && define.amd) {
-    define(['jquery', 'googlemaps!'], factory);
+    define(['jquery', 'googlemaps!registro/static/plugins/gmaps/gmaps'], factory);
   }
   else {
     root.GMaps = factory();

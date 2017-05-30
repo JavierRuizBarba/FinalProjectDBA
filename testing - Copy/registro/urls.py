@@ -4,5 +4,4 @@ from django.contrib.auth.views import login
 
 urlpatterns =[
     url('^$', views.registro),
-    url(r'home/', views.home)
 ]
