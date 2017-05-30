@@ -25,7 +25,7 @@ SECRET_KEY = '_&9y)pl@4)ej2r0&%%)k7wvadhn%um*&zj271#at8$z_%(^tcm'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -84,10 +84,10 @@ DATABASES = {
         'NAME': 'XE',
         'USER': 'DIENTES',
         #'PASSWORD': 'dientes',
-        #'HOST': '127.0.0.1',
+        'HOST': 'localhost',
         'PASSWORD': 'qaz1wsx2edc3',
-        'HOST': '198.199.84.234',
-        'PORT': '1521'
+        #'HOST': '198.199.84.234',
+        'PORT': '1510'
     }
 }
 
