@@ -4581,6 +4581,7 @@ fieldset:not([disabled]) .has-error .form-radio.form-normal.active:after,
 }
 #container .fc-row.fc-widget-header table th {
 	height: 30px;
+	text-align: center;
 	vertical-align: middle;
 }
 #container .fc-toolbar {
@@ -5771,13 +5772,13 @@ hr {
 }
 
 .weather-panel-bg {
-    background: #0eaaa6 url(../img/thumbs/6.jpg) ;
+    background: #0eaaa6;
 	min-width: 100%;
 	min-height: 100%;
 	background-size: cover;
 }
 .weather-panel-bg2 {
-    background: #0eaaa6 url(../img/thumbs/img2.jpg) ;
+    background: #0eaaa6;
 	min-width: 100%;
 	min-height: 100%;
 	background-size: cover;
@@ -7423,7 +7424,7 @@ body.error-full-page {
 .userWidget-1 .avatar-bg {
     width: 100%;
     height: 250px;
-    background: #0eaaa6 url(../img/thumbs/img4.png);
+    background: #0eaaa6;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

@@ -12,7 +12,7 @@
 {% load render_table from django_tables2 %}
 
 {% block body %}
-<div class="row">
+    <div class="row">
         <div class="col-md-1"></div>
         <div class="col-lg-10">
             <div class="panel">
@@ -29,28 +29,38 @@
         <div class="col-md-1"></div>
         <div class="col-lg-10">
             <div class="panel">
+
                 <div class="panel-body text-center">
                     <div class="row">
                         {% if tratamientos != None %}
-        {% render_table tratamientos %}
-    {% else %}
-        <h1>No tiene tratamientos registrados</h1>
-    {% endif %}
+                            {% render_table tratamientos %}
+                        {% else %}
+                            <h1>No tiene tratamientos registrados</h1>
+                        {% endif %}
                     </div>
                 </div>
             </div>
         </div>
         <div class="col-md-1"></div>
     </div>
-    
-{% endblock %}
-{% block scripts %}
-    <script>
-        function AddTreat(){
 
+{% endblock %}
+    {% block scripts %}
+    <script>
+        $('td:nth-child(1),th:nth-child(1)').hide();
+        $('#tablamamalona tbody tr').each(function() {
+            var customerId = $(this).find(".ID").html();
+        $(this).append("<td class=\"Material btn-sm\"><button value=\"" + customerId + "\" onclick =\"MaterialTratamiento("+customerId+")\" class=\"btn btn-info\">Ver materiales</></td>");
+        });
+    </script>
+    <script>
+        function MaterialTratamiento(pacienteid){
+            sessionStorage.setItem("paciente", pacienteid);
+            window.open('/perfil_paciente')
         }
     </script>
     <script>
-        $('td:nth-child(1),th:nth-child(1)').hide();
+        function AddTreat() {
+        }
     </script>
 {% endblock %}

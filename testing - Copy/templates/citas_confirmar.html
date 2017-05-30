@@ -54,7 +54,7 @@
         $("#tablamamalona thead tr").append("<td><strong>ACEPTAR</strong></td>");
         $('#tablamamalona tbody tr').each(function () {
             var customerId = $(this).find(".ID_CITA").html();
-            $(this).append("<input value=\"" + customerId + " \" class=\"checkbox\" name=\"type\" type=\"checkbox\">");
+            $(this).append("<td class=\"ACEPTAR text-center\"><input value=\"" + customerId + " \" class=\"form-checkbox\" name=\"type\" type=\"checkbox\"></td>");
         });
     }
     $('td:nth-child(1),th:nth-child(1)').hide();

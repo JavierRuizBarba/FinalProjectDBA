@@ -1,10 +1,10 @@
 {% extends basehtml %}
 {% block head %}
-    <title>Clinica Dental || Perfil</title>
+    <title>Clinica Dental || Perfil Paciente</title>
 {% endblock %}
 
 {% block title %}
-    <h3><i class="fa fa-home"></i> Perfil </h3>
+    <h3><i class="fa fa-home"></i> Perfil Paciente</h3>
 {% endblock %}
 {% load static %}
 {% block body %}
@@ -91,6 +91,34 @@
         </div>
         <div class="col-md-1"></div>
     </div>
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-lg-5">
+            <div class="panel">
+                <div class="panel-body text-center">
+                    <div class="row">
+                        <h2><a class="fa fa-heartbeat"></a> Alergias de paciente</h2>
+                        poner tabla magica aqui
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-5">
+            <div class="panel">
+                <div class="panel-body text-center">
+                    <div class="row">
+                        <h2><a class="fa fa-list-alt"></a>Tratamientos de paciente</h2>
+                        poner tabla magica aqui
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
 {% endblock %}
-
-</html>
+{% block scripts %}
+    <script>
+        var paciente = sessionStorage.getItem("paciente");
+        alert(paciente);
+    </script>
+{% endblock %}
