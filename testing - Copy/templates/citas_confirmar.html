@@ -55,6 +55,7 @@
         $('#tablamamalona tbody tr').each(function () {
             var customerId = $(this).find(".ID_CITA").html();
             $(this).append("<td class=\"ACEPTAR text-center\"><input value=\"" + customerId + " \" class=\"form-checkbox\" name=\"type\" type=\"checkbox\"></td>");
+            $(this).append("<td class=\"ELIMINAR \"><button value=\"" + customerId + "\" onclick =\"RemoveCita(" + customerId + ")\" class=\"btn btn-sm btn-danger\"><i class=\"fa fa-remove\" style></i></></td>");
         });
     }
     $('td:nth-child(1),th:nth-child(1)').hide();
@@ -86,6 +87,12 @@
                     }
                 });
             }
+        }
+    </script>
+    <script>
+        function RemoveCita(citaincoming){
+            sessionStorage.setItem("sent", citaincoming);
+            window.open('/citas_confirmar')
         }
     </script>
 {% endblock %}

@@ -13,19 +13,14 @@
         <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
             <div class="panel">
                 <div class="panel-body np">
-                    <img src=    {% if grupo == 'Pacientes' %}
-                        {% static 'img/paciente.jpg' %}
-                    {% elif grupo == 'Doctores' %}
-                        {% static 'img/dentist.jpg' %}
-                    {% elif grupo == 'Administrador' %}
-                        {% static 'img/admin.jpg' %}
-                    {% endif %}
+                    <img src=
+                                 {% static 'img/paciente.jpg' %}
                                  alt="Cover"
                          class="img-responsive">
                     <div class="text-center">
                         <!-- panel body -->
-                        <h4 class="text-lg text-overflow mar-top">{{ nombre }}{{ apellido }}</h4>
-                        <p class="text-sm">{{ grupo }}</p>
+                        <h4 class="text-lg text-overflow mar-top" id="id_nombre"></h4>
+                        <p class="text-sm">Paciente</p>
                     </div>
                 </div>
             </div>
@@ -41,37 +36,97 @@
                         <tr>
                             <td><i class="fa fa-envelope-o ph-5"></i></td>
                             <td> Email</td>
-                            <td>{{ correo }}</td>
+                            <td id="id_correo"></td>
                         </tr>
                         <tr>
                             <td><i class="fa fa-phone ph-5"></i></td>
                             <td> Telefono</td>
-                            <td> {{ celular }}</td>
+                            <td id="id_telefono"></td>
                         </tr>
                         <tr>
                             <td><i class="fa fa-map-marker ph-5"></i></td>
-                            <td> Locación</td>
-                            <td> {{ ciudad }}, {{ entidad }}</td>
+                            <td> Ubicación</td>
+                            <td id="id_ubicacion"></td>
                         </tr>
                         <tr>
                             <td><i class="fa fa-home ph-5"></i></td>
                             <td> Dirección</td>
-                            <td> {{ calle }}, {{ numero }}</td>
+                            <td id="id_direccion"></td>
                         </tr>
                         <tr>
                             <td><i class="fa {% if sexo == 'F' %}fa-female{% else %}fa-male{% endif %} ph-5"></i></td>
                             <td> Sexo</td>
-                            <td> {{ sexo }}</td>
+                            <td id="id_sexo"></td>
                         </tr>
-                        {% if grupo == 'Pacientes' %}
-                            <tr>
-                                <td><i class="fa fa-heartbeat ph-5"></i></td>
-                                <td> Tipo de sangre</td>
-                                <td> {{ tipo_sangre }}</td>
-                            </tr>
-                        {% endif %}
+                        <tr>
+                            <td><i class="fa fa-heartbeat ph-5"></i></td>
+                            <td> Tipo de sangre</td>
+                            <td id="id_blood"></td>
+                        </tr>
                         </tbody>
                     </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-lg-3">
+            <div class="panel">
+                <div class="panel-body text-center">
+                    <div class="row">
+                        <h3><a class="fa fa-heartbeat"></a> Alergias de paciente</h3>
+                        <div class="table-container">
+                            <table class="table table-hover table-vcenter" id="tablaalergias">
+                                <thead>
+                                <tr>
+                                    <th class="NOMBRE"><a href="?sort=ID_CITA">NOMBRE</a></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="panel">
+                <div class="panel-body text-center">
+                    <div class="row">
+                        <h3><a class="fa fa-list-alt"></a> Tratamientos de paciente</h3>
+                        <table class="table table-hover table-vcenter" id="tablaalergias">
+                            <thead>
+                            <tr>
+                                <th class="NOMBRE"><a href="?sort=ID_CITA">NOMBRE</a></th>
+                                <th class="ESPECIALIDAD"><a href="?sort=ID_CITA">ESPECIALIDAD</a></th>
+                                <th class="COSTO"><a href="?sort=ID_CITA">COSTO</a></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="panel">
+                <div class="panel-body text-center">
+                    <div class="row">
+                        <h3><a class="fa fa-plus"></a> Enferemedades de paciente</h3>
+                        <table class="table table-hover table-vcenter" id="tablaenfermedades">
+                            <thead>
+                            <tr>
+                                <th class="NOMBRE"><a href="?sort=ID_CITA">NOMBRE</a></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
@@ -91,34 +146,35 @@
         </div>
         <div class="col-md-1"></div>
     </div>
-    <div class="row">
-        <div class="col-md-1"></div>
-        <div class="col-lg-5">
-            <div class="panel">
-                <div class="panel-body text-center">
-                    <div class="row">
-                        <h2><a class="fa fa-heartbeat"></a> Alergias de paciente</h2>
-                        poner tabla magica aqui
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-5">
-            <div class="panel">
-                <div class="panel-body text-center">
-                    <div class="row">
-                        <h2><a class="fa fa-list-alt"></a>Tratamientos de paciente</h2>
-                        poner tabla magica aqui
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-1"></div>
-    </div>
 {% endblock %}
 {% block scripts %}
     <script>
         var paciente = sessionStorage.getItem("paciente");
-        alert(paciente);
+        $.ajax({  //Call ajax function sending the option loaded
+            url: "search_ajax/",  //This is the url of the ajax view where you make the search
+            type: 'POST',
+            dataType: "json",
+            data: {paciente: paciente, tag: "populateperfil"},
+            success: function (response) {
+                patient_info = response;
+                $('#id_nombre').html(patient_info[3]);
+                $('#id_sexo').html(patient_info[11]);
+                $('#id_correo').html(patient_info[4]);
+                $('#id_telefono').html(patient_info[10]);
+                $('#id_blood').html(patient_info[12]);
+                $('#id_ubicacion').html(patient_info[7] + ", " + patient_info[8] + ", " + patient_info[9]);
+                $('#id_direccion').html(patient_info[5] + ", " + patient_info[6]);
+            }
+        });
+        $.ajax({  //Call ajax function sending the option loaded
+            url: "search_ajax/",  //This is the url of the ajax view where you make the search
+            type: 'POST',
+            dataType: "json",
+            data: {paciente: paciente, tag: "tablaalergia"},
+            success: function (response) {
+                patient_allergies = response;
+                alert(patient_allergies);
+            }
+        });
     </script>
 {% endblock %}

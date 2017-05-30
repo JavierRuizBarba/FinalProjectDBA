@@ -18,6 +18,14 @@
             <div class="panel">
                 <div class="panel-body text-center">
                     <div class="row">
+                        {% if messages %}
+                                <ul class="messages">
+                                    {% for message in messages %}
+                                        <li{% if message.tags %}
+                                            class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
                         <h1>Editar Cita</h1>
                         <h3>Llenar todos los campos solicitados</h3>
                     </div>
@@ -26,13 +34,18 @@
         </div>
         <div class="col-md-1"></div>
     </div>
+    <form method="post">
     <div class="row">
         <div class="col-md-1"></div>
         <div class="col-lg-10">
             <div class="panel">
                 <div class="panel-body text-center">
                     <div class="row">
+                        {% csrf_token %}
                         {{ form.as_p }}
+                        <div id="forma2">
+                        {{ form2.as_p }}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -45,13 +58,14 @@
             <div class="panel">
                 <div class="panel-body text-center">
                     <div class="row">
-                        <button class="btn btn-info" element onclick="AddAppointment()">Editar Cita</button>
+                        <button class="btn btn-info" type="submit">Editar Cita</button>
                     </div>
                 </div>
             </div>
         </div>
         <div class="col-md-1"></div>
     </div>
+    </form>
 {% endblock %}
 
 {% block scripts %}
@@ -59,6 +73,8 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
     <script>
         var cita =sessionStorage.getItem("sent");
+        $('#id_Cita_Id').val(cita);
+        $('#forma2').hide();
         grupo = "{{ grupo }}";
         $.ajax({  //Call ajax function sending the option loaded
             url: "search_ajax/",  //This is the url of the ajax view where you make the search
@@ -87,7 +103,6 @@
                 $('#id_Fecha').val(partesfecha[1]+"/"+partesfecha[2]+"/"+partesfecha[0]);
                 $('#id_Fecha').trigger('change');
                 $('#id_Hora').val(hora);
-
             }
         });
     </script>
@@ -164,65 +179,5 @@
                     $('.timepicker').data('TimePicker').widget.instance = null;
                 }, 1500);
             });
-    </script>
-    <script>
-          $('.timepicker').select(function()
-            {
-                alert('Seleccionado');
-
-            });
-    </script>
-    <script>
-        function EditAppointment(){
-            detalle = $('#id_Detalle').val();
-            fecha = $('#id_Fecha').val() + " " + $('#id_Hora').val();
-            grupo = "{{ grupo }}";
-            if(detalle != "" && $('#id_Fecha').val() != "" && $('#id_Hora').val() != "" ) {
-                if (grupo == "Doctores") {
-                    doctor = "{{ usuario }}";
-                    paciente = $('#id_Pacientes').val();
-                }
-                else if (grupo== "Paciente")
-                {
-                    doctor = $('#id_Doctores').val();
-                    paciente = "{{ usuario }}"
-                }
-                else if (grupo== "Administrador")
-                {
-                    doctor = $('#id_Doctores').val();
-                    paciente = $('#id_Pacientes').val();
-                }
-                    $.ajax({  //Call ajax function sending the option loaded
-                        url: "search_ajax/",  //This is the url of the ajax view where you make the search
-                        type: 'POST',
-                        dataType: "json",
-                        data: {
-                            doctor: doctor,
-                            paciente: paciente,
-                            detalle: detalle,
-                            fecha: fecha,
-                            grupo: grupo,
-                            citanum: cita,
-                            tag: "editcita"
-                        },
-                        success: function (response) {
-                            result = response;
-                            if(result==1){
-                                alert('Modificación exitosa');
-                                window.close();
-                            }
-                            else
-                            {
-                                alert('Fecha y/o hora no disponibles');
-                            }
-
-                        }
-                    });
-            }
-            else
-            {
-                alert('Complete todos los campos')
-            }
-        }
     </script>
 {% endblock %}
