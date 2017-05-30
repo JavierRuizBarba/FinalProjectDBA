@@ -1,0 +1,12 @@
+{% extends basehtml %}
+{% block head %}
+    <title>Agregar Tratamiento</title>
+{% endblock %}
+{% block body %}
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn btn-default" type="submit">Agregar</button>
+        <a href="/home" type="btn btn-danger">Cancelar</a>
+    </form>
+{% endblock %}
