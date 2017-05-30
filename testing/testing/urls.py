@@ -45,4 +45,7 @@ urlpatterns = [
     url(r'^nuevo_tratamiento', views.nuevo_tratamiento),
     url(r'^materiales',views.lista_materiales),
     url(r'^perfil', views.perfil, name='perfil'),
+    url(r'^ver_pagos', views.ver_pagos),
+    url(r'^agregar_alergia', views.agregar_alergia),
+    url(r'^actualizar_historial_medico', views.actualizar_historial),
 ]
