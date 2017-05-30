@@ -51,6 +51,7 @@
         $('#tablamamalona tbody tr').each(function() {
             var customerId = $(this).find(".ID_CITA").html();
         $(this).append("<td class=\"Modificar btn-sm\"><button value=\"" + customerId + "\" onclick =\"ModificarCita(" + customerId + ")\" class=\"btn btn-info\"><a class=\"fa fa-edit\"></a></></td>");
+        $(this).append("<td class=\"ELIMINAR \"><button value=\"" + customerId + "\" onclick =\"RemoveCita(" + customerId + ")\" class=\"btn btn-sm btn-danger\"><i class=\"fa fa-remove\" style></i></></td>");
         });
     </script>
     <script>

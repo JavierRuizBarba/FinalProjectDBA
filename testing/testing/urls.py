@@ -49,4 +49,5 @@ urlpatterns = [
     url(r'^agregar_alergia', views.agregar_alergia),
     url(r'^actualizar_historial_medico', views.actualizar_historial),
     url(r'^paciente_perfil', views.paciente_perfil),
+    url(r'^trat_asignados', views.tratamiento_asignado),
 ]

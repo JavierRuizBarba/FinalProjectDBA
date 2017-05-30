@@ -1091,11 +1091,43 @@ def paciente_perfil(request):
         if grupo == "Pacientes":
             return redirect('/home')
         elif grupo == "Doctores":
-            basehtml = 'bases/bsaedentista.html'
+            basehtml = 'bases/basedentista.html'
         elif grupo == "Administrador":
             basehtml = 'bases/baseadministrador.html'
         return render(request, 'perfilpaciente.html', {'basehtml':basehtml})
 
+def tratamiento_asignado(request):
+    if not request.user.is_authenticated:
+        return redirect('%s?next=%s' % (settings.LOGIN_URL, request.path))
+    else:
+        usuario = request.user.id
+        groups = request.user.groups.all()
+        cur = connection.cursor()
+        rawCursor = cur.connection.cursor()
+        cur.callproc('dientes.get_pkg.get_address_id', [usuario, rawCursor])
+        res = rawCursor.fetchall()
+        if not res:
+            return redirect('/update_user_info')
+        else:
+            if not groups:
+                grupo = "Pacientes"
+            else:
+                grupo = str(groups[0])
+            if grupo != "Pacientes":
+                return redirect('/home')
+            else:
+                basehtml = 'bases/basepaciente.html'
+            cur = connection.cursor()
+            rawCursor = cur.connection.cursor()
+            cur.callproc('dientes.get_pkg.get_tratamiento_paciente', [rawCursor, usuario])
+            res = rawCursor.fetchall()
+            if not res:
+                tablaFinal = None
+            else:
+                cur.callproc('dientes.get_pkg.get_tratamiento_paciente', [rawCursor, usuario])
+                tablaFinal = getTable(rawCursor, "tablatratamientos")
+                RequestConfig(request).configure(tablaFinal)
+            return render(request, 'tratamiento_asignado.html', {'basehtml':basehtml, 'tabla':tablaFinal})
 @csrf_exempt
 def search_ajax(request):
     cur = connection.cursor()
@@ -1183,10 +1215,7 @@ def search_ajax(request):
     elif request.POST.get('tag') == 'tablatratamientos':
         paciente = request.POST.get('paciente')
         cur.callproc('dientes.get_pkg.get_tratamiento_paciente', [rawCursor, paciente])
-        res2 = rawCursor.fetchall()
-        res = []
-        for item in res2:
-            res.append(item[1])
+        res = rawCursor.fetchall()
     elif request.POST.get('tag') == 'tablaenfermedades':
         paciente = request.POST.get('paciente')
         cur.callproc('dientes.get_pkg.get_enfermedad_p', [rawCursor, paciente])
@@ -1195,6 +1224,14 @@ def search_ajax(request):
         res = []
         for item in res2:
             res.append(item[0])
+    elif request.POST.get('tag') == "deletecita":
+        cita = request.POST.get('idcita')
+        cur.callproc('dientes.delete_pkg.delete_cita', [cita])
+        res=''
+    elif request.POST.get('tag') == "deletetreat":
+        tratamiento = request.POST.get('idtreat')
+        cur.callproc('dientes.delete_pkg.delete_tratamiento_paciente', [tratamiento])
+        res=''
     return HttpResponse(json.dumps(res))
 
 
