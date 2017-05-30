@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'django_tables2',
     'registro',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -64,6 +65,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.request',
             ],
         },
     },
@@ -80,8 +82,10 @@ DATABASES = {
         'ENGINE': 'django.db.backends.oracle',
         'NAME': 'XE',
         'USER': 'DIENTES',
-        'PASSWORD': '123',
-        'HOST': '127.0.0.1',
+        #'PASSWORD': 'dientes',
+        #'HOST': '127.0.0.1',
+        'PASSWORD': 'qaz1wsx2edc3',
+        'HOST': '198.199.84.234',
         'PORT': '1521'
     }
 }
@@ -120,11 +124,12 @@ USE_L10N = True
 USE_TZ = True
 
 
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
 
-LOGIN_REDIRECT_URL =  '/register/home'
+LOGIN_REDIRECT_URL = '/home'
 
 LOGIN_URL = '/login'

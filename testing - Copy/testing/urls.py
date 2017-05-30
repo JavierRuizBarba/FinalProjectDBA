@@ -35,5 +35,18 @@ urlpatterns = [
     url(r'^todas_citas', views.todas_citas),
     url(r'^citas_confirmar', views.citas_confirmar),
     url(r'^horario', views.horario_vista),
-    (url(r'^pacientes', views.pacientes))
+    url(r'^pacientes', views.pacientes),
+	url(r'^tratamientos', views.tratamientos),
+    url(r'^asignar_tratamientos', views.asignar_tratamientos),
+    url(r'^abonos', views.verabonos),
+    url(r'^nuevo_pago', views.hacerpagos),
+    url(r'^agregar_tipo_cambio', views.agregartipocambio),
+    url(r'^home', views.home),
+    url(r'^nuevo_tratamiento', views.nuevo_tratamiento),
+    url(r'^materiales',views.lista_materiales),
+    url(r'^perfil', views.perfil, name='perfil'),
+    url(r'^ver_pagos', views.ver_pagos),
+    url(r'^agregar_alergia', views.agregar_alergia),
+    url(r'^actualizar_historial_medico', views.actualizar_historial),
+    url(r'^perfil_paciente', views.paciente_perfil, name='paciente_perfil')
 ]

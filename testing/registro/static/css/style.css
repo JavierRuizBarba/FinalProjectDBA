@@ -1077,7 +1077,7 @@ display:block
 	text-align: center;
 }
 #container.mainnav-full #page-content {
-	padding: 40px 20px 0;
+	padding: 5px 20px 0;
 }
 #container.mainnav-full .shortcut-grid:hover {
 	box-shadow: inset 4px 0 0 0 #2986b8;
@@ -1802,15 +1802,15 @@ div#container.mainnav-lg.aside-left.aside-in #fullwidth-container, div#container
 /* Footer */
 
 #footer {
-	background: #edf1f2;
-	border-top: rgba(0,0,0,0.07);
-	position: absolute;
-	padding-top: 15px;
-	bottom: 0;
-	z-index: 2;
-	left: 0;
-	right: 0;
-	height: 50px;
+    background: #edf1f2;
+    border-top: rgba(0,0,0,0.07);
+    position: fixed;
+    padding-top: 15px;
+    bottom: 0;
+    z-index: 2;
+    left: 0;
+    right: 0;
+    height: 50px;
 }
 #footer p {
 	margin-bottom: 5px
@@ -4581,6 +4581,7 @@ fieldset:not([disabled]) .has-error .form-radio.form-normal.active:after,
 }
 #container .fc-row.fc-widget-header table th {
 	height: 30px;
+	text-align: center;
 	vertical-align: middle;
 }
 #container .fc-toolbar {
@@ -5771,13 +5772,13 @@ hr {
 }
 
 .weather-panel-bg {
-    background: #0eaaa6 url(../img/thumbs/6.jpg) ;
+    background: #0eaaa6;
 	min-width: 100%;
 	min-height: 100%;
 	background-size: cover;
 }
 .weather-panel-bg2 {
-    background: #0eaaa6 url(../img/thumbs/img2.jpg) ;
+    background: #0eaaa6;
 	min-width: 100%;
 	min-height: 100%;
 	background-size: cover;
@@ -7423,7 +7424,7 @@ body.error-full-page {
 .userWidget-1 .avatar-bg {
     width: 100%;
     height: 250px;
-    background: #0eaaa6 url(../img/thumbs/img4.png);
+    background: #0eaaa6;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

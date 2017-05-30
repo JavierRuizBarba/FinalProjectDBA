@@ -45,7 +45,7 @@
                                 <!-- User dropdown menu -->
                                 <ul class="head-list">
                                     <li>
-                                        <a href="/register/home"> <i class="fa fa-user fa-fw"></i> Perfil </a>
+                                        <a href="/perfil"> <i class="fa fa-user fa-fw"></i> Perfil </a>
                                     </li>
                                     <li>
                                         <a href="/logout"> <i class="fa fa-sign-out fa-fw"></i> Cerrar Session </a>
@@ -86,7 +86,7 @@
                                 <a href="#" data-toggle="dropdown" class="dropdown-toggle"> Tratamientos <b class="caret"></b></a>
                                 <ul class="dropdown-menu" role="menu">
                                     <li><a href="/tratamientos"> Todos los tratamientos </a></li>
-                                    <li><a href="/asignar_tratamientos"> Tratamientos asignados</a></li>
+                                    <li><a href="/trat_asignados"> Tratamientos asignados</a></li>
                                 </ul>
                                 <!-- end dropdown-menu -->
                             </li>
@@ -96,7 +96,7 @@
                             </li>
                             <!-- standard drop down -->
                             <li>
-                                <a href="/pagos"> Pagos </a>
+                                <a href="/ver_pagos"> Pagos </a>
                             </li>
 
                             <!-- end standard drop down -->
@@ -118,16 +118,17 @@
                 <!--Page Title-->
                 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
             <div class="row">
-<div class="col-xs-1"></div>
-                <div class="col-md-11 pageheader">
-                    {% block title %}
-                    {% endblock %}
-                </div>
+                <div class="col-md-1"></div>
+                    <div class="col-md-10 pageheader">
+                        {% block title %}
+                        {% endblock %}
+                    </div>
+                <div class="col-md-1"></div>
             </div>
                 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
                 <!--End page title-->
                 <!--Page content-->
-            <div class="bodywrap">
+            <div id="page-content">
                 {% block body %}
                 {% endblock %}
             </div>
@@ -139,6 +140,7 @@
         </div>
         <!-- FOOTER -->
         <!--===================================================-->
+
         <footer id="footer">
             <p class="pad-lft">&#0169; 2017 Clinica Dental</p>
         </footer>
