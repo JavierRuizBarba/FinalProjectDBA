@@ -223,6 +223,7 @@ td, th {
 
     thead {
         display: table-header-group
+
     }
 
     img, tr {
@@ -2715,7 +2716,7 @@ caption {
 }
 
 th {
-    text-align: left
+    text-align: center;
 }
 
 .table {

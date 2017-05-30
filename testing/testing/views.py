@@ -1019,7 +1019,7 @@ def agregar_alergia(request):
 
                 return render(request, 'agregar_alergia.html', {'form':form, 'basehtml':basehtml, 'alergias':tablaFinal})
 
-def actaulizar_historial(request):
+def actualizar_historial(request):
     if not request.user.is_authenticated:
         return redirect('%s?next=%s' % (settings.LOGIN_URL, request.path))
     else:
