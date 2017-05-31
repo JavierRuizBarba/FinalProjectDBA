@@ -1234,8 +1234,68 @@ def search_ajax(request):
         res=''
     return HttpResponse(json.dumps(res))
 
-
-
     #return render(request,'search_ajax.html')
 
+def hoy_citas (request):
+    def __init__(self, *args, **kwargs):
+        super(todas_citas, self).__init__(*args, **kwargs)
+    if not request.user.is_authenticated:
+        return redirect('%s?next=%s' % (settings.LOGIN_URL, request.path))
+    else:
+        usuario = request.user.id
+        groups = request.user.groups.all()
+        if not groups:
+            grupo = "Pacientes"
+        else:
+            grupo = str(groups[0])
+        cur = connection.cursor()
+        rawCursor = cur.connection.cursor()
+        if grupo == "Doctores":
+            basehtml = 'bases/basedentista.html'
+            proc = 'dientes.get_pkg.get_cita_today'
+            cur.callproc(proc, [rawCursor])
+        elif grupo == "Pacientes":
+            basehtml = 'bases/basepaciente.html'
+            return redirect('/home')
+        elif grupo == "Administrador":
+            basehtml = 'bases/baseadministrador.html'
+            proc = 'dientes.get_pkg.get_cita_today'
+            cur.callproc(proc, [rawCursor])
+        res = rawCursor.fetchall()
+        if not res:
+            citas = None
+            return render(request, 'hoy_citas.html', {'citas':citas,'basehtml':basehtml, 'usuario':usuario, 'grupo':grupo})
+        else:
+            if grupo =="Administrador":
+                cur.callproc(proc, [rawCursor])
+            else:
+                cur.callproc(proc, [rawCursor, usuario])
+            tablaFinal = getTable(rawCursor, "tablacitas")
+            RequestConfig(request).configure(tablaFinal)
+        return render(request, 'hoy_citas.html', {'citas':tablaFinal, 'basehtml':basehtml, 'usuario':usuario, 'grupo':grupo})
 
+def nuevo_material(request):
+    if not request.user.is_authenticated:
+        return redirect('%s?next=%s' % (settings.LOGIN_URL, request.path))
+    else:
+        usuario = request.user.id
+        groups = request.user.groups.all()
+        if not groups:
+            grupo = "Pacientes"
+        else:
+            grupo = str(groups[0])
+            basehtml='bases/baseadministrador.html'
+        if grupo == "Pacientes":
+            return redirect('/home')
+        else:
+            if request.method == "POST":
+                form = forms.forma_materiales(request.POST)
+                if form.is_valid():
+                    cur=connection.cursor()
+                    material = request.POST.get('Material')
+                    cur.callproc('dientes.add_pkg.add_material', [material])
+                    cur.close()
+                    return redirect('/home')
+            else:
+                form = forms.forma_tipo_cambio()
+        return render(request, 'nuevo_material.html', {'form':form, 'basehtml':basehtml})

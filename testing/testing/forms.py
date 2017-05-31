@@ -78,8 +78,8 @@ class nueva_cita_doc(forms.Form):
 
     Pacientes = forms.ChoiceField(choices=res, required=True, widget=forms.Select(attrs={'placeholder': 'Paciente', 'class':'form-control'}))
     Detalle = forms.CharField(widget=forms.Textarea(attrs={'placeholder': 'Detalle', 'class':'form-control'}), required = True)
-    Fecha = forms.DateField(widget=DateInput(), required=True)
-    Hora = forms.DateField(widget=forms.DateInput(attrs={'class':'timepicker'}), required=True)
+    Fecha = forms.DateField(widget=DateInput(format='%m/%d/%Y'), required=True)
+    Hora = forms.TimeField(widget=forms.TimeInput(attrs={'class': 'timepicker'}, format='%H:%M'), required=True)
 
 class nueva_cita_paciente(forms.Form):
     def __init__(self, *args, **kwargs):
@@ -96,10 +96,10 @@ class nueva_cita_paciente(forms.Form):
         nombre = item[1] + ' ' + item[2]
         res2.append((item[0], nombre))
 
-    Doctores = forms.ChoiceField(choices=res2, required=True, widget=forms.Select(attrs={'placeholder': 'Doctor','class':'form-control'}))
-    Detalle = forms.CharField(widget=forms.Textarea(attrs={'placeholder': 'Detalle', 'class':'form-control', 'rows':'5'}), required = True)
+    Doctores = forms.ChoiceField(choices=res2, required=True, widget=forms.Select(attrs={'class':'form-control'}))
+    Detalle = forms.CharField(widget=forms.Textarea(attrs={'placeholder': 'Detalle', 'class':'form-control'}), required = True)
     Fecha = forms.DateField(widget= DateInput(), required=True)
-    Hora = forms.DateField(widget= forms.DateInput(attrs={'class':'timepicker'}), required=True)
+    Hora = forms.TimeField(widget=forms.TimeInput(attrs={'class': 'timepicker'}, format='%H:%M'), required=True)
 
 class nueva_cita_admin(forms.Form):
     def __init__(self, *args, **kwargs):
@@ -116,15 +116,15 @@ class nueva_cita_admin(forms.Form):
         nombre = item[1] + ' ' + item[2]
         res2.append((item[0], nombre))
 
-    Doctores = forms.ChoiceField(choices=res2, required=True, widget=forms.Select(attrs={'placeholder': 'Doctor','class':'form-control'}))
+    Doctores = forms.ChoiceField(choices=res2, required=True)
 
     cur.callproc('dientes.get_pkg.get_paciente_cita', [rawCursor])
     res = rawCursor.fetchall()
 
-    Pacientes = forms.ChoiceField(choices=res, required=True, widget=forms.Select(attrs={'class':'form-control'}))
-    Detalle = forms.CharField(widget=forms.Textarea(attrs={'placeholder': 'Detalle', 'class':'form-control', 'rows':'5'}), required = True)
-    Fecha = forms.DateField(widget= DateInput(), required=True)
-    Hora = forms.DateField(widget= forms.DateInput(attrs={'class':'timepicker'}), required=True)
+    Pacientes = forms.ChoiceField(choices=res, required=True)
+    Detalle = forms.CharField(widget=forms.Textarea, required=True)
+    Fecha = forms.DateField(widget=DateInput(), required=True)
+    Hora = forms.TimeField(widget=forms.TimeInput( attrs={'class': 'timepicker'}, format='%H:%M'), required=True)
 
 class forma_horarios_Inicio(forms.Form):
     Lunes_Inicio = forms.TimeField(widget=forms.TimeInput(attrs={'class': 'timepicker'}), input_formats=['%I:%M%p', '%I:%M %p'], required=False)
@@ -249,6 +249,9 @@ class forma_pagos(forms.Form):
     res = rawCursor.fetchall()
 
     Tipo_Pago = forms.ChoiceField(choices=res, required=True)
+
+class forma_Materiales(forms.Form):
+    Material = forms.CharField(required=True)
 
 class forma_tipo_cambio(forms.Form):
     Tipo_Cambio = forms.DecimalField(required=True, decimal_places=2)
