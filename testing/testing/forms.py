@@ -250,7 +250,7 @@ class forma_pagos(forms.Form):
 
     Tipo_Pago = forms.ChoiceField(choices=res, required=True)
 
-class forma_Materiales(forms.Form):
+class agregar_material(forms.Form):
     Material = forms.CharField(required=True)
 
 class forma_tipo_cambio(forms.Form):

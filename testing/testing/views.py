@@ -1285,11 +1285,11 @@ def nuevo_material(request):
         else:
             grupo = str(groups[0])
             basehtml='bases/baseadministrador.html'
-        if grupo == "Pacientes":
+        if grupo == "Pacientes" and grupo=="Doctores":
             return redirect('/home')
         else:
             if request.method == "POST":
-                form = forms.forma_materiales(request.POST)
+                form = forms.agregar_material(request.POST)
                 if form.is_valid():
                     cur=connection.cursor()
                     material = request.POST.get('Material')
@@ -1297,5 +1297,5 @@ def nuevo_material(request):
                     cur.close()
                     return redirect('/home')
             else:
-                form = forms.forma_tipo_cambio()
+                form = forms.agregar_material()
         return render(request, 'nuevo_material.html', {'form':form, 'basehtml':basehtml})
